@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LUDO.Services
+namespace LUDO.Helpers
 {
-    internal class GameService
+    internal enum TypeOfLocation
     {
+        Nest,
+        Field,
+        Final,
+        Goal
     }
 }

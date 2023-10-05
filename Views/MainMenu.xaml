@@ -9,6 +9,24 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
 
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="1" Text="{Binding Text}" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"/>
+        <Button Grid.Column="1" Grid.Row="0" Content="Button" Command="{Binding Command}" HorizontalAlignment="Center" VerticalAlignment="Top"></Button>
     </Grid>
 </Page>
+<!--Binding kopplas ihop med en fil i ViewModels för att kunna minska på xaml koden och arbeta lättare med förändringar-->
