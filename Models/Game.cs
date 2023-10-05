@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LUDO.ViewModels
+namespace LUDO.Models
 {
-    internal class GameOverViewModel
+    internal class Game
     {
     }
 }

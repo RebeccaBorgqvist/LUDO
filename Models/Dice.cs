@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LUDO.Helpers
+namespace LUDO.Models
 {
-    internal class Constants
+    internal class Dice
     {
     }
 }

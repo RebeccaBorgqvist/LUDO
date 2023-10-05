@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace LUDO.ViewModels
 {
-    internal class GameSettingsViewModel
+    internal class GameSettingsViewModel : ViewModelBase
     {
+
     }
 }
