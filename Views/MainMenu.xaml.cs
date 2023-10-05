@@ -29,6 +29,7 @@ namespace LUDO.Views
             this.DataContext = new MainMenuViewModel(); // Här kopplas xaml filen ihop med ViewModel, istället för att arbeta med sin bakomliggande xaml.cs fil.
         }
 
+        //A draft-method for drawing graphics
         private void TestDrawings(CanvasControl sender, CanvasDrawEventArgs args)
         {
             CanvasDevice device = CanvasDevice.GetSharedDevice();
