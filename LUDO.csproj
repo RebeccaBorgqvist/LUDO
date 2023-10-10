@@ -121,6 +121,7 @@
     </Compile>
     <Compile Include="Commands\BaseCommands.cs" />
     <Compile Include="Commands\TestCommand.cs" />
+    <Compile Include="GraphicsDrawer.cs" />
     <Compile Include="Helpers\TypeOfLocation.cs" />
     <Compile Include="Models\Board.cs" />
     <Compile Include="Models\Dice.cs" />

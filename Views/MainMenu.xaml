@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
 
-    
+
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -19,7 +19,7 @@
             <ColumnDefinition Width="auto"/>
 
         </Grid.ColumnDefinitions>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="2*"/>
@@ -28,12 +28,13 @@
 
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="1" Text="{Binding Text}" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"/>
+        <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1" Text="{Binding Text}" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap"/>
         <Button Grid.Column="1" Grid.Row="0" Content="Button" Command="{Binding Command}" HorizontalAlignment="Center" VerticalAlignment="Top"></Button>
-        <xaml:CanvasControl Draw="TestDrawings" Width="400" Height="400"/>
+        <Button Grid.Column="1" Content="Go To Game Board" Click="GoToGameBoard" Margin="344,167,0,0" VerticalAlignment="Top"/>
+
     </Grid>
 
-    
+
 
 
 </Page>
