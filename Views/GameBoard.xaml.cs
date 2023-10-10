@@ -212,8 +212,8 @@ namespace LUDO.Views
                     y = 370;
                 }
 
-                gameBoard.GamePieces = pieces; 
-
+                gameBoard.GamePieces = pieces;
+                counter.Text = $"{gameBoard.GamePieces.Count} pieces";
                
 
 
