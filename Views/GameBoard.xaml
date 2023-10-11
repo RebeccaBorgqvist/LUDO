@@ -6,16 +6,39 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding GameBoardViewModelInstance}">
 
-    <Grid>
-        <TextBox 
-            HorizontalAlignment="Left" 
-            Margin="576,360,0,0" 
-            TextWrapping="Wrap" 
-            FontSize="{Binding TextStorlek}"
-            Text="TextBox" 
-            VerticalAlignment="Top"/>
+    <Grid Margin="250,0,250,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
 
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+
+        </Grid.RowDefinitions>
+        
+        
+        <!-- dice section -->
+        <Button Grid.Row="{Binding CurrentPositionRow}" 
+                Grid.Column="{Binding CurrentPositionColumn}"
+                Command="{Binding RollDiceCommand}"
+                Background="Transparent"
+                Width="100"
+                Height="100"
+                Padding="0"
+                BorderThickness="0"
+                HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Image Source="{Binding CurrentDiceImage}" 
+                   Stretch="UniformToFill"/>
+        </Button>       
     </Grid>
 </Page>

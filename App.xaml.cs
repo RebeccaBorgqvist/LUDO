@@ -67,7 +67,7 @@ namespace LUDO
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(MainMenu), e.Arguments);
+                    rootFrame.Navigate(typeof(GameBoard), e.Arguments); // GLÖM INTE ÄNDRA TILLBAKA TILL MAINMENU
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
