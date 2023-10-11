@@ -11,16 +11,20 @@ namespace LUDO.Commands
     {
         public override void Execute(object parameter)
         {
-            if (GameSettingsViewModel.Instance.IsPlayer4Visible)
+            if (GameSettingsViewModel.Instance.IsPlayer3Visible && GameSettingsViewModel.Instance.IsPlayer4Visible)
             {
                 GameSettingsViewModel.Instance.IsPlayer4Visible = false;
+                GameSettingsViewModel.Instance.IsPlusButtonVisible = true;
+                GameSettingsViewModel.Instance.AddRemoveText = "Remove or add players";
+                GameSettingsViewModel.Instance.Players = 3;
             }
             else
             {
                 GameSettingsViewModel.Instance.IsPlayer3Visible = false;
                 GameSettingsViewModel.Instance.IsMinusButtonVisible = false;
+                GameSettingsViewModel.Instance.AddRemoveText = "Add more players";
+                GameSettingsViewModel.Instance.Players = 2;
             }
         }
-
     }
 }
