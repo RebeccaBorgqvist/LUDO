@@ -1,5 +1,4 @@
-﻿using LUDO.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +7,12 @@ using Windows.UI.Popups;
 
 namespace LUDO.Commands
 {
-    internal class TestCommand : BaseCommands // Ärvd kod som används till att hantera knapptryck och förändring med det
+    internal class HighscoreButtonCommand : BaseCommands
     {
         public override void Execute(object parameter)
         {
-            MainMenuViewModel.Instance.Text = "Ny Text :D";
+            var dialog = new MessageDialog("Highscore not yet implemented!");
+            Task.Run(() => dialog.ShowAsync()).GetAwaiter();
         }
     }
 }
