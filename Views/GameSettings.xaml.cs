@@ -25,5 +25,9 @@ namespace LUDO.Views
             this.DataContext = new GameSettingsViewModel();
         }
 
+        private void Player1Blue_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static LUDO.ViewModels.GameSettingsViewModel;
 
 namespace LUDO.Commands
 {
-    internal class ChooseColorCommand : BaseCommands
+    internal class ShowColorsCommand : BaseCommands
     {
          public override void Execute(object parameter)
          {
@@ -29,6 +30,5 @@ namespace LUDO.Commands
              }
          }
 
-        
     }
 }

@@ -121,7 +121,8 @@
     </Compile>
     <Compile Include="Commands\AddPlayerCommand.cs" />
     <Compile Include="Commands\BaseCommands.cs" />
-    <Compile Include="Commands\ChooseColorCommand.cs" />
+    <Compile Include="Commands\SelectColorCommand.cs" />
+    <Compile Include="Commands\ShowColorCommand.cs" />
     <Compile Include="Commands\RemovePlayerCommand.cs" />
     <Compile Include="Commands\TestCommand.cs" />
     <Compile Include="Helpers\TypeOfLocation.cs" />

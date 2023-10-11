@@ -26,7 +26,7 @@ namespace LUDO.ViewModels
         public ICommand PlusPlayerCommand { get; set; }
         public ICommand MinusPlayerCommand { get; set; }
         public ICommand ForwardCommand { get; set; }
-        public ICommand ChoosedColorCommand { get; set;}
+        public ICommand ChoosedColorCommand { get; set; }
         public static GameSettingsViewModel Instance { get; set; }
         public bool IsPlayer3Visible
         {
@@ -83,6 +83,10 @@ namespace LUDO.ViewModels
         //---- G ----
         private bool _isPlayer3ColorVisible;
         private bool _isPlayer4ColorVisible;
+        private bool _isPlayer1BlueVisible;
+        private bool _isPlayer1RedVisible;
+        private bool _isPlayer1GreenVisible;
+        private bool _isPlayer1YellowVisible;
 
 
         public bool IsPlayer3ColorsVisible
@@ -103,8 +107,44 @@ namespace LUDO.ViewModels
                 _isPlayer4ColorVisible = value;
                 OnPropertyChanged(nameof(IsPlayer4ColorsVisible));
             }
-        }       
+        }
 
+        public bool IsPlayer1BlueVisible
+        {
+            get { return _isPlayer1BlueVisible; }
+            set
+            {
+                _isPlayer1BlueVisible = value;
+                OnPropertyChanged(nameof(IsPlayer1BlueVisible));
+            }
+        }
+        public bool IsPlayerRedVisible
+        {
+            get { return _isPlayer1RedVisible; }
+            set
+            {
+                _isPlayer1RedVisible = value;
+                OnPropertyChanged(nameof(IsPlayerRedVisible));
+            }
+        }
+        public bool IsPlayer1GreenVisible
+        {
+            get { return _isPlayer1GreenVisible; }
+            set
+            {
+                _isPlayer1GreenVisible = value;
+                OnPropertyChanged(nameof(IsPlayer1GreenVisible));
+            }
+        }
+        public bool IsPlayer1YellowVisible
+        {
+            get { return _isPlayer1YellowVisible; }
+            set
+            {
+                _isPlayer1YellowVisible = value;
+                OnPropertyChanged(nameof(IsPlayer1YellowVisible));
+            }
+        }
     }
 }
   
