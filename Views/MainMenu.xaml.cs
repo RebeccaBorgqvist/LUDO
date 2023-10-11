@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using LUDO.ViewModels; // Denna läggs till för att kunna nå ViewModels filerna
-using Microsoft.Graphics.Canvas.Brushes;
+using Microsoft.Graphics.Canvas.Brushes; //superkommentaren för test!!!!
 using Microsoft.Graphics.Canvas.Geometry;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using Windows.UI;
