@@ -8,5 +8,6 @@ namespace LUDO.Models
 {
     internal class Player
     {
+   
     }
 }

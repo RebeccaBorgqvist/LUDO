@@ -28,11 +28,14 @@ namespace LUDO.ViewModels
         {
             get; set;
         }
-        public MainMenuViewModel()
+        /*public MainMenuViewModel()
         {
             Text = "HejHopp";
             Instance = this; // Denna tror vi används som en adress för att i TestCommands, ska komma åt rätt objekt? :)
             Command = new TestCommand(); // I TestCommand objektet kommer man skriva koden som ska styra det man vill ska ske när kommandot körs.
-        }
+        }*/
+
+       
+
     }
 }

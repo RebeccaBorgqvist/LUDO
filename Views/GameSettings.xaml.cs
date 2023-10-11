@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using LUDO.ViewModels;
+using Windows.UI;
 
 namespace LUDO.Views
 {
@@ -23,5 +24,6 @@ namespace LUDO.Views
             this.InitializeComponent();
             this.DataContext = new GameSettingsViewModel();
         }
+
     }
 }

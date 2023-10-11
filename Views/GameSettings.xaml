@@ -8,7 +8,88 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Frame x:Name="GameSettingsFrame">
+        <Grid Width="299" Height="359" Background="#666363" Padding="20" CornerRadius="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.ColumnSpan="2" Foreground="White" TextWrapping="WrapWholeWords" FontSize="15">
+                Choose number of players and their colors:
+            </TextBlock>
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="0,10,0,0">
+                <Button Content="Player 1" Background="#D9D9D9" HorizontalAlignment="Stretch" Margin="0,0,5,5"/>
+                <Button Content="Player 2" Background="#D9D9D9" HorizontalAlignment="Stretch" Margin="0,0,5,5"/>
+                <Button Visibility="{Binding IsPlayer3Visible}" Content="Player 3" Background="#D9D9D9" HorizontalAlignment="Stretch" Margin="0,0,5,5"/>
+                <Button Visibility="{Binding IsPlayer4Visible}" Content="Player 4" Background="#D9D9D9" HorizontalAlignment="Stretch" Margin="0,0,5,0"/>
+            </StackPanel>
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
 
-    </Grid>
+                    <RadioButton Name="Blue" GroupName="Player1" Background="Blue" Grid.Column="0" Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+</RadioButton>
+                    <RadioButton Name="Red" GroupName="Player1" Background="Red" Grid.Column="1"  Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></RadioButton>
+                    <RadioButton Name="Green" GroupName="Player1" Background="Green" Grid.Column="2"  Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></RadioButton>
+                    <RadioButton Name="Yellow" GroupName="Player1" Background="Yellow" Grid.Column="3"  Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></RadioButton>
+
+                    <RadioButton  GroupName="Player2"  Background="Blue"  Grid.Column="0" Grid.Row="1" Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                    <RadioButton  GroupName="Player2"  Background="Red" Grid.Column="1" Grid.Row="1"  Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></RadioButton>
+                    <RadioButton  GroupName="Player2"  Background="Green" Grid.Column="2" Grid.Row="1" Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></RadioButton>
+                    <RadioButton  GroupName="Player2"  Background="Yellow" Grid.Column="3" Grid.Row="1"  Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></RadioButton>
+
+                    <RadioButton  GroupName="Player3"  Visibility="{Binding IsPlayer3Visible}"  Background="Blue"  Grid.Column="0" Grid.Row="2"  Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></RadioButton>
+                    <RadioButton  GroupName="Player3"  Visibility="{Binding IsPlayer3Visible}"  Background="Red" Grid.Column="1" Grid.Row="2"  Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></RadioButton>
+                    <RadioButton  GroupName="Player3"  Visibility="{Binding IsPlayer3Visible}"  Background="Green" Grid.Column="2" Grid.Row="2"  Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></RadioButton>
+                    <RadioButton  GroupName="Player3"  Visibility="{Binding IsPlayer3Visible}"  Background="Yellow" Grid.Column="3" Grid.Row="2"  Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></RadioButton>
+
+                    <RadioButton  GroupName="Player4"  Visibility="{Binding IsPlayer4Visible}"   Background="Blue"  Grid.Column="0" Grid.Row="3" Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></RadioButton>
+                    <RadioButton  GroupName="Player4"  Visibility="{Binding IsPlayer4Visible}"   Background="Red"   Grid.Column="1" Grid.Row="3" Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></RadioButton>
+                    <RadioButton  GroupName="Player4"  Visibility="{Binding IsPlayer4Visible}"   Background="Green" Grid.Column="2" Grid.Row="3"  Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></RadioButton>
+                    <RadioButton  GroupName="Player4"  Visibility="{Binding IsPlayer4Visible}"  Background="Yellow" Grid.Column="3" Grid.Row="3"  Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></RadioButton>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,20,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="8*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Background="Transparent" Visibility="{Binding IsMinusButtonVisible}" Command="{Binding MinusPlayerCommand}">
+                        <Image Width="30" Height="30" Source="ms-appx:///Assets/minusIcon.png"/>
+                    </Button>
+                    <Button Background="Transparent" Command="{Binding PlusPlayerCommand}" Visibility="{Binding IsPlusButtonVisible}">
+                        <Image Width="30" Height="30" Source="ms-appx:///Assets/plusIcon.png"/>
+                    </Button>
+                </StackPanel>
+                <TextBlock Grid.Column="1" Text="{Binding AddRemoveText}" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" Margin="5,0,0,0"/>
+            </Grid>
+            <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Orientation="Horizontal" Padding="10,0,10,0">
+                <TextBlock Grid.ColumnSpan="2" Foreground="White" VerticalAlignment="Center" FontSize="15">
+                    Click -> to start the game
+                </TextBlock>
+                <Button Background="Transparent" Command="{Binding ForwardCommand}" Margin="30,0,0,0" VerticalAlignment="Center">
+                    <Image Width="30" Height="30" Source="ms-appx:///Assets/forwardIcon.png"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Frame>
 </Page>
