@@ -25,7 +25,7 @@ namespace LUDO.Commands
             {
                 players.Add(new Player(GameSettingsViewModel.Instance.Player4Name));
             }
-            //MainMenuViewModel.Instance.MainMenuFrame.Navigate(typeof(GameBoard(players)), null, new SuppressNavigationTransitionInfo());
+            MainMenuViewModel.Instance.MainMenuFrame.Navigate(typeof(GameBoard(players)), null, new SuppressNavigationTransitionInfo());
         }
     }
 }
