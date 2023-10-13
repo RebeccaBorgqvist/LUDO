@@ -36,7 +36,7 @@ namespace LUDO.ViewModels
             Instance = this;
             _diceModel = new Dice();
             RollDiceCommand = new RollDiceCommand();
-            CurrentDiceImage = "ms-appx:///Assets/roll_dice.png";
+            CurrentDiceImage = "./Assets/roll_dice.png";
         }
     }
 }
