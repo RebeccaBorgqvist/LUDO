@@ -121,8 +121,8 @@
     </Compile>
     <Compile Include="Commands\AddPlayerCommand.cs" />
     <Compile Include="Commands\BaseCommands.cs" />
-    <Compile Include="Commands\SelectColorCommand.cs" />
-    <Compile Include="Commands\ShowColorCommand.cs" />
+    <Compile Include="Commands\ChooseColors.cs" />
+    <Compile Include="Commands\PlayersSelectedColorCommand.cs" />
     <Compile Include="Commands\RemovePlayerCommand.cs" />
     <Compile Include="Commands\TestCommand.cs" />
     <Compile Include="Helpers\TypeOfLocation.cs" />
@@ -162,6 +162,7 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Styles\ButtonsStyle.xml" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

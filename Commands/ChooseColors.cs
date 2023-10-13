@@ -9,7 +9,7 @@ using static LUDO.ViewModels.GameSettingsViewModel;
 
 namespace LUDO.Commands
 {
-    internal class ShowColorsCommand : BaseCommands
+    internal class ChooseColorsCommand : BaseCommands
     {
          public override void Execute(object parameter)
          {

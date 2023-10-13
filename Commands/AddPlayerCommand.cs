@@ -27,4 +27,6 @@ namespace LUDO.Commands
             }
         }
     }
+
+    // Skapa detta för varje färg och sen via Namegroup jämföra Player1 och andra players och beroende på färg  villkora och if sats
 }
