@@ -8,17 +8,9 @@ namespace LUDO.Models
 {
     internal class Board
     {
-        private List<Piece> gamePieces;
+        public List<Cell> GameCells { get; set; }
 
 
-        public List<Piece> GamePieces { get; set; }
-        public Board()
-        { }
-
-        public void AddPiece(Piece piece)
-        { 
-            gamePieces.Add(piece);
-        }
 
     }
 }

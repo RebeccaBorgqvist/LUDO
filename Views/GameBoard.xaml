@@ -18,7 +18,7 @@
             VerticalAlignment="Top"/>
         
 
-        <xaml:CanvasControl Draw="DrawBoard" Margin="248,73,168,49" />
+        <xaml:CanvasControl x:Name="GameBoardCanvas" Width="1000" Height="800" />
         <TextBlock HorizontalAlignment="Left" Name="counter" Margin="42,649,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
 
 
