@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LUDO.Helpers
 {
-    internal enum TypeOfLocation
+    internal enum TypeOfCell
     {
         Nest,
         Field,
