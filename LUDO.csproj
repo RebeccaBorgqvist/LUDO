@@ -123,6 +123,7 @@
     <Compile Include="Commands\BaseCommands.cs" />
     <Compile Include="Commands\ChangeNameCommand.cs" />
     <Compile Include="Commands\ForwardCommand.cs" />
+    <Compile Include="Commands\PlayersSelectedColorCommand.cs" />
     <Compile Include="Commands\RemovePlayerCommand.cs" />
     <Compile Include="Commands\HighscoreButtonCommand.cs" />
     <Compile Include="Commands\PlayButtonCommand.cs" />
