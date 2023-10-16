@@ -7,52 +7,96 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Grid Width="299" Height="359" Background="#666363" Padding="20" CornerRadius="5">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="4*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <TextBlock Grid.ColumnSpan="2" Foreground="White" TextWrapping="WrapWholeWords" FontSize="15">
-            Choose number of players and their colors:
-        </TextBlock>
-        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="0,10,0,0">
-            <Button Content="{Binding Player1Name}" Command="{Binding ChangeNameCommand}" CommandParameter="Player1Name" Background="#D9D9D9" HorizontalAlignment="Stretch" Margin="0,0,5,5"/>
-            <Button Content="{Binding Player2Name}" Command="{Binding ChangeNameCommand}" CommandParameter="Player2Name" Background="#D9D9D9" HorizontalAlignment="Stretch" Margin="0,0,5,5"/>
-            <Button Content="{Binding Player3Name}" Visibility="{Binding IsPlayer3Visible}" Command="{Binding ChangeNameCommand}" CommandParameter="Player3Name" Background="#D9D9D9" HorizontalAlignment="Stretch" Margin="0,0,5,5"/>
-            <Button Content="{Binding Player4Name}" Visibility="{Binding IsPlayer4Visible}" Command="{Binding ChangeNameCommand}" CommandParameter="Player4Name" Background="#D9D9D9" HorizontalAlignment="Stretch" Margin="0,0,5,0"/>
-        </StackPanel>
-        <Grid Grid.Row="1" Grid.Column="1">
-            <!--Todo. Gabriellas code to replace this grid-->
-        </Grid>
-        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,20,0,0">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="..\Styles\ButtonStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Frame x:Name="GameSettingsFrame">
+        <Grid Width="299" Height="359" Background="#666363" Padding="20" CornerRadius="5">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="5*"/>
-                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="4*"/>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Background="Transparent" Visibility="{Binding IsMinusButtonVisible}" Command="{Binding MinusPlayerCommand}">
-                    <Image Width="30" Height="30" Source="ms-appx:///Assets/minusIcon.png"/>
-                </Button>
-                <Button Background="Transparent" Command="{Binding PlusPlayerCommand}" Visibility="{Binding IsPlusButtonVisible}">
-                    <Image Width="30" Height="30" Source="ms-appx:///Assets/plusIcon.png"/>
-                </Button>
-            </StackPanel>
-            <TextBlock Grid.Column="1" Text="{Binding AddRemoveText}" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" Margin="5,0,0,0"/>
-        </Grid>
-        <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom" >
-            <TextBlock Grid.ColumnSpan="2" Foreground="White" VerticalAlignment="Center" FontSize="15" Margin="10,0,0,0">
-                Click -> to start the game
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.ColumnSpan="2" Foreground="White" TextWrapping="WrapWholeWords" FontSize="15">
+            Choose number of players and their colors:
             </TextBlock>
-            <Button Background="Transparent" Command="{Binding ForwardCommand}" VerticalAlignment="Center" HorizontalAlignment="Right">
-                <Image Width="30" Height="30" Source="ms-appx:///Assets/forwardIcon.png"/>
-            </Button>
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="0,10,0,0">
+                <Button Content="{Binding Player1Name}" Command="{Binding ChangeNameCommand}" CommandParameter="Player1Name" Background="#D9D9D9" HorizontalAlignment="Stretch" Margin="0,0,5,5"/>
+                <Button Content="{Binding Player2Name}" Command="{Binding ChangeNameCommand}" CommandParameter="Player2Name" Background="#D9D9D9" HorizontalAlignment="Stretch" Margin="0,0,5,5"/>
+                <Button Content="{Binding Player3Name}" Visibility="{Binding IsPlayer3Visible}" Command="{Binding ChangeNameCommand}" CommandParameter="Player3Name" Background="#D9D9D9" HorizontalAlignment="Stretch" Margin="0,0,5,5"/>
+                <Button Content="{Binding Player4Name}" Visibility="{Binding IsPlayer4Visible}" Command="{Binding ChangeNameCommand}" CommandParameter="Player4Name" Background="#D9D9D9" HorizontalAlignment="Stretch" Margin="0,0,5,0"/>
+            </StackPanel>
+            <Grid Grid.Row="1" Grid.Column="1">
+                <!--Todo. Gabriellas code to replace this grid-->
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <RadioButton Name="Blue1" GroupName="Player1" Background="Blue" Style="{StaticResource CustomRadioButtonStyle}" Grid.Column="0" Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Command="{Binding ChangeColor}" IsChecked="{Binding Blue1}"></RadioButton>
+                    <RadioButton Name="Red1" GroupName="Player1" Background="Red" Style="{StaticResource CustomRadioButtonStyle}" Grid.Column="1"  Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Command="{Binding ChangeColor}" IsChecked="{Binding Red1}"></RadioButton>
+                    <RadioButton Name="Green1" GroupName="Player1" Background="Green" Style="{StaticResource CustomRadioButtonStyle}" Grid.Column="2"  Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Command="{Binding ChangeColor}" IsChecked="{Binding Green1}"></RadioButton>
+                    <RadioButton Name="Yellow1" GroupName="Player1" Background="Yellow" Style="{StaticResource CustomRadioButtonStyle}" Grid.Column="3"  Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Command="{Binding ChangeColor}" IsChecked="{Binding Yellow1}"></RadioButton>
+
+                    <RadioButton Name="Blue2" GroupName="Player2"  Background="Blue" Style="{StaticResource CustomRadioButtonStyle}" Grid.Column="0" Grid.Row="1" Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Command="{Binding ChangeColor}"  IsChecked="{Binding Blue2}"/>
+                    <RadioButton Name="Red2" GroupName="Player2"  Background="Red" Style="{StaticResource CustomRadioButtonStyle}" Grid.Column="1" Grid.Row="1"  Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Command="{Binding ChangeColor}" IsChecked="{Binding Red2}"/>
+                    <RadioButton Name="Green2" GroupName="Player2"  Background="Green" Style="{StaticResource CustomRadioButtonStyle}" Grid.Column="2" Grid.Row="1" Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Command="{Binding ChangeColor}" IsChecked="{Binding Green2}"></RadioButton>
+                    <RadioButton Name="Yellow2" GroupName="Player2"  Background="Yellow" Style="{StaticResource CustomRadioButtonStyle}" Grid.Column="3" Grid.Row="1"  Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Command="{Binding ChangeColor}" IsChecked="{Binding Yellow2}"></RadioButton>
+
+                    <RadioButton  Name="Blue3" GroupName="Player3"  Visibility="{Binding IsPlayer3Visible}"  Background="Blue" Style="{StaticResource CustomRadioButtonStyle}" Grid.Column="0" Grid.Row="2"  Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Command="{Binding ChangeColor}" IsChecked="{Binding Blue3}"/>
+                    <RadioButton  Name="Red3" GroupName="Player3"  Visibility="{Binding IsPlayer3Visible}"  Background="Red" Style="{StaticResource CustomRadioButtonStyle}" Grid.Column="1" Grid.Row="2"  Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Command="{Binding ChangeColor}" IsChecked="{Binding Red3}"/>
+                    <RadioButton  Name="Green3" GroupName="Player3"  Visibility="{Binding IsPlayer3Visible}"  Background="Green" Style="{StaticResource CustomRadioButtonStyle}" Grid.Column="2" Grid.Row="2"  Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Command="{Binding ChangeColor}" IsChecked="{Binding Green3}"></RadioButton>
+                    <RadioButton  Name="Yellow3" GroupName="Player3"  Visibility="{Binding IsPlayer3Visible}"  Background="Yellow" Style="{StaticResource CustomRadioButtonStyle}" Grid.Column="3" Grid.Row="2"  Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Command="{Binding ChangeColor}" IsChecked="{Binding Yellow3}"></RadioButton>
+
+                    <RadioButton  Name="Blue4" GroupName="Player4"  Visibility="{Binding IsPlayer4Visible}"   Background="Blue" Style="{StaticResource CustomRadioButtonStyle}" Grid.Column="0" Grid.Row="3" Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Command="{Binding ChangeColor}"  IsChecked="{Binding Blue4}"></RadioButton>
+                    <RadioButton Name="Red4" GroupName="Player4"  Visibility="{Binding IsPlayer4Visible}"   Background="Red" Style="{StaticResource CustomRadioButtonStyle}"  Grid.Column="1" Grid.Row="3" Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Command="{Binding ChangeColor}" IsChecked="{Binding Red4}"></RadioButton>
+                    <RadioButton Name="Green4" GroupName="Player4"  Visibility="{Binding IsPlayer4Visible}"   Background="Green" Style="{StaticResource CustomRadioButtonStyle}" Grid.Column="2" Grid.Row="3"  Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Command="{Binding ChangeColor}" IsChecked="{Binding Green4}"></RadioButton>
+                    <RadioButton Name="Yellow4" GroupName="Player4"  Visibility="{Binding IsPlayer4Visible}"  Background="Yellow" Style="{StaticResource CustomRadioButtonStyle}" Grid.Column="3" Grid.Row="3"  Margin="1,1,1,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Command="{Binding ChangeColor}" IsChecked="{Binding Yellow4}"></RadioButton>
+
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,20,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="8*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Background="Transparent" Visibility="{Binding IsMinusButtonVisible}" Command="{Binding MinusPlayerCommand}">
+                        <Image Width="30" Height="30" Source="ms-appx:///Assets/minusIcon.png"/>
+                    </Button>
+                    <Button Background="Transparent" Command="{Binding PlusPlayerCommand}" Visibility="{Binding IsPlusButtonVisible}">
+                        <Image Width="30" Height="30" Source="ms-appx:///Assets/plusIcon.png"/>
+                    </Button>
+                </StackPanel>
+                <TextBlock Grid.Column="1" Text="{Binding AddRemoveText}" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" Margin="5,0,0,0"/>
+            </Grid>
+            <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom" >
+                <TextBlock Grid.ColumnSpan="2" Foreground="White" VerticalAlignment="Center" FontSize="15" Margin="10,0,0,0">
+                Click -> to start the game
+                </TextBlock>
+                <Button Background="Transparent" Command="{Binding ForwardCommand}" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <Image Width="30" Height="30" Source="ms-appx:///Assets/forwardIcon.png"/>
+                </Button>
+            </Grid>
         </Grid>
-    </Grid>
+    </Frame>
 </Page>
