@@ -6,16 +6,67 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:Media="using:Microsoft.Xaml.Interactions.Media"
+    
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding GameBoardViewModelInstance}">
 
-    <Grid>
-        <TextBox 
-            HorizontalAlignment="Left" 
-            Margin="576,360,0,0" 
-            TextWrapping="Wrap" 
-            FontSize="{Binding TextStorlek}"
-            Text="TextBox" 
-            VerticalAlignment="Top"/>
+    <Page.Resources>
+        <Storyboard x:Name="DiceRollStoryboard">
+            <DoubleAnimation
+                Storyboard.TargetName="DiceRotateTransform"
+                Storyboard.TargetProperty="Angle"
+                From="0" To="360" Duration="0:0:2"
+                AutoReverse="False" RepeatBehavior="10x"/>
+        </Storyboard>
+        <Storyboard x:Name="RollDice">
+            <DoubleAnimation Duration="00:00:10" Storyboard.TargetName="DiceButton" To="-16.5" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"/>
+            <DoubleAnimation Duration="00:00:10" Storyboard.TargetName="DiceButton" To="1.5" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"/>
+        </Storyboard>
+    </Page.Resources>
 
+
+    <Grid HorizontalAlignment="Right" Width="700" Height="700" VerticalAlignment="Center" Margin="0,0,250,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+
+        </Grid.RowDefinitions>
+
+        <!-- delete this background when the real one is implemented -->
+        <Image Stretch="UniformToFill"
+               Source="ms-appx:///Assets/gameboard_picture.png" 
+               Grid.ColumnSpan="2" 
+               Grid.RowSpan="2"/>
+
+        <!-- dice section -->
+        <Button x:Name="DiceButton" Grid.Row="1" 
+                Grid.Column="{Binding CurrentPositionColumn}"
+                Command="{Binding RollDiceCommand}"
+                Background="Transparent"
+                Width="43"
+                Height="43"
+                Padding="0"
+                BorderThickness="0" VerticalAlignment="Top" Margin="215,95,0,0" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <CompositeTransform/>
+            </Button.RenderTransform>
+
+            <Image Source="{Binding CurrentDiceImage}"
+                   Stretch="UniformToFill">
+            </Image>
+        </Button>
     </Grid>
 </Page>
