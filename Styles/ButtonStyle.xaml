@@ -1,0 +1,70 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:LUDO"
+                    xmlns:viewmodels="using:LUDO.ViewModels"
+                    xmlns:muxc="clr-namespace:Microsoft.UI.Xaml.Controls;assembly=Microsoft.UI.Xaml.Controls">
+    <!-- Radio Button Style -->
+    <Style x:Key="CustomRadioButtonStyle" TargetType="RadioButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Create a Rectangle for the checkbox appearance -->
+                        <Rectangle x:Name="Checkbox"
+                                   Width="20"
+                                   Height="20"
+                                   Fill="Transparent"
+                                   Stroke="#007ACC"
+                                   StrokeThickness="2"
+                                   RadiusX="2"
+                                   RadiusY="2"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"/>
+
+                        <!-- Create a Path for the checkmark -->
+                        <Path x:Name="CheckMark" Data="M0,5 L7,12 L16,0"
+                              Stroke="#4CAF50"
+                              StrokeThickness="2"
+                              Visibility="Collapsed"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Left"/>
+
+                        <!-- Define the content (text) for the radio button -->
+                        <ContentPresenter Grid.Column="1" VerticalAlignment="Center"/>
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="PointerOver">
+                                    <Storyboard>
+                                        <!-- Define visual changes for PointerOver state -->
+                                        <!-- Change the background color when the pointer is over the control -->
+                                        <ColorAnimation Storyboard.TargetName="Checkbox" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="#E0E0E0" Duration="0:0:0.1"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Checked">
+                                    <Storyboard>
+                                        <!-- Hide the Checkbox when checked -->
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Checkbox" Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <!-- Show the CheckMark when checked -->
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckMark" Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <!-- Add more states and transitions as needed -->
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

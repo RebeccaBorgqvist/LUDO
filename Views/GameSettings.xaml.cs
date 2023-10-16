@@ -25,5 +25,6 @@ namespace LUDO.Views
             this.DataContext = new GameSettingsViewModel();
         }
 
+ 
     }
 }
