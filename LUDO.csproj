@@ -123,6 +123,7 @@
     <Compile Include="Commands\BaseCommands.cs" />
     <Compile Include="Commands\ChangeNameCommand.cs" />
     <Compile Include="Commands\ForwardCommand.cs" />
+    <Compile Include="Commands\PlayersSelectedColorCommand.cs" />
     <Compile Include="Commands\RemovePlayerCommand.cs" />
     <Compile Include="Commands\HighscoreButtonCommand.cs" />
     <Compile Include="Commands\PlayButtonCommand.cs" />
@@ -173,6 +174,10 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Page Include="Styles\ButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
