@@ -119,7 +119,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Commands\AddPlayerCommand.cs" />
     <Compile Include="Commands\BaseCommands.cs" />
+    <Compile Include="Commands\ChangeNameCommand.cs" />
+    <Compile Include="Commands\ForwardCommand.cs" />
+    <Compile Include="Commands\RemovePlayerCommand.cs" />
     <Compile Include="Commands\HighscoreButtonCommand.cs" />
     <Compile Include="Commands\PlayButtonCommand.cs" />
     <Compile Include="Commands\RulesButtonCommand.cs" />
@@ -158,6 +162,9 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\forwardIcon.png" />
+    <Content Include="Assets\minusIcon.png" />
+    <Content Include="Assets\plusIcon.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
