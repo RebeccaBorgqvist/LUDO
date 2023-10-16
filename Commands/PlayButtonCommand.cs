@@ -14,7 +14,7 @@ namespace LUDO.Commands
         public override void Execute(object parameter)
         {
             // TBD: Transitions?
-            MainMenuViewModel.Instance.MainMenuFrame.Navigate(typeof(PlayerSelect), null, new SuppressNavigationTransitionInfo());
+            MainMenuViewModel.Instance.MainMenuFrame.Navigate(typeof(GameSettings), null, new SuppressNavigationTransitionInfo());
         }
     }
 }
