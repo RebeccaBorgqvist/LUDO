@@ -14,9 +14,12 @@ namespace LUDO.Commands
     {
         public override void Execute(object parameter)
         {
+            // TBD: MOVE CODE TO RELEVANT CLASS?
             List<Player> players = new List<Player>();
+
             players.Add(new Player(GameSettingsViewModel.Instance.Player1Name));
             players.Add(new Player(GameSettingsViewModel.Instance.Player2Name));
+
             if (GameSettingsViewModel.Instance.IsPlayer3Visible)
             {
                 players.Add(new Player(GameSettingsViewModel.Instance.Player3Name));
@@ -25,7 +28,8 @@ namespace LUDO.Commands
             {
                 players.Add(new Player(GameSettingsViewModel.Instance.Player4Name));
             }
-            //MainMenuViewModel.Instance.MainMenuFrame.Navigate(typeof(GameBoard(players)), null, new SuppressNavigationTransitionInfo());
+
+            MainMenuViewModel.Instance.MainMenuFrame.Navigate(typeof(GameBoard), null, new SuppressNavigationTransitionInfo());
         }
     }
 }

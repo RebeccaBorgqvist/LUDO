@@ -121,10 +121,12 @@
     </Compile>
     <Compile Include="Commands\AddPlayerCommand.cs" />
     <Compile Include="Commands\BaseCommands.cs" />
+    <Compile Include="Commands\HighscoreButtonCommand.cs" />
+    <Compile Include="Commands\PlayButtonCommand.cs" />
+    <Compile Include="Commands\RulesButtonCommand.cs" />
     <Compile Include="Commands\ChangeNameCommand.cs" />
     <Compile Include="Commands\ForwardCommand.cs" />
     <Compile Include="Commands\RemovePlayerCommand.cs" />
-    <Compile Include="Commands\TestCommand.cs" />
     <Compile Include="Helpers\TypeOfLocation.cs" />
     <Compile Include="Models\Board.cs" />
     <Compile Include="Models\Dice.cs" />
@@ -147,6 +149,9 @@
     <Compile Include="Views\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\StartMenu.xaml.cs">
+      <DependentUpon>StartMenu.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -155,6 +160,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\forwardIcon.png" />
+    <Content Include="Assets\backIcon.png" />
+    <Content Include="Assets\highscoreIcon.png" />
+    <Content Include="Assets\menuIcon.png" />
     <Content Include="Assets\minusIcon.png" />
     <Content Include="Assets\plusIcon.png" />
     <Content Include="Properties\Default.rd.xml" />
@@ -180,6 +188,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StartMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
