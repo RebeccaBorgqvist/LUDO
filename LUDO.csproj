@@ -122,7 +122,6 @@
     <Compile Include="Commands\AddPlayerCommand.cs" />
     <Compile Include="Commands\BaseCommands.cs" />
     <Compile Include="Commands\RollDiceCommand.cs" />
-    <Compile Include="Commands\TestCommand.cs" />
     <Compile Include="Commands\ChangeNameCommand.cs" />
     <Compile Include="Commands\ForwardCommand.cs" />
     <Compile Include="Commands\PlayersSelectedColorCommand.cs" />
