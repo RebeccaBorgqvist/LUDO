@@ -122,6 +122,9 @@
     <Compile Include="Commands\AddPlayerCommand.cs" />
     <Compile Include="Commands\BaseCommands.cs" />
     <Compile Include="Commands\RollDiceCommand.cs" />
+    <Compile Include="Commands\HighscoreButtonCommand.cs" />
+    <Compile Include="Commands\PlayButtonCommand.cs" />
+    <Compile Include="Commands\RulesButtonCommand.cs" />
     <Compile Include="Commands\ChangeNameCommand.cs" />
     <Compile Include="Commands\ForwardCommand.cs" />
     <Compile Include="Commands\PlayersSelectedColorCommand.cs" />
@@ -150,9 +153,6 @@
     </Compile>
     <Compile Include="Views\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PlayerSelect.xaml.cs">
-      <DependentUpon>PlayerSelect.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StartMenu.xaml.cs">
       <DependentUpon>StartMenu.xaml</DependentUpon>
@@ -189,6 +189,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\forwardIcon.png" />
+    <Content Include="Assets\backIcon.png" />
+    <Content Include="Assets\highscoreIcon.png" />
+    <Content Include="Assets\menuIcon.png" />
     <Content Include="Assets\minusIcon.png" />
     <Content Include="Assets\plusIcon.png" />
     <Content Include="Properties\Default.rd.xml" />
@@ -218,10 +221,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainMenu.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\PlayerSelect.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

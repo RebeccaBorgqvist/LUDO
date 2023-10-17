@@ -14,9 +14,12 @@ namespace LUDO.Commands
     {
         public override void Execute(object parameter)
         {
+            // TBD: MOVE CODE TO RELEVANT CLASS?
             List<Player> players = new List<Player>();
+
             players.Add(new Player(GameSettingsViewModel.Instance.Player1Name));
             players.Add(new Player(GameSettingsViewModel.Instance.Player2Name));
+
             if (GameSettingsViewModel.Instance.IsPlayer3Visible)
             {
                 players.Add(new Player(GameSettingsViewModel.Instance.Player3Name));

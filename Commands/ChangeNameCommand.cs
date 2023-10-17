@@ -18,7 +18,9 @@ namespace LUDO.Commands
             {
                 PrimaryButtonText = "OK",
                 CloseButtonText = "Cancel"
+                
             };
+
             StackPanel panel = new StackPanel();
             TextBox inputTextBox = new TextBox
             {
