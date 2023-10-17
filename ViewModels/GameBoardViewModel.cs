@@ -1,9 +1,10 @@
+
 ﻿using LUDO.Models;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.UI.Xaml;
+﻿using LUDO.Commands;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using Windows.UI;
 using Windows.UI;
 using Windows.UI.Xaml.Controls;
 using System.Diagnostics;
+
 
 namespace LUDO.ViewModels
 {
@@ -37,7 +39,6 @@ namespace LUDO.ViewModels
         }
 
         public ICommand RollDiceCommand { get; set; }
-
 
 
         //property for building game board.
@@ -355,7 +356,6 @@ namespace LUDO.ViewModels
             //    if (cell.Id == 6 && cell.IsFinal == true) count++;
             //}
             //Debug.WriteLine(count.ToString());
-
         }
     }
 }

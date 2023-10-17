@@ -9,6 +9,7 @@
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:Media="using:Microsoft.Xaml.Interactions.Media" xmlns:xaml="using:Microsoft.Graphics.Canvas.UI.Xaml"
+
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     DataContext="{Binding GameBoardViewModelInstance}">
 
@@ -26,6 +27,7 @@
         </Storyboard>
     </Page.Resources>
 
+
         <xaml:CanvasControl x:Name="GameBoardCanvas" Width="1000" Height="800" />
         <TextBlock HorizontalAlignment="Left" Name="counter" Margin="42,649,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
 
@@ -39,6 +41,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+
             <RowDefinition Height="200*"/>
             <RowDefinition Height="143*"/>
             <RowDefinition Height="19*"/>
@@ -56,6 +59,7 @@
 
         <!-- dice section -->
         <Button x:Name="DiceButton" 
+
                 Grid.Column="{Binding CurrentPositionColumn}"
                 Command="{Binding RollDiceCommand}"
                 Background="Transparent"
@@ -63,6 +67,7 @@
                 Height="43"
                 Padding="0"
                 BorderThickness="0" Margin="377,387,0,0" RenderTransformOrigin="0.465,0.504" VerticalAlignment="Top" Grid.RowSpan="2">
+
             <Button.RenderTransform>
                 <CompositeTransform/>
             </Button.RenderTransform>
