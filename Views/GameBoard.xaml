@@ -4,11 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:LUDO.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:xaml="using:Microsoft.Graphics.Canvas.UI.Xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:Media="using:Microsoft.Xaml.Interactions.Media" xmlns:xaml="using:Microsoft.Graphics.Canvas.UI.Xaml"
+    xmlns:Media="using:Microsoft.Xaml.Interactions.Media" 
+    xmlns:xaml="using:Microsoft.Graphics.Canvas.UI.Xaml"
 
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     DataContext="{Binding GameBoardViewModelInstance}">
@@ -28,8 +29,8 @@
     </Page.Resources>
 
 
-        <xaml:CanvasControl x:Name="GameBoardCanvas" Width="1000" Height="800" />
-        <TextBlock HorizontalAlignment="Left" Name="counter" Margin="42,649,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <!--<xaml:CanvasControl x:Name="GameBoardCanvas" Width="1000" Height="800" />-->
+        <!--<TextBlock HorizontalAlignment="Left" Name="counter" Margin="42,649,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>-->
 
     <Grid HorizontalAlignment="Right" Width="1000" Height="800" VerticalAlignment="Center" Margin="0,0,250,0">
         <Grid.ColumnDefinitions>
