@@ -18,19 +18,16 @@ namespace LUDO.Commands
             ContentDialog dialog = new ContentDialog
             {
                 PrimaryButtonText = "OK",
-                CloseButtonText = "Cancel",
+                CloseButtonText = "Cancel"
             };
-
-
             StackPanel panel = new StackPanel();
             TextBox inputTextBox = new TextBox
             {
                 MaxLength = 12
             };
-
+            panel.Children.Add(inputTextBox);
             dialog.Content = panel;
             ContentDialogResult result = await dialog.ShowAsync();
-
             if (result == ContentDialogResult.Primary)
             {
                 string newName = inputTextBox.Text;
