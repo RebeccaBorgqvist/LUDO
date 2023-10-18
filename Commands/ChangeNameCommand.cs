@@ -25,28 +25,36 @@ namespace LUDO.Commands
             {
                 MaxLength = 12
             };
+
+            // Handle KeyUp event for the TextBox
+            inputTextBox.KeyUp += async (sender, e) =>
+            {
+                if (e.Key == Windows.System.VirtualKey.Enter)
+                {
+                    dialog.Hide(); // Close the dialog
+                    string newName = inputTextBox.Text;
+
+                    switch (parameter.ToString())
+                    {
+                        case "Player1Name":
+                            GameSettingsViewModel.Instance.Player1Name = newName;
+                            break;
+                        case "Player2Name":
+                            GameSettingsViewModel.Instance.Player2Name = newName;
+                            break;
+                        case "Player3Name":
+                            GameSettingsViewModel.Instance.Player3Name = newName;
+                            break;
+                        case "Player4Name":
+                            GameSettingsViewModel.Instance.Player4Name = newName;
+                            break;
+                    }
+                }
+            };
+
             panel.Children.Add(inputTextBox);
             dialog.Content = panel;
             ContentDialogResult result = await dialog.ShowAsync();
-            if (result == ContentDialogResult.Primary)
-            {
-                string newName = inputTextBox.Text;
-                switch (parameter.ToString())
-                {
-                    case "Player1Name":
-                        GameSettingsViewModel.Instance.Player1Name = newName;
-                        break;
-                    case "Player2Name":
-                        GameSettingsViewModel.Instance.Player2Name = newName;
-                        break;
-                    case "Player3Name":
-                        GameSettingsViewModel.Instance.Player3Name = newName;
-                        break;
-                    case "Player4Name":
-                        GameSettingsViewModel.Instance.Player4Name = newName;
-                        break;
-                }
-            }
         }
     }
 }
