@@ -10,7 +10,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI;
-using Windows.UI;
 using Windows.UI.Xaml.Controls;
 using System.Diagnostics;
 
@@ -22,9 +21,26 @@ namespace LUDO.ViewModels
         public static GameBoardViewModel Instance { get; private set; }
 
         private Dice _diceModel;
-        Board gameBoard = new Board();
-
+        private Board _boardModel;
+        private GameLogic _gameLogicModel; //not sure so far if we are required this later on :/
         private string _currentDiceImage;
+
+
+        public Board BoardModel
+        {
+            get { return _boardModel; }
+            set
+            {
+                _boardModel = value;
+            }
+        }
+
+        public GameLogic GameLogicModel
+        { 
+            get { return _gameLogicModel; }
+            set { _gameLogicModel = value; }
+        }
+
         public string CurrentDiceImage
         {
             get { return _currentDiceImage; }
@@ -37,25 +53,31 @@ namespace LUDO.ViewModels
                 }
             }
         }
-
         public ICommand RollDiceCommand { get; set; }
 
 
-        //property for building game board.
+        //property for building game board (win2d class)
         public CanvasControl GameBoardCanvas
         { get; set; }
 
         public GameBoardViewModel()
         {
             Instance = this;
+
+            //dice-related initiations
             _diceModel = new Dice();
             RollDiceCommand = new RollDiceCommand();
             CurrentDiceImage = "./Assets/roll_dice.png";
+
+
+            //gameBoard- and gameLogic related initiations 
+            _boardModel = new Board();
+            _gameLogicModel = new GameLogic();
         }
 
 
 
-        //USAGE OF WIN2D API: DRAWING CELLS OF THE GAME BOARD(fields, finals, goals, nests)     
+        //USAGE OF WIN2D API: DRAWING CELLS OF THE GAME BOARD(fields, finals, finish and nests)     
         internal void DrawBoard(CanvasControl sender, CanvasDrawEventArgs args)
         {
 
@@ -345,17 +367,10 @@ namespace LUDO.ViewModels
                 }
                 args.DrawingSession.DrawImage(renderTarget);
             }
-            gameBoard.GameCells = gameBoardCells;
 
-
-            //TESTER
-
-            //int count = 0;
-            //foreach (Cell cell in gameBoard.GameCells)
-            //{
-            //    if (cell.Id == 6 && cell.IsFinal == true) count++;
-            //}
-            //Debug.WriteLine(count.ToString());
+            _boardModel.GameCells = gameBoardCells;
+            _gameLogicModel.StartGame();      
         }
+        
     }
 }

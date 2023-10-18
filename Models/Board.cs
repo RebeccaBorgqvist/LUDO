@@ -8,9 +8,8 @@ namespace LUDO.Models
 {
     internal class Board
     {
+        private List<Cell> _gameCells;        
+
         public List<Cell> GameCells { get; set; }
-
-
-
     }
 }

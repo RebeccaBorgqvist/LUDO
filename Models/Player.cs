@@ -9,10 +9,23 @@ namespace LUDO.Models
     internal class Player
     {
         private string _name;
-        public string Name { get { return _name; } }
+
+        private bool _isTurnToRoll;
+
+
+        public bool IsTurnToRoll
+        {
+            get { return _isTurnToRoll; }
+            set { _isTurnToRoll = value; }
+        }
+
+        public string Name { get { return _name; } set { _name = value; } }
+
+
         public Player(string name)
         {
             _name = name;
+            _isTurnToRoll = false;
         }
     }
 }
