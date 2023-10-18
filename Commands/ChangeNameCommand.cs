@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using LUDO.ViewModels;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 
 
 namespace LUDO.Commands
@@ -17,16 +18,19 @@ namespace LUDO.Commands
             ContentDialog dialog = new ContentDialog
             {
                 PrimaryButtonText = "OK",
-                CloseButtonText = "Cancel"
+                CloseButtonText = "Cancel",
             };
+
+
             StackPanel panel = new StackPanel();
             TextBox inputTextBox = new TextBox
             {
                 MaxLength = 12
             };
-            panel.Children.Add(inputTextBox);
+
             dialog.Content = panel;
-            ContentDialogResult result = await dialog.ShowAsync(); 
+            ContentDialogResult result = await dialog.ShowAsync();
+
             if (result == ContentDialogResult.Primary)
             {
                 string newName = inputTextBox.Text;
