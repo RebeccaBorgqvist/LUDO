@@ -6,47 +6,35 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    
+    Background="#D9D9D9"
+    Width="960"
+    Height="720">
+
     <Page.Resources>
         <Style x:Key="StartButtonStyle" TargetType="Button">
-            <Setter Property="FontSize" Value="64"/>
+            <Setter Property="FontSize" Value="72"/>
             <Setter Property="Background" Value="#FFFFFF"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="CornerRadius" Value="25"/>
+            <Setter Property="CornerRadius" Value="15"/>
         </Style>
     </Page.Resources>
 
-    <Grid>
+    <Grid Background="#666363" CornerRadius="15">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="5*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="LUDO" Grid.Column="1" Grid.Row="0" FontSize="160" HorizontalAlignment="Center"/>
-
-        <Border Grid.Column="1" Grid.Row="1" Background="#666363" CornerRadius="25" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="4*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <Button Content="PLAY" Grid.Column="1" Grid.Row="0" Command="{Binding PlayButtonCommand}" Style="{StaticResource StartButtonStyle}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,50,0,0"/>
-                <Button Content="HIGHSCORE" Grid.Column="1" Grid.Row="1" Command="{Binding HighscoreButtonCommand}" Style="{StaticResource StartButtonStyle}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,25"/>
-                <Button Content="RULES" Grid.Column="1" Grid.Row="2" Command="{Binding RulesButtonCommand}" Style="{StaticResource StartButtonStyle}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,0,0,50"/>
-            </Grid>
-        </Border>
+        <Button Content="PLAY" Grid.Column="1" Grid.Row="1" Command="{Binding PlayButtonCommand}" Style="{StaticResource StartButtonStyle}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="50,10"/>
+        <Button Content="HIGHSCORE" Grid.Column="1" Grid.Row="2" Command="{Binding HighscoreButtonCommand}" Style="{StaticResource StartButtonStyle}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="50,10"/>
+        <Button Content="RULES" Grid.Column="1" Grid.Row="3" Command="{Binding RulesButtonCommand}" Style="{StaticResource StartButtonStyle}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="50,10"/>
     </Grid>
 </Page>
