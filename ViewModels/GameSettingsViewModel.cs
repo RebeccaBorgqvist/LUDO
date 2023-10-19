@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Devices.I2c;
 using LUDO.Models;
+using System.Collections.ObjectModel;
+using Windows.UI.Xaml.Media;
 
 namespace LUDO.ViewModels
 {
@@ -41,10 +43,13 @@ namespace LUDO.ViewModels
 
         private string _addRemoveText = "Add more players";
         private int _players = 2;
+
         private string _player1Name = "Player 1";
         private string _player2Name = "Player 2";
         private string _player3Name = "Player 3";
         private string _player4Name = "Player 4";
+
+
         public ICommand PlusPlayerCommand { get; set; }
         public ICommand MinusPlayerCommand { get; set; }
         public ICommand ForwardCommand { get; set; }
@@ -156,7 +161,7 @@ namespace LUDO.ViewModels
                 OnPropertyChanged(nameof(IsPlayer4ColorsVisible));
             }
         }
-        // Blue
+        // BLUE
         public bool Blue1
         {
             get { return _blue1; }
@@ -194,6 +199,7 @@ namespace LUDO.ViewModels
                 OnPropertyChanged(nameof(Blue4));
             }
         }
+        // RED
         public bool Red1
         {
             get { return _red1; }
@@ -230,6 +236,7 @@ namespace LUDO.ViewModels
                 OnPropertyChanged(nameof(Red4));
             }
         }
+        // GREEN
         public bool Green1
         {
             get { return _green1; }
@@ -267,6 +274,7 @@ namespace LUDO.ViewModels
             }
         }
 
+        // YELLOW
         public bool Yellow1
         {
             get { return _yellow1; }
