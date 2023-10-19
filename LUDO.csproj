@@ -182,10 +182,13 @@
     <Content Include="Assets\6.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\backIcon.png" />
     <Content Include="Assets\PieceBlue.png" />
     <Content Include="Assets\gameboard_picture.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\highscoreIcon.png" />
+    <Content Include="Assets\menuIcon.png" />
     <Content Include="Assets\PieceGreen.png" />
     <Content Include="Assets\PieceRed.png" />
     <Content Include="Assets\roll_dice.png">

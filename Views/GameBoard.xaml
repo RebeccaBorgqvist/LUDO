@@ -10,8 +10,9 @@
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:Media="using:Microsoft.Xaml.Interactions.Media" 
     xmlns:xaml="using:Microsoft.Graphics.Canvas.UI.Xaml"
-
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Background="#D9D9D9"
+    Width="960"
+    Height="720"
     DataContext="{Binding GameBoardViewModelInstance}">
 
     <Page.Resources>
@@ -28,8 +29,8 @@
         </Storyboard>
     </Page.Resources>
 
-    <Grid>
-        <Canvas VerticalAlignment="center" HorizontalAlignment="center" Width="452" Height="426" Background="LightGray">
+    <Grid Background="#666363">
+        <Canvas VerticalAlignment="Center" HorizontalAlignment="Center" Width="452" Height="426" Background="LightGray">
             <xaml:CanvasControl x:Name="GameBoardCanvas" Width="452" Height="426">
                 <xaml:CanvasControl.RenderTransform>
                     <CompositeTransform SkewX="0" TranslateX="0" SkewY="0" TranslateY="0"/>
