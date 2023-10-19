@@ -5,6 +5,7 @@
     xmlns:local="using:LUDO.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:LUDO.ViewModels"
     mc:Ignorable="d"
     Background="#D9D9D9">
 
@@ -15,41 +16,41 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>-->
 
-        <Style x:Key="RadioButtonStyle" TargetType="RadioButton">
-            <Setter Property="Margin" Value="25,10,25,10"/>
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="VerticalAlignment" Value="Stretch"/>
-            <Setter Property="CornerRadius" Value="25"/>
+        <Style x:Name="radioButtonStyle" TargetType="RadioButton">
+            <!--<Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>-->
+            <Setter Property="Margin" Value="0,0,-16,8"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RadioButton">
-                        <Grid Background="{TemplateBinding Background}">
-                            <Border x:Name="RadioButtonBorder"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="25">
-                                <Grid>
-                                    <ContentPresenter x:Name="ContentPresenter"
-                                              ContentTemplate="{TemplateBinding ContentTemplate}"
-                                              ContentTransitions="{TemplateBinding ContentTransitions}"
-                                              Content="{TemplateBinding Content}"
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                                </Grid>
-                            </Border>
+                        <Grid x:Name="RootGrid"
+							  Width="64"
+							  Height="64"
+                              BorderThickness="0"
+							  Background="{TemplateBinding Background}"
+							  CornerRadius="5">
+
+                            <TextBlock x:Name="RootTextBlock" Text="×" Foreground="Transparent" FontSize="120" HorizontalAlignment="Center" Visibility="Visible" VerticalAlignment="Center" Padding="0,0,0,28"/>
+                            <Ellipse x:Name="RootEllipse" Fill="{TemplateBinding Background}" Width="32" Height="32"/>
+
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CheckStates">
                                     <VisualState x:Name="Checked">
                                         <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RadioButtonBorder"
-                                                                   Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="YourCheckedColor" />
-                                            </ObjectAnimationUsingKeyFrames>
+                                            <ColorAnimation Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)" To="#D9D9D9" Duration="0"/>
+                                            <ColorAnimation Storyboard.TargetName="RootTextBlock" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" To="Transparent" Duration="0"/>
                                         </Storyboard>
                                     </VisualState>
-                                    <VisualState x:Name="Unchecked" />
-                                    <VisualState x:Name="Indeterminate" />
+                                    <VisualState x:Name="Unchecked"/>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetName="RootTextBlock" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" To="White" Duration="0"/>
+                                            <ColorAnimation Storyboard.TargetName="RootEllipse" Storyboard.TargetProperty="(Ellipse.Fill).(SolidColorBrush.Color)" To="Transparent" Duration="0"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Normal"/>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
                         </Grid>
@@ -59,7 +60,7 @@
         </Style>
     </Page.Resources>
 
-    <Grid Background="#666363" CornerRadius="25">
+    <Grid Background="#666363" CornerRadius="15">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="5*"/>
@@ -74,17 +75,14 @@
             <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="1" Grid.Row="1" FontSize="36" Foreground="White" TextWrapping="WrapWholeWords" >
-				Choose number of players and their colors:
+        <TextBlock Grid.Column="1" Grid.Row="1" FontSize="56" Foreground="White" TextWrapping="WrapWholeWords" HorizontalAlignment="Center">
+			PLAYER SELECT
         </TextBlock>
 
         <Grid Grid.Column="1" Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>
@@ -94,30 +92,94 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Button Content="{Binding Player1Name}" Command="{Binding ChangeNameCommand}" CommandParameter="Player1Name" Grid.Column="0" Grid.Row="1" FontSize="36" Background="#D9D9D9" HorizontalAlignment="Stretch" Margin="0,0,10,10"/>
-            <Button Content="{Binding Player2Name}" Command="{Binding ChangeNameCommand}" CommandParameter="Player2Name" Grid.Column="0" Grid.Row="2" FontSize="36" Background="#D9D9D9" HorizontalAlignment="Stretch" Margin="0,0,10,10"/>
-            <Button Content="{Binding Player3Name}" Command="{Binding ChangeNameCommand}" Visibility="{Binding IsPlayer3Visible}" CommandParameter="Player3Name" Grid.Column="0" Grid.Row="3" FontSize="36" Background="#D9D9D9" HorizontalAlignment="Stretch" Margin="0,0,10,10"/>
-            <Button Content="{Binding Player4Name}" Command="{Binding ChangeNameCommand}" Visibility="{Binding IsPlayer4Visible}" CommandParameter="Player4Name" Grid.Column="0" Grid.Row="4" FontSize="36" Background="#D9D9D9" HorizontalAlignment="Stretch" Margin="0,0,10,10"/>
+            <Button Content="{Binding Player1Name}" Command="{Binding ChangeNameCommand}" CommandParameter="Player1Name" Grid.Column="0" Grid.Row="1" FontSize="36" Background="#D9D9D9" HorizontalAlignment="Stretch" CornerRadius="5" Margin="0,0,10,10"/>
+            <Button Content="{Binding Player2Name}" Command="{Binding ChangeNameCommand}" CommandParameter="Player2Name" Grid.Column="0" Grid.Row="2" FontSize="36" Background="#D9D9D9" HorizontalAlignment="Stretch" CornerRadius="5" Margin="0,0,10,10"/>
+            <Button Content="{Binding Player3Name}" Command="{Binding ChangeNameCommand}" Visibility="{Binding IsPlayer3Visible}" CommandParameter="Player3Name" Grid.Column="0" Grid.Row="3" FontSize="36" Background="#D9D9D9" HorizontalAlignment="Stretch" CornerRadius="5" Margin="0,0,10,10"/>
+            <Button Content="{Binding Player4Name}" Command="{Binding ChangeNameCommand}" Visibility="{Binding IsPlayer4Visible}" CommandParameter="Player4Name" Grid.Column="0" Grid.Row="4" FontSize="36" Background="#D9D9D9" HorizontalAlignment="Stretch" CornerRadius="5" Margin="0,0,10,10"/>
 
-            <RadioButton  Grid.Column="1" Grid.Row="1" GroupName="Player1" Style="{StaticResource RadioButtonStyle}" Background="Blue"/>
-            <RadioButton  Grid.Column="2" Grid.Row="1" GroupName="Player1" Style="{StaticResource RadioButtonStyle}" Background="Red"/>
-            <RadioButton  Grid.Column="3" Grid.Row="1" GroupName="Player1" Style="{StaticResource RadioButtonStyle}" Background="Green"/>
-            <RadioButton  Grid.Column="4" Grid.Row="1" GroupName="Player1" Style="{StaticResource RadioButtonStyle}" Background="Yellow" />
+            <ItemsControl Grid.Column="1" Grid.Row="1" ItemsSource="{Binding ColorSelection[0]}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <RadioButton/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
 
-            <RadioButton  Grid.Column="1" Grid.Row="2" GroupName="Player2" Style="{StaticResource RadioButtonStyle}" Background="Blue"/>
-            <RadioButton  Grid.Column="2" Grid.Row="2" GroupName="Player2" Style="{StaticResource RadioButtonStyle}" Background="Red"/>
-            <RadioButton  Grid.Column="3" Grid.Row="2" GroupName="Player2" Style="{StaticResource RadioButtonStyle}" Background="Green"/>
-            <RadioButton  Grid.Column="4" Grid.Row="2" GroupName="Player2" Style="{StaticResource RadioButtonStyle}" Background="Yellow" />
+            <ItemsControl Grid.Column="1" Grid.Row="2" ItemsSource="{Binding ColorSelection[1]}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <RadioButton/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
 
-            <RadioButton  Grid.Column="1" Grid.Row="3" GroupName="Player3" Style="{StaticResource RadioButtonStyle}" Background="Blue" Visibility="{Binding IsPlayer3Visible}"/>
-            <RadioButton  Grid.Column="2" Grid.Row="3" GroupName="Player3" Style="{StaticResource RadioButtonStyle}" Background="Red" Visibility="{Binding IsPlayer3Visible}"/>
-            <RadioButton  Grid.Column="3" Grid.Row="3" GroupName="Player3" Style="{StaticResource RadioButtonStyle}" Background="Green" Visibility="{Binding IsPlayer3Visible}"/>
-            <RadioButton  Grid.Column="4" Grid.Row="3" GroupName="Player3" Style="{StaticResource RadioButtonStyle}" Background="Yellow" Visibility="{Binding IsPlayer3Visible}"/>
+            <ItemsControl Grid.Column="1" Grid.Row="3" ItemsSource="{Binding ColorSelection[2]}" Visibility="{Binding IsPlayer3Visible}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <RadioButton/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
 
-            <RadioButton  Grid.Column="1" Grid.Row="4" GroupName="Player4" Style="{StaticResource RadioButtonStyle}" Background="Blue" Visibility="{Binding IsPlayer4Visible}"/>
-            <RadioButton  Grid.Column="2" Grid.Row="4" GroupName="Player4" Style="{StaticResource RadioButtonStyle}" Background="Red" Visibility="{Binding IsPlayer4Visible}"/>
-            <RadioButton  Grid.Column="3" Grid.Row="4" GroupName="Player4" Style="{StaticResource RadioButtonStyle}" Background="Green" Visibility="{Binding IsPlayer4Visible}"/>
-            <RadioButton  Grid.Column="4" Grid.Row="4" GroupName="Player4" Style="{StaticResource RadioButtonStyle}" Background="Yellow" Visibility="{Binding IsPlayer4Visible}"/>
+            <ItemsControl Grid.Column="1" Grid.Row="4" ItemsSource="{Binding ColorSelection[3]}" Visibility="{Binding IsPlayer4Visible}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <RadioButton/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+
+
+
+            <!--<ListView ItemsSource="{x:vm GameSettingsViewModel.RadioButtons}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <RadioButton Content="{x:Bind Content}" IsChecked="{x:Bind IsChecked, Mode=TwoWay}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>-->
+
+
+            <!--<RadioButton Grid.Column="1" Grid.Row="1" GroupName="Player1" Style="{StaticResource RadioButtonStyle}" Command="{Binding ChangeColor}" CommandParameter="Blue1" IsChecked="{Binding Blue1}" Background="Blue"/>
+            <RadioButton Grid.Column="2" Grid.Row="1" GroupName="Player1" Style="{StaticResource RadioButtonStyle}" Command="{Binding ChangeColor}" CommandParameter="Red1" IsChecked="{Binding Red1}" Background="Red"/>
+            <RadioButton Grid.Column="3" Grid.Row="1" GroupName="Player1" Style="{StaticResource RadioButtonStyle}" Command="{Binding ChangeColor}" CommandParameter="Green1" IsChecked="{Binding Green1}" Background="Green"/>
+            <RadioButton Grid.Column="4" Grid.Row="1" GroupName="Player1" Style="{StaticResource RadioButtonStyle}" Command="{Binding ChangeColor}" CommandParameter="Yellow1" IsChecked="{Binding Yellow1}" Background="Yellow"/>
+
+            <RadioButton Grid.Column="1" Grid.Row="2" GroupName="Player2" Style="{StaticResource RadioButtonStyle}" Command="{Binding ChangeColor}" CommandParameter="Blue2" IsChecked="{Binding Blue1}" Background="Blue"/>
+            <RadioButton Grid.Column="2" Grid.Row="2" GroupName="Player2" Style="{StaticResource RadioButtonStyle}" Command="{Binding ChangeColor}" CommandParameter="Red2" IsChecked="{Binding Blue1}" Background="Red"/>
+            <RadioButton Grid.Column="3" Grid.Row="2" GroupName="Player2" Style="{StaticResource RadioButtonStyle}" Command="{Binding ChangeColor}" CommandParameter="Green2" IsChecked="{Binding Blue1}" Background="Green"/>
+            <RadioButton Grid.Column="4" Grid.Row="2" GroupName="Player2" Style="{StaticResource RadioButtonStyle}" Command="{Binding ChangeColor}" CommandParameter="Yellow2" IsChecked="{Binding Blue1}" Background="Yellow" />
+
+            <RadioButton Grid.Column="1" Grid.Row="3" GroupName="Player3" Style="{StaticResource RadioButtonStyle}" Background="Blue" Visibility="{Binding IsPlayer3Visible}"/>
+            <RadioButton Grid.Column="2" Grid.Row="3" GroupName="Player3" Style="{StaticResource RadioButtonStyle}" Background="Red" Visibility="{Binding IsPlayer3Visible}"/>
+            <RadioButton Grid.Column="3" Grid.Row="3" GroupName="Player3" Style="{StaticResource RadioButtonStyle}" Background="Green" Visibility="{Binding IsPlayer3Visible}"/>
+            <RadioButton Grid.Column="4" Grid.Row="3" GroupName="Player3" Style="{StaticResource RadioButtonStyle}" Background="Yellow" Visibility="{Binding IsPlayer3Visible}"/>
+
+            <RadioButton Grid.Column="1" Grid.Row="4" GroupName="Player4" Style="{StaticResource RadioButtonStyle}" Background="Blue" Visibility="{Binding IsPlayer4Visible}"/>
+            <RadioButton Grid.Column="2" Grid.Row="4" GroupName="Player4" Style="{StaticResource RadioButtonStyle}" Background="Red" Visibility="{Binding IsPlayer4Visible}"/>
+            <RadioButton Grid.Column="3" Grid.Row="4" GroupName="Player4" Style="{StaticResource RadioButtonStyle}" Background="Green" Visibility="{Binding IsPlayer4Visible}"/>
+            <RadioButton Grid.Column="4" Grid.Row="4" GroupName="Player4" Style="{StaticResource RadioButtonStyle}" Background="Yellow" Visibility="{Binding IsPlayer4Visible}"/>-->
 
             <!--<RadioButton Name="Blue1" GroupName="Player1" Background="Blue" Style="{StaticResource RadioButtonStyle}" Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Command="{Binding ChangeColor}" IsChecked="{Binding Blue1}" Margin="50,0,0,0"/>
             <RadioButton Name="Red1" GroupName="Player1" Background="Red" Style="{StaticResource RadioButtonStyle}" Grid.Column="2" Grid.Row="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Command="{Binding ChangeColor}" IsChecked="{Binding Red1}" Margin="50,0,0,0"/>
@@ -159,12 +221,12 @@
         </Grid>
 
         <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-            <TextBlock FontSize="36" Foreground="White" Margin="0,10,10,0">
-					Click → to start the game
+            <TextBlock FontSize="36" Foreground="White" Margin="0,15,10,0">
+				Click → to start the game
             </TextBlock>
 
             <Button Command="{Binding ForwardCommand}" Background="Transparent">
-                <Image Width="68" Height="68" Source="ms-appx:///Assets/forwardIcon.png"/>
+                <Image Width="76" Height="76" Source="ms-appx:///Assets/forwardIcon.png"/>
             </Button>
         </StackPanel>
     </Grid>

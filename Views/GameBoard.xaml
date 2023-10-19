@@ -8,9 +8,9 @@
     mc:Ignorable="d"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:Media="using:Microsoft.Xaml.Interactions.Media"
-    
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:Media="using:Microsoft.Xaml.Interactions.Media" 
+    xmlns:xaml="using:Microsoft.Graphics.Canvas.UI.Xaml"
+    Background="#D9D9D9"
     DataContext="{Binding GameBoardViewModelInstance}">
 
     <Page.Resources>
@@ -28,38 +28,42 @@
     </Page.Resources>
 
 
-    <Grid HorizontalAlignment="Right" Width="700" Height="700" VerticalAlignment="Center" Margin="0,0,250,0">
+        <!--<xaml:CanvasControl x:Name="GameBoardCanvas" Width="1000" Height="800" />-->
+        <!--<TextBlock HorizontalAlignment="Left" Name="counter" Margin="42,649,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>-->
+
+    <Grid Background="#666363" CornerRadius="15" Width="960" Height="720" HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="983*"/>
+            <ColumnDefinition Width="17*"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
-
         </Grid.ColumnDefinitions>
-
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="200*"/>
+            <RowDefinition Height="143*"/>
+            <RowDefinition Height="19*"/>
+            <RowDefinition Height="38*"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-
         </Grid.RowDefinitions>
 
-        <!-- delete this background when the real one is implemented -->
-        <Image Stretch="UniformToFill"
-               Source="ms-appx:///Assets/gameboard_picture.png" 
-               Grid.ColumnSpan="2" 
-               Grid.RowSpan="2"/>
+        <xaml:CanvasControl x:Name="GameBoardCanvas" Grid.RowSpan="4" RenderTransformOrigin="0.499,0.602" >
+            <xaml:CanvasControl.RenderTransform>
+                <CompositeTransform SkewX="0" TranslateX="0" SkewY="0" TranslateY="0"/>
+            </xaml:CanvasControl.RenderTransform>
+        </xaml:CanvasControl>
 
         <!-- dice section -->
-        <Button x:Name="DiceButton" Grid.Row="1" 
+        <Button x:Name="DiceButton" 
+
                 Grid.Column="{Binding CurrentPositionColumn}"
                 Command="{Binding RollDiceCommand}"
                 Background="Transparent"
                 Width="43"
                 Height="43"
                 Padding="0"
-                BorderThickness="0" VerticalAlignment="Top" Margin="215,95,0,0" RenderTransformOrigin="0.5,0.5">
+                BorderThickness="0" Margin="377,387,0,0" RenderTransformOrigin="0.465,0.504" VerticalAlignment="Top" Grid.RowSpan="2">
+
             <Button.RenderTransform>
                 <CompositeTransform/>
             </Button.RenderTransform>

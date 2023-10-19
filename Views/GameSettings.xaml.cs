@@ -18,9 +18,13 @@ namespace LUDO.Views
 {
     public sealed partial class GameSettings : Page
     {
+        public static Style RadioButtonStyle;
         public GameSettings()
         {
             this.InitializeComponent();
+
+            RadioButtonStyle = radioButtonStyle;
+
             this.DataContext = new GameSettingsViewModel();
         }
     }
