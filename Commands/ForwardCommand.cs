@@ -14,18 +14,7 @@ namespace LUDO.Commands
     {
         public override void Execute(object parameter)
         {
-            List<Player> players = new List<Player>();
-            players.Add(new Player(GameSettingsViewModel.Instance.Player1Name));
-            players.Add(new Player(GameSettingsViewModel.Instance.Player2Name));
-            if (GameSettingsViewModel.Instance.IsPlayer3Visible)
-            {
-                players.Add(new Player(GameSettingsViewModel.Instance.Player3Name));
-            }
-            if (GameSettingsViewModel.Instance.IsPlayer4Visible)
-            {
-                players.Add(new Player(GameSettingsViewModel.Instance.Player4Name));
-            }
-            MainMenuViewModel.Instance.MainMenuFrame.Navigate(typeof(GameBoard), players, new SuppressNavigationTransitionInfo());
+            MainMenuViewModel.Instance.MainMenuFrame.Navigate(typeof(GameBoard), null, new SuppressNavigationTransitionInfo());
         }
     }
 }

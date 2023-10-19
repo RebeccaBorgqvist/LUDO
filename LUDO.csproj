@@ -129,6 +129,7 @@
     <Compile Include="Commands\HighscoreButtonCommand.cs" />
     <Compile Include="Commands\PlayButtonCommand.cs" />
     <Compile Include="Commands\RulesButtonCommand.cs" />
+    <Compile Include="Helpers\Color.cs" />
     <Compile Include="Helpers\TypeOfCell.cs" />
     <Compile Include="Models\Board.cs" />
     <Compile Include="Models\Cell.cs" />
