@@ -36,7 +36,7 @@ namespace LUDO.ViewModels
         }
 
         public GameLogic GameLogicModel
-        { 
+        {
             get { return _gameLogicModel; }
             set { _gameLogicModel = value; }
         }
@@ -73,6 +73,9 @@ namespace LUDO.ViewModels
             //gameBoard- and gameLogic related initiations 
             _boardModel = new Board();
             _gameLogicModel = new GameLogic();
+            GameLogic.SetPlayerColor();
+            _gameLogicModel.CreatePlayerOrder();
+            _gameLogicModel.StartGame();
         }
 
 
@@ -94,6 +97,10 @@ namespace LUDO.ViewModels
                 float height = 20;
                 int x;
                 int y;
+
+                //adjustment due to the space to the left and top
+                int adjustmentInX = 244; //248
+                int adjustmentInY = 130; //132
 
                 Color color = new Color();
 
@@ -126,72 +133,72 @@ namespace LUDO.ViewModels
                     {
                         // gameboard´s cells
 
-                        x = 430; //xDefault = 430;
-                        y = 280; //yDefault = 280;
+                        x = 430 - adjustmentInX; //xDefault = 430;
+                        y = 280 - adjustmentInY; //yDefault = 280;
                         color = Colors.Red;
 
                         //base for nest in RED section
-                        centerX = 620;
-                        centerY = 205;
+                        centerX = 620 - adjustmentInX;
+                        centerY = 205 - adjustmentInY;
                         radius = 75;
                         radius2 = radius - 20;
 
                         //finish´s cells 
-                        x_finish = 470;
-                        y_finish = 320;
+                        x_finish = 470 - adjustmentInX;
+                        y_finish = 320 - adjustmentInY;
 
 
                     }
                     else if (section == 1)
                     {
-                        x = 520; //xDefault = 520;
-                        y = 300; //yDefault = 300;
+                        x = 520 - adjustmentInX; //xDefault = 520;
+                        y = 300 - adjustmentInY; //yDefault = 300;
                         color = Colors.Green;
 
                         //base for nest in GREEN section
-                        centerX = 620;
-                        centerY = 480;
+                        centerX = 620 - adjustmentInX;
+                        centerY = 480 - adjustmentInY;
                         radius = 75;
                         radius2 = radius - 20;
 
 
                         //finish´s cells 
-                        x_finish = 500;
-                        y_finish = 340;
+                        x_finish = 500 - adjustmentInX;
+                        y_finish = 340 - adjustmentInY;
 
                     }
                     else if (section == 2)
                     {
-                        x = 490; //xDefault = 490;
-                        y = 380; //yDefault = 380;
+                        x = 490 - adjustmentInX; //xDefault = 490;
+                        y = 380 - adjustmentInY; //yDefault = 380;
                         color = Colors.Yellow;
 
                         //base for nest in YELLOW section
-                        centerX = 320;
-                        centerY = 480;
+                        centerX = 320 - adjustmentInX;
+                        centerY = 480 - adjustmentInY;
                         radius = 75;
                         radius2 = radius - 20;
 
 
                         //finish´s cells 
-                        x_finish = 470;
-                        y_finish = 360;
+                        x_finish = 470 - adjustmentInX;
+                        y_finish = 360 - adjustmentInY;
                     }
                     else
                     {
-                        x = 400; //xDefault = 400;
-                        y = 360; //yDefault = 360;
+                        x = 400 - adjustmentInX; //xDefault = 400;
+                        y = 360 - adjustmentInY; //yDefault = 360;
                         color = Colors.Blue;
 
                         //base for nest in BLUE section
-                        centerX = 320;
-                        centerY = 205;
+                        centerX = 320 - adjustmentInX;
+                        centerY = 205 - adjustmentInY;
                         radius = 75;
                         radius2 = radius - 20;
 
                         //finish´s cells 
-                        x_finish = 440;
-                        y_finish = 340;
+                        x_finish = 440 - adjustmentInX;
+                        y_finish = 340 - adjustmentInY;
                     }
 
                     // 13 fields and 5 finals in every section
@@ -275,29 +282,29 @@ namespace LUDO.ViewModels
                         if (section == 0)
                         {
                             x += 30;
-                            y = 130;
+                            y = 130 - adjustmentInY;
                         }
                         if (section == 1)
                         {
                             y += 30;
-                            x = 670;
+                            x = 670 - adjustmentInX;
                         }
                         if (section == 2)
                         {
                             x -= 30;
-                            y = 530;
+                            y = 530 - adjustmentInY;
                         }
                         if (section == 3)
                         {
                             y -= 30;
-                            x = 250;
+                            x = 250 - adjustmentInX;
                         }
                     }
 
 
 
 
-                   
+
                     // front-end for finishCell
                     dSession.FillCircle(x_finish, y_finish, radius_finish, color);
 
@@ -367,10 +374,7 @@ namespace LUDO.ViewModels
                 }
                 args.DrawingSession.DrawImage(renderTarget);
             }
-
-            _boardModel.GameCells = gameBoardCells;
-            _gameLogicModel.StartGame();      
         }
-        
     }
 }
+
