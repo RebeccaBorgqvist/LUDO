@@ -42,13 +42,13 @@ namespace LUDO.ViewModels
         private bool _yellow4 = true;
 
         private string _addRemoveText = "Add more players";
+
         private int _players = 2;
 
         private string _player1Name = "Player 1";
         private string _player2Name = "Player 2";
         private string _player3Name = "Player 3";
         private string _player4Name = "Player 4";
-
 
         public ICommand PlusPlayerCommand { get; set; }
         public ICommand MinusPlayerCommand { get; set; }
