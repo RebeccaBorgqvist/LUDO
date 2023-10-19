@@ -9,5 +9,13 @@ namespace LUDO.Models
 {
     internal class Piece
     {
+        public bool IsOnBoard { get; set; }
+        public bool CanMove { get; set; }
+        public Cell CurrentCell { get; set; }
+
+        public void HighlightPiece()
+        {
+            
+        }
     }
 }
