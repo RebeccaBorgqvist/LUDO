@@ -357,7 +357,7 @@ namespace LUDO.ViewModels
                         int[] coordinates = new int[] { coordX, coordY };
 
                         Cell nestCellObj = new Cell(section, nestCellsID, false, coordinates);
-                        nestCellObj.PiecesVisiting = new List<Piece>();
+                        //nestCellObj.PiecesVisiting = new List<Piece>();
 
 
                         gameBoardCells.Add(nestCellObj);
