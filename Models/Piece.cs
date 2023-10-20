@@ -9,13 +9,25 @@ namespace LUDO.Models
 {
     internal class Piece
     {
-        public bool IsOnBoard { get; set; }
-        public bool CanMove { get; set; }
-        public Cell CurrentCell { get; set; }
-
-        public void HighlightPiece()
+        private int[] _coordinates;
+        public int[] Coordinates
         {
-            
+            get { return _coordinates; }
+            set { _coordinates = value; }
+        }
+        public Piece(int[] coordinates)
+        {
+            _coordinates = coordinates;
+        }
+        public (int[], int[]) SimulatePieceMove()
+        {
+            return PieceMove(false);
+        }
+        public (int[], int[]) PieceMove(bool move = true)
+        {
+            int[] startCoordinates = { 10, 10 };
+            int[] endCoordinates = { 40, 40 };
+            return (startCoordinates, endCoordinates);
         }
     }
 }

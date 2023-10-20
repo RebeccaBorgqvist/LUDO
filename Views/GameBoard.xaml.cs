@@ -23,8 +23,7 @@ using LUDO.Models;
 namespace LUDO.Views
 {
     public sealed partial class GameBoard : Page
-    {
-      
+    {      
         public GameBoard()
         {
             this.InitializeComponent();

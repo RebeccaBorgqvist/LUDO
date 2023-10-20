@@ -61,6 +61,9 @@ namespace LUDO.ViewModels
             CurrentDiceImage = "ms-appx:///Assets/roll_dice.png";
             _boardModel = new Board();
             _gameLogicModel = new GameLogic();
+            GameLogic.SetPlayerColor();
+            _gameLogicModel.CreatePlayerOrder();
+            _gameLogicModel.StartGame();
         }
         //USAGE OF WIN2D API: DRAWING CELLS OF THE GAME BOARD(fields, finals, finish and nests)     
         internal void DrawBoard(CanvasControl sender, CanvasDrawEventArgs args)
