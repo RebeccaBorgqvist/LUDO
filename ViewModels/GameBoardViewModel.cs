@@ -22,10 +22,169 @@ namespace LUDO.ViewModels
         public CanvasControl GameBoardCanvas { get; set; } //property for building game board (win2d class)
         public static GameBoardViewModel Instance { get; private set; }
         private Dice _diceModel;
+        private int _diceResult;
         private Board _boardModel;
         private GameLogic _gameLogicModel; //not sure so far if we are required this later on :/
         private string _currentDiceImage;
-
+        private bool _redPiece1Visibility = false;
+        private int _redPiece1CoordinateX;
+        private int _redPiece1CoordinateY;
+        private bool _greenPiece1Visibility = false;
+        private int _greenPiece1CoordinateX;
+        private int _greenPiece1CoordinateY;
+        private bool _yellowPiece1Visibility = false;
+        private int _yellowPiece1CoordinateX;
+        private int _yellowPiece1CoordinateY;
+        private bool _bluePiece1Visibility = false;
+        private int _bluePiece1CoordinateX;
+        private int _bluePiece1CoordinateY;
+        private int _highlightCurrentCoordinateX; 
+        private int _highlightCurrentCoordinateY;
+        private int _highlightVisualizedCoordinateX;
+        private int _highlightVisualizedCoordinateY;
+        public int DiceResult { get; set; }
+        public bool RedPiece1Visibility 
+        {
+            get { return _redPiece1Visibility;}
+            set { 
+                _redPiece1Visibility = value;
+                OnPropertyChanged(nameof(RedPiece1Visibility));
+            }
+        }
+        public int RedPiece1CoordinateX 
+        {
+            get { return _redPiece1CoordinateX; }
+            set { 
+                _redPiece1CoordinateX = value;
+                OnPropertyChanged(nameof(RedPiece1CoordinateX));    
+            }
+        }
+        public int RedPiece1CoordinateY
+        {
+            get { return _redPiece1CoordinateY; }
+            set
+            {
+                _redPiece1CoordinateY = value;
+                OnPropertyChanged(nameof(RedPiece1CoordinateY));
+            }
+        }
+        public bool GreenPiece1Visibility
+        {
+            get { return _greenPiece1Visibility; }
+            set
+            {
+                _greenPiece1Visibility = value;
+                OnPropertyChanged(nameof(GreenPiece1Visibility));
+            }
+        }
+        public int GreenPiece1CoordinateX
+        {
+            get { return _greenPiece1CoordinateX; }
+            set
+            {
+                _greenPiece1CoordinateX = value;
+                OnPropertyChanged(nameof(GreenPiece1CoordinateX));
+            }
+        }
+        public int GreenPiece1CoordinateY
+        {
+            get { return _greenPiece1CoordinateY; }
+            set
+            {
+                _greenPiece1CoordinateY = value;
+                OnPropertyChanged(nameof(GreenPiece1CoordinateY));
+            }
+        }
+        public bool YellowPiece1Visibility
+        {
+            get { return _yellowPiece1Visibility; }
+            set
+            {
+                _yellowPiece1Visibility = value;
+                OnPropertyChanged(nameof(YellowPiece1Visibility));
+            }
+        }
+        public int YellowPiece1CoordinateX
+        {
+            get { return _yellowPiece1CoordinateX; }
+            set
+            {
+                _yellowPiece1CoordinateX = value;
+                OnPropertyChanged(nameof(YellowPiece1CoordinateX));
+            }
+        }
+        public int YellowPiece1CoordinateY
+        {
+            get { return _yellowPiece1CoordinateY; }
+            set
+            {
+                _yellowPiece1CoordinateY = value;
+                OnPropertyChanged(nameof(YellowPiece1CoordinateY));
+            }
+        }
+        public bool BluePiece1Visibility
+        {
+            get { return _bluePiece1Visibility; }
+            set
+            {
+                _bluePiece1Visibility = value;
+                OnPropertyChanged(nameof(BluePiece1Visibility));
+            }
+        }
+        public int BluePiece1CoordinateX
+        {
+            get { return _bluePiece1CoordinateX; }
+            set
+            {
+                _bluePiece1CoordinateX = value;
+                OnPropertyChanged(nameof(BluePiece1CoordinateX));
+            }
+        }
+        public int BluePiece1CoordinateY
+        {
+            get { return _bluePiece1CoordinateY; }
+            set
+            {
+                _bluePiece1CoordinateY = value;
+                OnPropertyChanged(nameof(BluePiece1CoordinateY));
+            }
+        }
+        public int HighlightCurrentCoordinateX
+        {
+            get { return _highlightCurrentCoordinateX; }
+            set
+            {
+                _highlightCurrentCoordinateX = value;
+                OnPropertyChanged(nameof(HighlightCurrentCoordinateX));
+            }
+        }
+        public int HighlightCurrentCoordinateY
+        {
+            get { return _highlightCurrentCoordinateY; }
+            set
+            {
+                _highlightCurrentCoordinateY = value;
+                OnPropertyChanged(nameof(HighlightCurrentCoordinateY));
+            }
+        }
+        public int HighlightVisualizedCoordinateX
+        {
+            get { return _highlightVisualizedCoordinateX; }
+            set
+            {
+                _highlightVisualizedCoordinateX = value;
+                OnPropertyChanged(nameof(HighlightVisualizedCoordinateX));
+            }
+        }
+        public int HighlightVisualizedCoordinateY
+        {
+            get { return _highlightVisualizedCoordinateY; }
+            set
+            {
+                _highlightVisualizedCoordinateY = value;
+                OnPropertyChanged(nameof(HighlightVisualizedCoordinateY));
+            }
+        }
         public Dice DiceModel
         {
             get { return _diceModel; }
@@ -53,6 +212,7 @@ namespace LUDO.ViewModels
                 }
             }
         }
+        
         public GameBoardViewModel()
         {
             Instance = this;
@@ -65,13 +225,74 @@ namespace LUDO.ViewModels
             _gameLogicModel.CreatePlayerOrder();
             _gameLogicModel.StartGame();
         }
+
+        public void ShowPieceOnBoard(Helpers.Color pieceColor, int pieceCoordinateX, int pieceCoordinateY)
+        {
+            if(pieceColor == Helpers.Color.Red)
+            {
+                RedPiece1Visibility = true;
+                RedPiece1CoordinateX = pieceCoordinateX;
+                RedPiece1CoordinateY = pieceCoordinateY;
+            }
+            else if (pieceColor == Helpers.Color.Green)
+            {
+                GreenPiece1Visibility = true;
+                GreenPiece1CoordinateX = pieceCoordinateX;
+                GreenPiece1CoordinateY = pieceCoordinateY;
+            }
+            else if (pieceColor == Helpers.Color.Yellow)
+            {
+                YellowPiece1Visibility = true;
+                YellowPiece1CoordinateX = pieceCoordinateX;
+                YellowPiece1CoordinateY = pieceCoordinateY;
+            }
+            else
+            {
+                BluePiece1Visibility = true;
+                BluePiece1CoordinateX = pieceCoordinateX;
+                BluePiece1CoordinateY = pieceCoordinateY;
+            }
+        }
+
+        public void MovePieceOnBoard(Helpers.Color pieceColor,  int pieceCoordinateX, int pieceCoordinateY)
+        {
+            if (pieceColor == Helpers.Color.Red)
+            {
+                RedPiece1CoordinateX = pieceCoordinateX;
+                RedPiece1CoordinateY = pieceCoordinateY;
+            }
+            else if (pieceColor == Helpers.Color.Green)
+            {
+                GreenPiece1CoordinateX = pieceCoordinateX;
+                GreenPiece1CoordinateY = pieceCoordinateY;
+            }
+            else if (pieceColor == Helpers.Color.Yellow)
+            {
+                YellowPiece1CoordinateX = pieceCoordinateX;
+                YellowPiece1CoordinateY = pieceCoordinateY;
+            }
+            else
+            {
+                BluePiece1CoordinateX = pieceCoordinateX;
+                BluePiece1CoordinateY = pieceCoordinateY;
+            }
+        }
+
+        public static void Highlighting(int xNuvarande, int yNuvarande, int newCoordinateInX, int newCoordinateInY)
+        {
+            Instance.HighlightCurrentCoordinateX = xNuvarande;
+            Instance.HighlightCurrentCoordinateY = yNuvarande;
+            Instance.HighlightVisualizedCoordinateX = newCoordinateInX;
+            Instance.HighlightVisualizedCoordinateY = newCoordinateInY;
+        }
+
         //USAGE OF WIN2D API: DRAWING CELLS OF THE GAME BOARD(fields, finals, finish and nests)     
         internal void DrawBoard(CanvasControl sender, CanvasDrawEventArgs args)
         {
-            CanvasDevice device = CanvasDevice.GetSharedDevice();
 
             List<Cell> gameBoardCells = new List<Cell>();
 
+            CanvasDevice device = CanvasDevice.GetSharedDevice();
             using (CanvasRenderTarget renderTarget = new CanvasRenderTarget(device, (float)sender.ActualWidth, (float)sender.ActualHeight, 96))
             using (CanvasDrawingSession dSession = renderTarget.CreateDrawingSession())
             {
@@ -316,8 +537,6 @@ namespace LUDO.ViewModels
                 }
                 args.DrawingSession.DrawImage(renderTarget);
             }
-            _boardModel.GameCells = gameBoardCells;
-            _gameLogicModel.StartGame();
         }
     }
 }

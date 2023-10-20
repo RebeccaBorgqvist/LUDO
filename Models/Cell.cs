@@ -18,19 +18,12 @@ namespace LUDO.Models
         public bool IsFinal => isFinal;
         public int[] Coordinates => coordinates;
 
-        public bool IsHighlighted { get; set; } = false; //Becca
-
         public Cell(int section, int id, bool isFinal, int[] coordinates)
         { 
             this.section = section;
             this.id = id;
             this.isFinal = isFinal;
             this.coordinates = coordinates;
-        }
-
-        public void HighlightCell() //Becca
-        {
-
         }
     }
 }

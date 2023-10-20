@@ -184,29 +184,30 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\backIcon.png" />
-    <Content Include="Assets\PieceBlue.png" />
-    <Content Include="Assets\gameboard_picture.png">
+    <Content Include="Assets\GameBoard.png" />
+    <Content Include="Assets\random_pictures\gameboard_picture.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\highscoreIcon.png" />
     <Content Include="Assets\menuIcon.png" />
+    <Content Include="Assets\PieceBlue.png" />
     <Content Include="Assets\PieceGreen.png" />
     <Content Include="Assets\PieceRed.png" />
+    <Content Include="Assets\PieceYellow.png" />
     <Content Include="Assets\roll_dice.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\forwardIcon.png" />
     <Content Include="Assets\minusIcon.png" />
     <Content Include="Assets\plusIcon.png" />
-    <Content Include="Assets\PieceYellow.png" />
     <Content Include="Properties\Default.rd.xml" />
-    <Content Include="Assets\LockScreenLogo.scale-200.png" />
-    <Content Include="Assets\SplashScreen.scale-200.png" />
-    <Content Include="Assets\Square150x150Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
-    <Content Include="Assets\StoreLogo.png" />
-    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Assets\random_pictures\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\random_pictures\SplashScreen.scale-200.png" />
+    <Content Include="Assets\random_pictures\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\random_pictures\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\random_pictures\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\random_pictures\StoreLogo.png" />
+    <Content Include="Assets\random_pictures\Wide310x150Logo.scale-200.png" />
     <Page Include="Styles\ButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
