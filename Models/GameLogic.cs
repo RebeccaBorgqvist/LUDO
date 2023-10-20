@@ -90,12 +90,12 @@ namespace LUDO.Models
                         var (newCoordinateInX, newCoordinateInY) = piece.SimulatePieceMove(heltal);
                         GameBoardViewModel.Highlighting(xNuvarande, yNuvarande, newCoordinateInX, newCoordinateInY);
                         //Pause todo
+                        player.Pieces[0].PieceMove(heltal); //move according to decision
                     }
                     //show me which options I have
                     //take decision
                     endTheGame = true; //for testing 
                     break; //for testing
-                    //player.Pieces[0].PieceMove(heltal); //move according to decision
                 }
                 //check if all players finished and if so change bool
             }

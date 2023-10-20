@@ -63,14 +63,18 @@ namespace LUDO.Models
         }
         public (int, int) PieceMove(int diceResult, bool move = true)
         {
-            int testMoveInX = new Random().Next(30,200);
-            int testMoveInY = new Random().Next(30, 200);
+            int randomInt = new Random().Next(0,40);
+            int testMoveInX = GameBoardViewModel.Instance.BoardModel.GameCells[randomInt].Coordinates[0];
+            int testMoveInY = GameBoardViewModel.Instance.BoardModel.GameCells[randomInt].Coordinates[1];
+
+            //int testMoveInX = new Random().Next(30,200); //for testing
+            //int testMoveInY = new Random().Next(30, 200); //for testing
             if (move)
             {
                 if (diceResult == 0) //this is only for testing
                 {
-                    this._coordinateX += testMoveInX;
-                    this._coordinateY += testMoveInY;
+                    this._coordinateX = testMoveInX;
+                    this._coordinateY = testMoveInY;
                     if (this._pieceColor == Color.Red)
                     {
                         GameBoardViewModel.Instance.MovePieceOnBoard(Color.Red, this._coordinateX, this._coordinateY);

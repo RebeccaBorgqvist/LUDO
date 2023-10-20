@@ -11,5 +11,10 @@ namespace LUDO.Models
         private List<Cell> _gameCells;        
 
         public List<Cell> GameCells { get; set; }
+
+        public Board()
+        {
+            _gameCells = new List<Cell>();
+        }
     }
 }
