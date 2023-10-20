@@ -34,6 +34,13 @@ namespace LUDO.Models
             _color = color;
             _colorInt = (int)color;
             _isTurnToRoll = false;
+            _pieces = new List<Piece>()
+            {
+                new Piece(color),
+                new Piece(color),
+                new Piece(color),
+                new Piece(color)
+            };
         }
     }
 }

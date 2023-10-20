@@ -303,7 +303,7 @@ namespace LUDO.ViewModels
                         }
 
                         dSession.FillCircle(coordX, coordY, radius - 60, color); //cell with a negative ID that shows that a cell belongs to nest.
-                        dSession.FillCircle(coordX, coordY, radius - 80, Colors.Black); // a piece(a dot so far) that will be navigated throughout the gameboard.
+                        //dSession.FillCircle(coordX, coordY, radius - 80, Colors.Black); // a piece(a dot so far) that will be navigated throughout the gameboard.
 
                         //back end
                         int[] coordinates = new int[] { coordX, coordY };

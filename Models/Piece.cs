@@ -9,15 +9,39 @@ namespace LUDO.Models
 {
     internal class Piece
     {
-        private int[] _coordinates;
-        public int[] Coordinates
+        private int[,] _coordinates;
+        private Helpers.Color _pieceColor;
+        public Helpers.Color PieceColor { get { return _pieceColor; } }
+        public int[,] Coordinates
         {
             get { return _coordinates; }
             set { _coordinates = value; }
         }
-        public Piece(int[] coordinates)
+
+        public Piece(Helpers.Color playerColor)
         {
-            _coordinates = coordinates;
+            _pieceColor = playerColor;
+            this.SetStartingCoordinates();
+        }
+
+        public void SetStartingCoordinates()
+        {
+            if (this._pieceColor == Color.Red) 
+            {
+                this._coordinates = new int[10,10];
+            }
+            else if (this._pieceColor == Color.Green) 
+            {
+                this._coordinates = new int[30, 30];
+            }
+            else if (this._pieceColor == Color.Yellow)
+            {
+                this._coordinates = new int[50, 50];
+            }
+            else
+            {
+                this._coordinates = new int[70, 70];
+            }
         }
         public (int[], int[]) SimulatePieceMove()
         {
