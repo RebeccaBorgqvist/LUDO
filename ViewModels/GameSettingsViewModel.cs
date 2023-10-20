@@ -59,10 +59,10 @@ namespace LUDO.ViewModels
         public bool IsPlayer3Visible
         {
             get { return _isPlayer3Visible; }
-            set 
-            { 
+            set
+            {
                 _isPlayer3Visible = value;
-                OnPropertyChanged(nameof(IsPlayer3Visible));   
+                OnPropertyChanged(nameof(IsPlayer3Visible));
             }
         }
         public bool IsPlayer4Visible
@@ -95,7 +95,7 @@ namespace LUDO.ViewModels
         public string AddRemoveText
         {
             get { return _addRemoveText; }
-            set 
+            set
             {
                 _addRemoveText = value;
                 OnPropertyChanged(nameof(AddRemoveText));
