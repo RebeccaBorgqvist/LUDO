@@ -36,7 +36,13 @@
                     <CompositeTransform SkewX="0" TranslateX="0" SkewY="0" TranslateY="0"/>
                 </xaml:CanvasControl.RenderTransform>
             </xaml:CanvasControl>
-            <Image Width="20" Height="20" Source="ms-appx:///Assets/1.png" Canvas.Left="100" Canvas.Top="100"/>
+            <Image Width="30" Height="30" Source="ms-appx:///Assets/PieceRed.png" Visibility="{Binding RedPiece1Visibility}" Canvas.Left="{Binding RedPiece1CoordinateX}" Canvas.Top="{Binding RedPiece1CoordinateY}"/>
+            <Image Width="30" Height="30" Source="ms-appx:///Assets/PieceGreen.png" Visibility="{Binding GreenPiece1Visibility}" Canvas.Left="{Binding GreenPiece1CoordinateX}" Canvas.Top="{Binding GreenPiece1CoordinateY}"/>
+            <Image Width="30" Height="30" Source="ms-appx:///Assets/PieceYellow.png" Visibility="{Binding YellowPiece1Visibility}" Canvas.Left="{Binding YellowPiece1CoordinateX}" Canvas.Top="{Binding YellowPiece1CoordinateY}"/>
+            <Image Width="30" Height="30" Source="ms-appx:///Assets/PieceBlue.png" Visibility="{Binding BluePiece1Visibility}" Canvas.Left="{Binding BluePiece1CoordinateX}" Canvas.Top="{Binding BluePiece1CoordinateY}"/>
+
+            <Image Width="30" Height="30" Source="ms-appx:///Assets/1.png" Canvas.Left="{Binding HighlightCurrentCoordinateX}" Canvas.Top="{Binding HighlightCurrentCoordinateY}"/>
+            <Image Width="30" Height="30" Source="ms-appx:///Assets/2.png" Canvas.Left="{Binding HighlightVisualizedCoordinateX}" Canvas.Top="{Binding HighlightVisualizedCoordinateY}"/>
             <Button x:Name="DiceButton" 
 
                     Canvas.Left="138" Canvas.Top="250"

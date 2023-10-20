@@ -72,41 +72,33 @@ namespace LUDO.Models
             List<Player> playersBeforeNewStart = playersSortedByColor.Take(playerToStart).ToList();
             List<Player> playersAfterNewStart = playersSortedByColor.Skip(playerToStart).ToList();
             playersRandomized = playersAfterNewStart.Concat(playersBeforeNewStart).ToList();
-            Debug.WriteLine($"{playersRandomized}");
         }
         public void StartGame()
         {
             bool endTheGame = false; // set TRUE only if all 4 pieces of a player reached the finish
-
-            // MAIN GAME LOOP====================================================================================================================
             while (!endTheGame)
             {
 
-                //A TEST LOOP JUST TO SEE HOW THE PLAYER´S TURN TO ROLL DICE IS CHANGING. later on - endTheGame once the finish is reached.
-                for (int throww = 0; throww < 3; throww++)
+                foreach (Player player in playersRandomized) //loop according to the player order
                 {
-
-                    for (int playerOnTurn = 0; playerOnTurn < GameSettingsViewModel.Instance.Players; playerOnTurn++)
+                    //Pausa och vänta på att spelare klickar på tärningen
+                    int heltal = GameBoardViewModel.Instance.DiceResult;//throw the dice and return the result, say 0
+                    foreach (Piece piece in player.Pieces)
                     {
-                        //TBD: do some magic stuff with pieces...
-
-                        if (playersRandomized[playerOnTurn].IsTurnToRoll)
-                        {
-                            Debug.WriteLine($"{playersRandomized[playerOnTurn].Name}, your turn to roll dice!");
-                            playersRandomized[playerOnTurn].IsTurnToRoll = false;
-
-
-                            if (playerToStart + 1 < GameSettingsViewModel.Instance.Players) playerToStart++;
-                            else if (playerToStart + 1 == GameSettingsViewModel.Instance.Players) playerToStart = 0;
-
-                            playersRandomized[playerToStart].IsTurnToRoll = true;
-                        }
+                        int xNuvarande = piece.CoordinateX;
+                        int yNuvarande = piece.CoordinateY;
+                        var (newCoordinateInX, newCoordinateInY) = piece.SimulatePieceMove(heltal);
+                        GameBoardViewModel.Highlighting(xNuvarande, yNuvarande, newCoordinateInX, newCoordinateInY);
+                        //Pause todo
                     }
+                    //show me which options I have
+                    //take decision
+                    endTheGame = true; //for testing 
+                    break; //for testing
+                    //player.Pieces[0].PieceMove(heltal); //move according to decision
                 }
-                endTheGame = true;
+                //check if all players finished and if so change bool
             }
-            Debug.WriteLine("game over ladies and gentlemen");
-
         }
     }
 }
