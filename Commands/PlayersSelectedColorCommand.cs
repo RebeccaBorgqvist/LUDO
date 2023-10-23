@@ -6,33 +6,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static LUDO.ViewModels.GameSettingsViewModel;
+using LUDO.Views;
 
 namespace LUDO.Commands
 {
     internal class PlayersSelectedColorCommand : BaseCommands
     {
-
-        public override void Execute(object parameter)
+      public override void Execute(object parameter)
         {
-            if (parameter is string color)
+           if (parameter is string color)
             {
-                Debug.WriteLine($"Color parameter: {color}"); // test to see if the color parameter is beeing passed correctly 
-                for (int player = 1; player <= 4; player++)
-                {
-                    // Set the current player's color to the desired color and others to false
-                    for (int p = 1; p <= 4; p++)
+             
+                    for (int player = 1; player <= 4; player++)
                     {
-                        var propertyName = $"{color}{p}";
-                        var propertyInfo = GameSettingsViewModel.Instance.GetType().GetProperty(propertyName);
-                        if (propertyInfo != null)
+                        // Set the current player's color to the desired color and others to false
+                        for (int p = 1; p <= 4; p++)
                         {
-                            propertyInfo.SetValue(GameSettingsViewModel.Instance, p == player);
+                            var propertyName = $"{color}{p}";
+                            var propertyInfo = GameSettingsViewModel.Instance.GetType().GetProperty(propertyName);
+                            if (propertyInfo != null)
+                            {
+                                propertyInfo.SetValue(GameSettingsViewModel.Instance, p == player);
+                            }
                         }
                     }
-                }
-
             }
+
         }
+
     }
 }
+
 

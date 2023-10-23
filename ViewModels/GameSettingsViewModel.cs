@@ -21,25 +21,28 @@ namespace LUDO.ViewModels
         private bool _isPlayer3ColorVisible;
         private bool _isPlayer4ColorVisible;
 
-        private bool _blue1;
-        private bool _blue2;
-        private bool _blue3;
-        private bool _blue4;
 
-        private bool _red1;
-        private bool _red2;
-        private bool _red3;
-        private bool _red4;
+        private bool _blue1 = false;
+        private bool _blue2 = false;
+        private bool _blue3 = false;
+        private bool _blue4 = false;
 
-        private bool _green1;
-        private bool _green2;
-        private bool _green3;
-        private bool _green4;
+        private bool _red1 = false;
+        private bool _red2 = false;
+        private bool _red3 = false;
+        private bool _red4 = false;
 
-        private bool _yellow1;
-        private bool _yellow2;
-        private bool _yellow3;
-        private bool _yellow4;
+        private bool _green1 = false;
+        private bool _green2 = false;
+        private bool _green3 = false;
+        private bool _green4 = false;
+
+
+        private bool _yellow1 = false;
+        private bool _yellow2 = false;
+        private bool _yellow3 = false;
+        private bool _yellow4 = false;
+
 
         private string _addRemoveText = "Add more players";
 
@@ -207,6 +210,8 @@ namespace LUDO.ViewModels
                 OnPropertyChanged(SelectedColorPlayer4);
             }
         }
+
+        
 
         // BLUE
         public bool Blue1
