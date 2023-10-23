@@ -17,19 +17,19 @@ namespace LUDO.Commands
            if (parameter is string color)
             {
              
-                    for (int player = 1; player <= 4; player++)
+              for (int player = 1; player <= 4; player++)
                     {
-                        // Set the current player's color to the desired color and others to false
-                        for (int p = 1; p <= 4; p++)
-                        {
+                      // Set the current player's color to the desired color and others to false
+                      for (int p = 1; p <= 4; p++)
+                      {
                             var propertyName = $"{color}{p}";
                             var propertyInfo = GameSettingsViewModel.Instance.GetType().GetProperty(propertyName);
                             if (propertyInfo != null)
                             {
                                 propertyInfo.SetValue(GameSettingsViewModel.Instance, p == player);
                             }
-                        }
-                    }
+                      }
+               }
             }
 
         }
