@@ -27,21 +27,76 @@
             </xaml:CanvasControl>
 
             <!--Dice-->
-            <Button x:Name="DiceButton" 
-                    Canvas.Left="142" Canvas.Top="258"
+            <Button x:Name="DiceButtonBlue" 
+                    Canvas.Left="140" Canvas.Top="125"
                     Command="{Binding RollDiceCommand}"
                     Background="Transparent"
                     Width="35"
                     Height="35"
                     Padding="0"
-                    BorderThickness="0">
+                    BorderThickness="0" VerticalAlignment="Top">
 
                 <Button.RenderTransform>
                     <CompositeTransform/>
                 </Button.RenderTransform>
 
                 <Image Source="{Binding CurrentDiceImage}"
-                       Stretch="UniformToFill">
+                       Stretch="UniformToFill"
+                       Visibility="{Binding DiceVisibilityBlue}">
+                </Image>
+            </Button>
+            <Button x:Name="DiceButtonRed" 
+                    Canvas.Left="278" Canvas.Top="125"
+                    Command="{Binding RollDiceCommand}"
+                    Background="Transparent"
+                    Width="35"
+                    Height="35"
+                    Padding="0"
+                    BorderThickness="0" VerticalAlignment="Top">
+
+                <Button.RenderTransform>
+                    <CompositeTransform/>
+                </Button.RenderTransform>
+
+                <Image Source="{Binding CurrentDiceImage}"
+                       Stretch="UniformToFill"
+                       Visibility="{Binding DiceVisibilityRed}">
+                </Image>
+            </Button>
+            <Button x:Name="DiceButtonGreen" 
+                    Canvas.Left="278" Canvas.Top="260"
+                    Command="{Binding RollDiceCommand}"
+                    Background="Transparent"
+                    Width="35"
+                    Height="35"
+                    Padding="0"
+                    BorderThickness="0" VerticalAlignment="Top">
+
+                <Button.RenderTransform>
+                    <CompositeTransform/>
+                </Button.RenderTransform>
+
+                <Image Source="{Binding CurrentDiceImage}"
+                       Stretch="UniformToFill"
+                       Visibility="{Binding DiceVisibilityGreen}">
+                </Image>
+            </Button>
+            <Button x:Name="DiceButtonYellow" 
+                    Canvas.Left="140" Canvas.Top="260"
+                    Command="{Binding RollDiceCommand}"
+                    Background="Transparent"
+                    Width="35"
+                    Height="35"
+                    Padding="0"
+                    BorderThickness="0" VerticalAlignment="Top">
+
+                <Button.RenderTransform>
+                    <CompositeTransform/>
+                </Button.RenderTransform>
+
+                <Image Source="{Binding CurrentDiceImage}"
+                       Stretch="UniformToFill"
+                       Visibility="{Binding DiceVisibilityYellow}">
                 </Image>
             </Button>
 

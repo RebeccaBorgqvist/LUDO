@@ -12,12 +12,15 @@ using Windows.UI;
 using Windows.UI.Xaml.Controls;
 using System.Diagnostics;
 using Windows.Foundation;
-
+using Windows.UI.Xaml;
 
 namespace LUDO.ViewModels
 {
     internal class GameBoardViewModel : ViewModelBase
     {
+        public Player CurrentPlayer { get; set; }
+        public Helpers.Color CurrentPlayerColor { get; set; }
+
         public ICommand RollDiceCommand { get; set; }
         public CanvasControl GameBoardCanvas { get; set; } //property for building game board (win2d class)
         public static GameBoardViewModel Instance { get; private set; }
@@ -189,6 +192,25 @@ namespace LUDO.ViewModels
         {
             get { return _diceModel; }
             set { _diceModel = value; }
+        }
+        public Visibility DiceVisibilityBlue
+        {
+            get { return CurrentPlayerColor == Helpers.Color.Blue ? Visibility.Visible : Visibility.Collapsed; }
+        }
+
+        public Visibility DiceVisibilityRed
+        {
+            get { return CurrentPlayerColor == Helpers.Color.Red ? Visibility.Visible : Visibility.Collapsed; }
+        }
+
+        public Visibility DiceVisibilityGreen
+        {
+            get { return CurrentPlayerColor == Helpers.Color.Green ? Visibility.Visible : Visibility.Collapsed; }
+        }
+
+        public Visibility DiceVisibilityYellow
+        {
+            get { return CurrentPlayerColor == Helpers.Color.Yellow ? Visibility.Visible : Visibility.Collapsed; }
         }
         public Board BoardModel
         {

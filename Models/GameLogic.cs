@@ -80,6 +80,7 @@ namespace LUDO.Models
             {
                 foreach (Player player in playersRandomized) //loop according to the player order
                 {
+                    GameBoardViewModel.Instance.CurrentPlayer = player; // Set the current player
                     //Pausa och vänta på att spelare klickar på tärningen
                     int heltal = GameBoardViewModel.Instance.DiceResult;//throw the dice and return the result, say 0
                     foreach (Piece piece in player.Pieces)
