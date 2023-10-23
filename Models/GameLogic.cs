@@ -18,6 +18,7 @@ namespace LUDO.Models
         private static Color player2Color;
         private static Color player3Color;
         private static Color player4Color;
+        //private Queue<Player> playerQueue;
 
         public GameLogic()
         {
@@ -69,18 +70,74 @@ namespace LUDO.Models
             List<Player> playersSortedByColor = players.OrderBy(player => player.ColorInt).ToList();
             playerToStart = new Random().Next(0, GameSettingsViewModel.Instance.Players - 1);
             playersSortedByColor[playerToStart].IsTurnToRoll = true;
+
+            GameBoardViewModel.Instance.CurrentPlayer = playersSortedByColor[playerToStart];
+            MoveDice(playersSortedByColor[playerToStart]);
+
             List<Player> playersBeforeNewStart = playersSortedByColor.Take(playerToStart).ToList();
             List<Player> playersAfterNewStart = playersSortedByColor.Skip(playerToStart).ToList();
             playersRandomized = playersAfterNewStart.Concat(playersBeforeNewStart).ToList();
+
+            //playerQueue = new Queue<Player>(playersRandomized);
         }
+        /*
+        public void MoveToNextPlayer()
+        {
+            Player currentPlayer = playerQueue.Dequeue();
+            currentPlayer.IsTurnToRoll = false;
+
+            Player nextPlayer = playerQueue.Peek();
+            nextPlayer.IsTurnToRoll = true;
+
+            GameBoardViewModel.Instance.CurrentPlayer = nextPlayer;
+
+            playerQueue.Enqueue(currentPlayer);
+        }*/
+
+        private void SetDiceVisibility(bool red, bool blue, bool green, bool yellow)
+        {
+            GameBoardViewModel.Instance.DiceVisibilityRed = red;
+            GameBoardViewModel.Instance.DiceVisibilityBlue = blue;
+            GameBoardViewModel.Instance.DiceVisibilityGreen = green;
+            GameBoardViewModel.Instance.DiceVisibilityYellow = yellow;
+        }
+
+        public void MoveDice(Player player)
+        {         
+            if (player.Color == Color.Red)
+            {
+                SetDiceVisibility(true, false, false, false);
+            }
+            else if (player.Color == Color.Blue)
+            {
+                SetDiceVisibility(false, true, false, false);
+            }
+            else if (player.Color == Color.Green)
+            {
+                SetDiceVisibility(false, false, true, false);
+            }
+            else if (player.Color == Color.Yellow)
+            {
+                SetDiceVisibility(false, false, false, true);
+            }
+            else
+            {
+                throw new InvalidOperationException($"Invalid player color: {player.Color}");
+            }
+        }
+
         public void StartGame()
         {
             bool endTheGame = false; // set TRUE only if all 4 pieces of a player reached the finish
             while (!endTheGame)
             {
+                //Player currentPlayer = playerQueue.Dequeue(); // get the current player
+                //GameBoardViewModel.Instance.CurrentPlayer = currentPlayer; // set the current player
+
+
                 foreach (Player player in playersRandomized) //loop according to the player order
                 {
-                    GameBoardViewModel.Instance.CurrentPlayer = player; // Set the current player
+                    GameBoardViewModel.Instance.CurrentPlayer = player; // set the current player
                     //Pausa och vänta på att spelare klickar på tärningen
                     int heltal = GameBoardViewModel.Instance.DiceResult;//throw the dice and return the result, say 0
                     foreach (Piece piece in player.Pieces)
@@ -90,6 +147,8 @@ namespace LUDO.Models
                         var (newCoordinateInX, newCoordinateInY) = piece.SimulatePieceMove(heltal);
                         GameBoardViewModel.Highlighting(xNuvarande, yNuvarande, newCoordinateInX, newCoordinateInY);
                         //Pause todo
+
+                        //playerQueue.Enqueue(currentPlayer); // put the current player back at the end of the queue
                     }
                     //show me which options I have
                     //take decision

@@ -20,6 +20,8 @@ namespace LUDO.Commands
                 GameBoardViewModel.Instance.CurrentDiceImage = imagePath;
                 GameBoardViewModel.Instance.DiceResult = rollResult;
                 // TBD: logic to move to the next player's turn
+                GameBoardViewModel.Instance.HighlightValidPieces();
+                //GameBoardViewModel.Instance.GameLogicInstance.MoveToNextPlayer();
             }
         }
     }

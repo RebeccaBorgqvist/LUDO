@@ -18,7 +18,7 @@ namespace LUDO.ViewModels
 {
     internal class GameBoardViewModel : ViewModelBase
     {
-        public Player CurrentPlayer { get; set; }
+        public GameLogic GameLogicInstance { get; set; }
         public Helpers.Color CurrentPlayerColor { get; set; }
 
         public ICommand RollDiceCommand { get; set; }
@@ -29,37 +29,66 @@ namespace LUDO.ViewModels
         private Board _boardModel;
         private GameLogic _gameLogicModel; //not sure so far if we are required this later on :/
         private string _currentDiceImage;
+
         private bool _redPiece1Visibility = false;
         private int _redPiece1CoordinateX;
         private int _redPiece1CoordinateY;
+
         private bool _greenPiece1Visibility = false;
         private int _greenPiece1CoordinateX;
         private int _greenPiece1CoordinateY;
+
         private bool _yellowPiece1Visibility = false;
         private int _yellowPiece1CoordinateX;
         private int _yellowPiece1CoordinateY;
+
         private bool _bluePiece1Visibility = false;
         private int _bluePiece1CoordinateX;
         private int _bluePiece1CoordinateY;
-        private int _highlightCurrentCoordinateX; 
+
+        private int _highlightCurrentCoordinateX;
         private int _highlightCurrentCoordinateY;
+
         private int _highlightVisualizedCoordinateX;
         private int _highlightVisualizedCoordinateY;
-        public int DiceResult { get; set; }
-        public bool RedPiece1Visibility 
+
+        private bool _diceVisibilityYellow;
+        private bool _diceVisibilityGreen;
+        private bool _diceVisibilityRed;
+        private bool _diceVisibilityBlue;
+
+        private Player _currentPlayer;
+        public Player CurrentPlayer
         {
-            get { return _redPiece1Visibility;}
-            set { 
+            get { return _currentPlayer; }
+            set
+            {
+                _currentPlayer = value;
+                OnPropertyChanged(nameof(CurrentPlayer));
+                OnPropertyChanged(nameof(DiceVisibilityBlue));
+                OnPropertyChanged(nameof(DiceVisibilityRed));
+                OnPropertyChanged(nameof(DiceVisibilityGreen));
+                OnPropertyChanged(nameof(DiceVisibilityYellow));
+            }
+        }
+        public int DiceResult { get; set; }
+
+        public bool RedPiece1Visibility
+        {
+            get { return _redPiece1Visibility; }
+            set
+            {
                 _redPiece1Visibility = value;
                 OnPropertyChanged(nameof(RedPiece1Visibility));
             }
         }
-        public int RedPiece1CoordinateX 
+        public int RedPiece1CoordinateX
         {
             get { return _redPiece1CoordinateX; }
-            set { 
+            set
+            {
                 _redPiece1CoordinateX = value;
-                OnPropertyChanged(nameof(RedPiece1CoordinateX));    
+                OnPropertyChanged(nameof(RedPiece1CoordinateX));
             }
         }
         public int RedPiece1CoordinateY
@@ -188,30 +217,53 @@ namespace LUDO.ViewModels
                 OnPropertyChanged(nameof(HighlightVisualizedCoordinateY));
             }
         }
+
         public Dice DiceModel
         {
             get { return _diceModel; }
             set { _diceModel = value; }
         }
-        public Visibility DiceVisibilityBlue
+
+        public bool DiceVisibilityBlue
         {
-            get { return CurrentPlayerColor == Helpers.Color.Blue ? Visibility.Visible : Visibility.Collapsed; }
+            get { return _diceVisibilityBlue; }
+            set
+            {
+                _diceVisibilityBlue = value;
+                OnPropertyChanged(nameof(DiceVisibilityBlue));
+            }
         }
 
-        public Visibility DiceVisibilityRed
+        public bool DiceVisibilityRed
         {
-            get { return CurrentPlayerColor == Helpers.Color.Red ? Visibility.Visible : Visibility.Collapsed; }
+            get { return _diceVisibilityRed; }
+            set
+            {
+                _diceVisibilityRed = value;
+                OnPropertyChanged(nameof(DiceVisibilityRed));
+            }
         }
 
-        public Visibility DiceVisibilityGreen
+        public bool DiceVisibilityGreen
         {
-            get { return CurrentPlayerColor == Helpers.Color.Green ? Visibility.Visible : Visibility.Collapsed; }
+            get { return _diceVisibilityGreen; }
+            set
+            {
+                _diceVisibilityGreen = value;
+                OnPropertyChanged(nameof(DiceVisibilityGreen));
+            }
         }
 
-        public Visibility DiceVisibilityYellow
+        public bool DiceVisibilityYellow
         {
-            get { return CurrentPlayerColor == Helpers.Color.Yellow ? Visibility.Visible : Visibility.Collapsed; }
+            get { return _diceVisibilityYellow; }
+            set
+            {
+                _diceVisibilityYellow = value;
+                OnPropertyChanged(nameof(DiceVisibilityYellow));
+            }
         }
+
         public Board BoardModel
         {
             get { return _boardModel; }
@@ -234,7 +286,7 @@ namespace LUDO.ViewModels
                 }
             }
         }
-        
+
         public GameBoardViewModel()
         {
             Instance = this;
@@ -246,11 +298,12 @@ namespace LUDO.ViewModels
             GameLogic.SetPlayerColor();
             _gameLogicModel.CreatePlayerOrder();
             _gameLogicModel.StartGame();
+            GameLogicInstance = new GameLogic();
         }
 
         public void ShowPieceOnBoard(Helpers.Color pieceColor, int pieceCoordinateX, int pieceCoordinateY)
         {
-            if(pieceColor == Helpers.Color.Red)
+            if (pieceColor == Helpers.Color.Red)
             {
                 RedPiece1Visibility = true;
                 RedPiece1CoordinateX = pieceCoordinateX;
@@ -276,7 +329,7 @@ namespace LUDO.ViewModels
             }
         }
 
-        public void MovePieceOnBoard(Helpers.Color pieceColor,  int pieceCoordinateX, int pieceCoordinateY)
+        public void MovePieceOnBoard(Helpers.Color pieceColor, int pieceCoordinateX, int pieceCoordinateY)
         {
             if (pieceColor == Helpers.Color.Red)
             {
@@ -300,6 +353,7 @@ namespace LUDO.ViewModels
             }
         }
 
+        // Highlight for gameboard cells
         public static void Highlighting(int xNuvarande, int yNuvarande, int newCoordinateInX, int newCoordinateInY)
         {
             Instance.HighlightCurrentCoordinateX = xNuvarande;
@@ -308,10 +362,28 @@ namespace LUDO.ViewModels
             Instance.HighlightVisualizedCoordinateY = newCoordinateInY;
         }
 
+        public void HighlightValidPieces()
+        {
+            foreach (Piece piece in CurrentPlayer.Pieces)
+            {
+                if (piece.PieceInNest && DiceResult == 6)
+                {
+                    piece.HighlightValidPiece = true;
+                }
+                else if (!piece.PieceInNest)
+                {
+                    piece.HighlightValidPiece = true;
+                }
+                else
+                {
+                    piece.HighlightValidPiece = false;
+                }
+            }
+        }
+
         //USAGE OF WIN2D API: DRAWING CELLS OF THE GAME BOARD(fields, finals, finish and nests)     
         internal void DrawBoard(CanvasControl sender, CanvasDrawEventArgs args)
         {
-
             List<Cell> gameBoardCells = new List<Cell>();
 
             CanvasDevice device = CanvasDevice.GetSharedDevice();
@@ -546,7 +618,6 @@ namespace LUDO.ViewModels
                         }
 
                         dSession.FillCircle(coordX, coordY, radius - 60, color); //cell with a negative ID that shows that a cell belongs to nest.
-                        //dSession.FillCircle(coordX, coordY, radius - 80, Colors.Black); // a piece(a dot so far) that will be navigated throughout the gameboard.
 
                         //back end
                         int[] coordinates = new int[] { coordX, coordY };

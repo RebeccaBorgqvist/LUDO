@@ -13,6 +13,10 @@ namespace LUDO.Models
         private int _coordinateX;
         private int _coordinateY;
         private Color _pieceColor;
+
+        public bool HighlightValidPiece { get; internal set; }
+        public bool PieceInNest { get; internal set; }
+
         public Color PieceColor { get { return _pieceColor; } }
         public int CoordinateX
         {
@@ -24,6 +28,7 @@ namespace LUDO.Models
             get { return _coordinateY; }
             set { _coordinateY = value; }
         }
+
         public Piece(Color playerColor)
         {
             _pieceColor = playerColor;
@@ -58,6 +63,7 @@ namespace LUDO.Models
             }
         }
 
+        // TBD: this is for highlighting a cell thats possible to move a valid piece to after throwing the dice
         public (int, int) SimulatePieceMove(int diceResult)
         {
             return PieceMove(diceResult, false);
