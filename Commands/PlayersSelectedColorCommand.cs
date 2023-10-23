@@ -16,6 +16,7 @@ namespace LUDO.Commands
         {
             if (parameter is string color)
             {
+                Debug.WriteLine($"Color parameter: {color}"); // test to see if the color parameter is beeing passed correctly 
                 for (int player = 1; player <= 4; player++)
                 {
                     // Set the current player's color to the desired color and others to false
