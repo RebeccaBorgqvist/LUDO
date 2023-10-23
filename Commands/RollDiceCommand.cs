@@ -16,6 +16,7 @@ namespace LUDO.Commands
         {
             var (rollResult, imagePath) = Dice.RollDice();
             GameBoardViewModel.Instance.CurrentDiceImage = imagePath;
+            GameBoardViewModel.Instance.DiceResult = rollResult;
         }
     }
 }

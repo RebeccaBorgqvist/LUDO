@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LUDO.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,13 +10,13 @@ namespace LUDO.Models
     internal class Player
     {
         private string _name;
-        private Helpers.Color _color;
+        private Color _color;
         private int _colorInt;
         private bool _isTurnToRoll;
         private List<Piece> _pieces;
 
         public string Name { get { return _name; } set { _name = value; } }
-        public Helpers.Color Color { get { return _color; } set { _color = value; } }
+        public Color Color { get { return _color; } set { _color = value; } }
         public int ColorInt { get { return _colorInt; } private set { _colorInt = value; } }
         public bool IsTurnToRoll
         {
@@ -28,12 +29,19 @@ namespace LUDO.Models
             set { _pieces = value; }
         }
 
-        public Player(string name, Helpers.Color color)
+        public Player(string name, Color color)
         {
             _name = name;
             _color = color;
             _colorInt = (int)color;
             _isTurnToRoll = false;
+            _pieces = new List<Piece>()
+            {
+                new Piece(color),
+                new Piece(color),
+                new Piece(color),
+                new Piece(color)
+            };
         }
     }
 }

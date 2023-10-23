@@ -12,7 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using LUDO.ViewModels; // Denna läggs till för att kunna nå ViewModels filerna
+using LUDO.ViewModels;
 using Microsoft.Graphics.Canvas.Brushes; //superkommentaren för test!!!!
 using Microsoft.Graphics.Canvas.Geometry;
 using Microsoft.Graphics.Canvas.UI.Xaml;
@@ -26,12 +26,9 @@ namespace LUDO.Views
         public MainWindow()
         {
             this.InitializeComponent();
-
-            this.DataContext = new MainMenuViewModel(); // Här kopplas xaml filen ihop med ViewModel, istället för att arbeta med sin bakomliggande xaml.cs fil.
-
+            this.DataContext = new MainMenuViewModel();
             MainMenuViewModel.Instance.MainMenuFrame = MainFrame;
             MainFrame.Navigate(typeof(StartMenu));
-
         }
         private void GoToGameBoard(object sender, RoutedEventArgs e)
         {

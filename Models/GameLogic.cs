@@ -1,4 +1,5 @@
 ﻿using LUDO.ViewModels;
+using LUDO.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,37 +14,36 @@ namespace LUDO.Models
         private List<Player> players;
         private List<Player> playersRandomized;
         private int playerToStart;
-        private static Helpers.Color player1Color;
-        private static Helpers.Color player2Color;
-        private static Helpers.Color player3Color;
-        private static Helpers.Color player4Color;
+        private static Color player1Color;
+        private static Color player2Color;
+        private static Color player3Color;
+        private static Color player4Color;
 
         public GameLogic()
         {
             players = new List<Player>();
         }
-
         public static void SetPlayerColor()
         {
-            if (GameSettingsViewModel.Instance.Red1) player1Color = Helpers.Color.Red;
-            if (GameSettingsViewModel.Instance.Green1) player1Color = Helpers.Color.Green;
-            if (GameSettingsViewModel.Instance.Yellow1) player1Color = Helpers.Color.Yellow;
-            if (GameSettingsViewModel.Instance.Blue1) player1Color = Helpers.Color.Blue;
+            if (GameSettingsViewModel.Instance.Red1) player1Color = Color.Red;
+            if (GameSettingsViewModel.Instance.Green1) player1Color = Color.Green;
+            if (GameSettingsViewModel.Instance.Yellow1) player1Color = Color.Yellow;
+            if (GameSettingsViewModel.Instance.Blue1) player1Color = Color.Blue;
 
-            if (GameSettingsViewModel.Instance.Red2) player2Color = Helpers.Color.Red;
-            if (GameSettingsViewModel.Instance.Green2) player2Color = Helpers.Color.Green;
-            if (GameSettingsViewModel.Instance.Yellow2) player2Color = Helpers.Color.Yellow;
-            if (GameSettingsViewModel.Instance.Blue2) player2Color = Helpers.Color.Blue;
+            if (GameSettingsViewModel.Instance.Red2) player2Color = Color.Red;
+            if (GameSettingsViewModel.Instance.Green2) player2Color = Color.Green;
+            if (GameSettingsViewModel.Instance.Yellow2) player2Color = Color.Yellow;
+            if (GameSettingsViewModel.Instance.Blue2) player2Color = Color.Blue;
 
-            if (GameSettingsViewModel.Instance.Red3) player3Color = Helpers.Color.Red;
-            if (GameSettingsViewModel.Instance.Green3) player3Color = Helpers.Color.Green;
-            if (GameSettingsViewModel.Instance.Yellow3) player3Color = Helpers.Color.Yellow;
-            if (GameSettingsViewModel.Instance.Blue3) player3Color = Helpers.Color.Blue;
+            if (GameSettingsViewModel.Instance.Red3) player3Color = Color.Red;
+            if (GameSettingsViewModel.Instance.Green3) player3Color = Color.Green;
+            if (GameSettingsViewModel.Instance.Yellow3) player3Color = Color.Yellow;
+            if (GameSettingsViewModel.Instance.Blue3) player3Color = Color.Blue;
 
-            if (GameSettingsViewModel.Instance.Red4) player4Color = Helpers.Color.Red;
-            if (GameSettingsViewModel.Instance.Green4) player4Color = Helpers.Color.Green;
-            if (GameSettingsViewModel.Instance.Yellow4) player4Color = Helpers.Color.Yellow;
-            if (GameSettingsViewModel.Instance.Blue4) player4Color = Helpers.Color.Blue;
+            if (GameSettingsViewModel.Instance.Red4) player4Color = Color.Red;
+            if (GameSettingsViewModel.Instance.Green4) player4Color = Color.Green;
+            if (GameSettingsViewModel.Instance.Yellow4) player4Color = Color.Yellow;
+            if (GameSettingsViewModel.Instance.Blue4) player4Color = Color.Blue;
         }
         public void CreatePlayerOrder()
         {
@@ -72,41 +72,32 @@ namespace LUDO.Models
             List<Player> playersBeforeNewStart = playersSortedByColor.Take(playerToStart).ToList();
             List<Player> playersAfterNewStart = playersSortedByColor.Skip(playerToStart).ToList();
             playersRandomized = playersAfterNewStart.Concat(playersBeforeNewStart).ToList();
-            Debug.WriteLine($"{playersRandomized}");
         }
         public void StartGame()
         {
             bool endTheGame = false; // set TRUE only if all 4 pieces of a player reached the finish
-
-            // MAIN GAME LOOP====================================================================================================================
             while (!endTheGame)
             {
-
-                //A TEST LOOP JUST TO SEE HOW THE PLAYER´S TURN TO ROLL DICE IS CHANGING. later on - endTheGame once the finish is reached.
-                for (int throww = 0; throww < 3; throww++)
+                foreach (Player player in playersRandomized) //loop according to the player order
                 {
-
-                    for (int playerOnTurn = 0; playerOnTurn < GameSettingsViewModel.Instance.Players; playerOnTurn++)
+                    //Pausa och vänta på att spelare klickar på tärningen
+                    int heltal = GameBoardViewModel.Instance.DiceResult;//throw the dice and return the result, say 0
+                    foreach (Piece piece in player.Pieces)
                     {
-                        //TBD: do some magic stuff with pieces...
-
-                        if (playersRandomized[playerOnTurn].IsTurnToRoll)
-                        {
-                            Debug.WriteLine($"{playersRandomized[playerOnTurn].Name}, your turn to roll dice!");
-                            playersRandomized[playerOnTurn].IsTurnToRoll = false;
-
-
-                            if (playerToStart + 1 < GameSettingsViewModel.Instance.Players) playerToStart++;
-                            else if (playerToStart + 1 == GameSettingsViewModel.Instance.Players) playerToStart = 0;
-
-                            playersRandomized[playerToStart].IsTurnToRoll = true;
-                        }
+                        int xNuvarande = piece.CoordinateX;
+                        int yNuvarande = piece.CoordinateY;
+                        var (newCoordinateInX, newCoordinateInY) = piece.SimulatePieceMove(heltal);
+                        GameBoardViewModel.Highlighting(xNuvarande, yNuvarande, newCoordinateInX, newCoordinateInY);
+                        //Pause todo
                     }
+                    //show me which options I have
+                    //take decision
+                    endTheGame = true; //for testing 
+                    break; //for testing
+                    //player.Pieces[0].PieceMove(heltal); //move according to decision
                 }
-                endTheGame = true;
+                //check if all players finished and if so change bool
             }
-            Debug.WriteLine("game over ladies and gentlemen");
-
         }
     }
 }
