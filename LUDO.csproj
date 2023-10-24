@@ -130,6 +130,7 @@
     <Compile Include="Commands\HighscoreButtonCommand.cs" />
     <Compile Include="Commands\PlayButtonCommand.cs" />
     <Compile Include="Commands\RulesButtonCommand.cs" />
+    <Compile Include="Commands\StartGameCommand.cs" />
     <Compile Include="Helpers\Color.cs" />
     <Compile Include="Helpers\TypeOfCell.cs" />
     <Compile Include="Models\Board.cs" />
@@ -152,9 +153,6 @@
     </Compile>
     <Compile Include="Views\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PlayerSelect.xaml.cs">
-      <DependentUpon>PlayerSelect.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StartMenu.xaml.cs">
       <DependentUpon>StartMenu.xaml</DependentUpon>
@@ -228,10 +226,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainMenu.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\PlayerSelect.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

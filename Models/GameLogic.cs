@@ -6,6 +6,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
+using System.Threading;
 
 namespace LUDO.Models
 {
@@ -24,7 +26,7 @@ namespace LUDO.Models
         {
             players = new List<Player>();
         }
-        public static void SetPlayerColor()
+        public void SetPlayerColor()
         {
             if (GameSettingsViewModel.Instance.Red1) player1Color = Color.Red;
             if (GameSettingsViewModel.Instance.Green1) player1Color = Color.Green;
@@ -71,8 +73,8 @@ namespace LUDO.Models
             playerToStart = new Random().Next(0, GameSettingsViewModel.Instance.Players - 1);
             playersSortedByColor[playerToStart].IsTurnToRoll = true;
 
-            GameBoardViewModel.Instance.CurrentPlayer = playersSortedByColor[playerToStart];
-            MoveDice(playersSortedByColor[playerToStart]);
+            //GameBoardViewModel.Instance.CurrentPlayer = playersSortedByColor[playerToStart];
+            //MoveDice(playersSortedByColor[playerToStart]);
 
             List<Player> playersBeforeNewStart = playersSortedByColor.Take(playerToStart).ToList();
             List<Player> playersAfterNewStart = playersSortedByColor.Skip(playerToStart).ToList();
@@ -131,13 +133,8 @@ namespace LUDO.Models
             bool endTheGame = false; // set TRUE only if all 4 pieces of a player reached the finish
             while (!endTheGame)
             {
-                //Player currentPlayer = playerQueue.Dequeue(); // get the current player
-                //GameBoardViewModel.Instance.CurrentPlayer = currentPlayer; // set the current player
-
-
                 foreach (Player player in playersRandomized) //loop according to the player order
                 {
-                    GameBoardViewModel.Instance.CurrentPlayer = player; // set the current player
                     //Pausa och vänta på att spelare klickar på tärningen
                     int heltal = GameBoardViewModel.Instance.DiceResult;//throw the dice and return the result, say 0
                     foreach (Piece piece in player.Pieces)
@@ -150,6 +147,8 @@ namespace LUDO.Models
 
                         //playerQueue.Enqueue(currentPlayer); // put the current player back at the end of the queue
                     }
+
+                    // Dice.Instance.DiceRollEvent.Reset();
                     //show me which options I have
                     //take decision
                     endTheGame = true; //for testing 
@@ -158,6 +157,15 @@ namespace LUDO.Models
                 }
                 //check if all players finished and if so change bool
             }
+        }
+
+        public void PlayerTurn()
+        {
+            int player = 0;
+            Player activePlayer = playersRandomized[player];
+           
+
+            player++;
         }
     }
 }

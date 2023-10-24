@@ -23,8 +23,10 @@ namespace LUDO.ViewModels
         //public ICommand PieceCommand { get; set; }
 
         public ICommand RollDiceCommand { get; set; }
+        public ICommand StartGameCommand { get; set; }
         public CanvasControl GameBoardCanvas { get; set; } //property for building game board (win2d class)
         public static GameBoardViewModel Instance { get; private set; }
+
         private Dice _diceModel;
         private int _diceResult;
         private Board _boardModel;
@@ -70,6 +72,20 @@ namespace LUDO.ViewModels
                 OnPropertyChanged(nameof(DiceVisibilityRed));
                 OnPropertyChanged(nameof(DiceVisibilityGreen));
                 OnPropertyChanged(nameof(DiceVisibilityYellow));
+            }
+        }
+
+        private Visibility _startButtonVisibility;
+        public Visibility StartButtonVisibility 
+        {
+            get { return _startButtonVisibility; }
+            set
+            {
+                if (value != _startButtonVisibility)
+                {
+                    _startButtonVisibility = value;
+                    OnPropertyChanged(nameof(StartButtonVisibility));
+                }
             }
         }
         public int DiceResult { get; set; }
@@ -292,18 +308,20 @@ namespace LUDO.ViewModels
         {
             Instance = this;
 
-            //PieceCommand = new PieceCommand();
             RollDiceCommand = new RollDiceCommand();
-            GameLogicInstance = new GameLogic();
+            StartGameCommand = new StartGameCommand();
+
+            CurrentDiceImage = "ms-appx:///Assets/roll_dice.png";
+        }
+
+        public void CreateGame()
+        {
             _diceModel = new Dice();
             _boardModel = new Board();
             _gameLogicModel = new GameLogic();
-
+            _gameLogicModel.SetPlayerColor();
             _gameLogicModel.CreatePlayerOrder();
             _gameLogicModel.StartGame();
-            GameLogic.SetPlayerColor();
-
-            CurrentDiceImage = "ms-appx:///Assets/roll_dice.png";
         }
 
         public void ShowPieceOnBoard(Helpers.Color pieceColor, int pieceCoordinateX, int pieceCoordinateY)

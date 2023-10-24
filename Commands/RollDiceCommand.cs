@@ -14,13 +14,11 @@ namespace LUDO.Commands
     {
         public override void Execute(object parameter)
         {
-            if (GameBoardViewModel.Instance.CurrentPlayer.IsTurnToRoll)
+            if (Dice.Instance != null)
             {
-                var (rollResult, imagePath) = Dice.RollDice();
+                var (rollResult, imagePath) = Dice.Instance.DiceRoll();
                 GameBoardViewModel.Instance.CurrentDiceImage = imagePath;
                 GameBoardViewModel.Instance.DiceResult = rollResult;
-                // TBD: logic to move to the next player's turn
-
             }
         }
     }
