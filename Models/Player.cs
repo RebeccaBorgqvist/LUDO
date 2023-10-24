@@ -36,10 +36,10 @@ namespace LUDO.Models
             _isTurnToRoll = false;
             _pieces = new List<Piece>()
             {
-                new Piece(color, 1),
-                new Piece(color, 2),
-                new Piece(color, 3),
-                new Piece(color, 4)
+                new Piece(color, 1, _colorInt),
+                new Piece(color, 2, _colorInt),
+                new Piece(color, 3, _colorInt),
+                new Piece(color, 4, _colorInt)
             };
         }
     }

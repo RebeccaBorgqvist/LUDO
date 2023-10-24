@@ -56,8 +56,6 @@
             <Image Width="30" Height="30" Source="ms-appx:///Assets/PieceYellow.png" Visibility="{Binding YellowPiece4Visibility}" Canvas.Left="{Binding YellowPiece4CoordinateX}" Canvas.Top="{Binding YellowPiece4CoordinateY}"/>
             <Image Width="30" Height="30" Source="ms-appx:///Assets/PieceBlue.png" Visibility="{Binding BluePiece4Visibility}" Canvas.Left="{Binding BluePiece4CoordinateX}" Canvas.Top="{Binding BluePiece4CoordinateY}"/>
 
-            <Image Width="30" Height="30" Source="ms-appx:///Assets/1.png" Canvas.Left="{Binding HighlightCurrentCoordinateX}" Canvas.Top="{Binding HighlightCurrentCoordinateY}"/>
-            <Image Width="30" Height="30" Source="ms-appx:///Assets/2.png" Canvas.Left="{Binding HighlightVisualizedCoordinateX}" Canvas.Top="{Binding HighlightVisualizedCoordinateY}"/>
             <Button x:Name="DiceButton" 
 
                     Canvas.Left="138" Canvas.Top="250"

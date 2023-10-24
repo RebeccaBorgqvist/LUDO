@@ -14,6 +14,7 @@ namespace LUDO.Models
         private Helpers.Color _pieceColor;
         private int _id;
         private Cell _atCell;
+        private int colorInt;
         public int[] Coordinates
         {
             get { return _coordinates; }
@@ -31,11 +32,12 @@ namespace LUDO.Models
             set { _atCell = value; }
         }
 
-        public Piece(Color playerColor, int id)
+        public Piece(Color playerColor, int id, int colorInt)
         {
             _pieceColor = playerColor;
             _id = id;
             this.SetStartingCoordinates();
+            this.colorInt = colorInt;
         }
 
         public void SetStartingCoordinates()
@@ -151,75 +153,77 @@ namespace LUDO.Models
         }
         public int[] SimulatePieceMove(int diceResult)
         {
-            return PieceMove(diceResult, false);
+            return PieceMove(diceResult, true);
         }
-        public int[] PieceMove(int diceResult, bool move = true)
+        public int[] PieceMove(int diceResult, bool onlySimulateMove = false)
         {
-            int currentSection = this.AtCell.Section;
-            int currentId = this.AtCell.Id;
-            bool currentFinal = this.AtCell.IsFinal;
-            int newId = diceResult + currentId;
-            int newSection = currentSection;
-            if (newId > 13)
+            int newId = diceResult + this.AtCell.Id;
+            int newSection = this.AtCell.Section;
+            bool newFinal = this.AtCell.IsFinal;
+
+            if (this.AtCell.IsFinal && newId > 5) //Finalizing
             {
-                newId = newId % 13;
-                if (currentSection > 3) newSection = 0;
-                else newSection = currentSection + 1;
+                newId = 6;
+            }
+            else if (newId > 7 && this.colorInt == this.AtCell.Section) //Enter final area
+            {
+                newFinal = true;
+                newId = newId - 7;
+            }
+            else if (newId > 13) //Enter next section
+            {
+                newId = newId - 13;
+                if (this.AtCell.Section > 3) newSection = 0;
+                else newSection = this.AtCell.Section + 1;
+            }
+            else if (this.AtCell.Id < 0 && diceResult == 6) //Move out from nest
+            {
+                newId = 9;
             }
 
-            foreach(Cell cell in GameBoardViewModel.Instance.BoardModel.GameCells) //update piece- and cell-object correlation according to new move.
+            bool moveLegit = false;
+            foreach (Cell cell in GameBoardViewModel.Instance.BoardModel.GameCells) //Check if move is legit and update piece with new position
             {
-                if (cell.Section == newSection && cell.Id == newId)
+                if (cell.Section == newSection && cell.Id == newId && cell.IsFinal == newFinal)
                 {
-                    if (cell.PiecesVisiting.Count > 0) 
+                    if (cell.PiecesVisiting.Count > 0 && cell.PiecesVisiting[0].PieceColor != this.PieceColor)
                     {
-                        //Todo. Crash with other piece
+                        //Todo. Crash with other pieces of different color
+                        moveLegit = true;
                     }
-                    else
+                    else if (cell.PiecesVisiting.Count > 0) 
+                    {
+                        //Todo. Share cell with own other piece
+                        moveLegit = true;
+                    }
+                    else //not occupied
+                    {
+                        moveLegit = true;
+                    }
+
+                    if (moveLegit && !onlySimulateMove)
                     {
                         this.AtCell = cell;
                         cell.PiecesVisiting.Add(this);
+                        GameBoardViewModel.Instance.ShowPieceOnBoard(this.PieceColor, true, this.Id, this.AtCell.Coordinates);
                     }
-                }
-                if (cell.Section == currentSection && cell.Id == currentId)
-                {
-                    if (cell.PiecesVisiting.Count > 1)
+                    else if (moveLegit && onlySimulateMove)
                     {
-                        //Todo. remove the correct one
-                    }
-                    else
-                    {
-                        cell.PiecesVisiting.Clear();
+                        return cell.Coordinates;
                     }
                 }
             }
-
-            int randomIntCell = new Random().Next(0,15);
-            int[] randomCellCoordinate = GameBoardViewModel.Instance.BoardModel.GameCells[randomIntCell].Coordinates;
-
-            if (move)
+            if (moveLegit) //If move legit, remove old position.
             {
-                if (diceResult == 0) //this is only for testing
+                foreach (Cell cell in GameBoardViewModel.Instance.BoardModel.GameCells) 
                 {
-                    if (this.PieceColor == Color.Red)
+                    if (cell.Section == newSection && cell.Id == newId && cell.IsFinal == newFinal)
                     {
-                        GameBoardViewModel.Instance.ShowPieceOnBoard(Color.Red, true, this.Id ,this.Coordinates);
-                    }
-                    else if (this.PieceColor == Color.Green)
-                    {
-                        GameBoardViewModel.Instance.ShowPieceOnBoard(Color.Green, true, this.Id, this.Coordinates);
-                    }
-                    else if (this.PieceColor == Color.Yellow)
-                    {
-                        GameBoardViewModel.Instance.ShowPieceOnBoard(Color.Yellow, true, this.Id, this.Coordinates);
-                    }
-                    else
-                    {
-                        GameBoardViewModel.Instance.ShowPieceOnBoard(Color.Blue, true, this.Id, this.Coordinates);
+                        cell.PiecesVisiting.RemoveAt(0);
                     }
                 }
             }
-            return randomCellCoordinate;
+            return this.Coordinates; //Returns the original coordinates if move not legit (for the simulation)
         }
     }
 }
