@@ -19,6 +19,8 @@ namespace LUDO.Commands
                 var (rollResult, imagePath) = Dice.Instance.DiceRoll();
                 GameBoardViewModel.Instance.CurrentDiceImage = imagePath;
                 GameBoardViewModel.Instance.DiceResult = rollResult;
+
+                GameBoardViewModel.Instance.GameLogicModel.PlayerTurn();
             }
         }
     }

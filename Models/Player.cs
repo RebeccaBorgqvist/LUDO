@@ -3,7 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using Windows.UI.Core;
+using Windows.UI.Popups;
+using Windows.UI.Xaml.Controls;
 
 namespace LUDO.Models
 {
@@ -29,18 +33,22 @@ namespace LUDO.Models
             set { _pieces = value; }
         }
 
-        public Player(string name, Color color)
+        public Player(string name, Color color = Color.Black)
         {
             _name = name;
             _color = color;
             _colorInt = (int)color;
             _isTurnToRoll = false;
+        }
+
+        public void CreatePieces()
+        {
             _pieces = new List<Piece>()
             {
-                new Piece(color),
-                new Piece(color),
-                new Piece(color),
-                new Piece(color)
+                new Piece(Color),
+                new Piece(Color),
+                new Piece(Color),
+                new Piece(Color)
             };
         }
     }

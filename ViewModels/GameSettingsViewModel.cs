@@ -50,6 +50,8 @@ namespace LUDO.ViewModels
         private string _player3Name = "Player 3";
         private string _player4Name = "Player 4";
 
+        public List<Player> PlayerList { get; set; }
+
         public ICommand PlusPlayerCommand { get; set; }
         public ICommand MinusPlayerCommand { get; set; }
         public ICommand ForwardCommand { get; set; }
@@ -320,6 +322,17 @@ namespace LUDO.ViewModels
             ForwardCommand = new ForwardCommand();
             ChangeNameCommand = new ChangeNameCommand();
             ChangeColor = new PlayersSelectedColorCommand();
+
+            ResetPlayerList();
+        }
+
+        public void ResetPlayerList()
+        {
+            PlayerList = new List<Player>()
+            {
+                new Player("Player 1"),
+                new Player("Player 2")
+            };
         }
 
     }

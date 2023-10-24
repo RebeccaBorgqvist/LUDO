@@ -244,8 +244,11 @@ namespace LUDO.ViewModels
             _diceModel = new Dice();
             _boardModel = new Board();
             _gameLogicModel = new GameLogic();
-            _gameLogicModel.SetPlayerColor();
-            _gameLogicModel.CreatePlayerOrder();
+            //_gameLogicModel.SetPlayerColor();
+            //_gameLogicModel.CreatePlayerOrder();
+
+            _gameLogicModel.SetRandomizedPlayers();
+            _gameLogicModel.CreatePlayerPieces();
             _gameLogicModel.StartGame();
         }
 
