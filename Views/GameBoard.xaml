@@ -52,8 +52,8 @@
                 <!--Red Piece-->
                 <Button Command="{Binding PieceCommand}"
                     Background="Transparent" 
-                    Canvas.Left="339" 
-                    Canvas.Top="21"
+                    Canvas.Left="{Binding RedPiece1CoordinateX}" 
+                    Canvas.Top="{Binding RedPiece1CoordinateY}"
                     Padding="0">
                     <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceRed.png" 
@@ -62,40 +62,40 @@
                 </Button>
                 <Button Command="{Binding PieceCommand}"
                     Background="Transparent"
-                    Canvas.Left="389" 
-                    Canvas.Top="21"
+                    Canvas.Left="{Binding RedPiece2CoordinateX}" 
+                    Canvas.Top="{Binding RedPiece2CoordinateY}"
                     Padding="0">
                     <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceRed.png" 
-                       Visibility="{Binding RedPiece1Visibility}"
+                       Visibility="{Binding RedPiece2Visibility}"
                 />
                 </Button>
                 <Button Command="{Binding PieceCommand}"
                     Background="Transparent" 
-                    Canvas.Left="339" 
-                    Canvas.Top="70"
+                    Canvas.Left="{Binding RedPiece3CoordinateX}" 
+                    Canvas.Top="{Binding RedPiece3CoordinateY}"
                     Padding="0">
                     <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceRed.png" 
-                       Visibility="{Binding RedPiece1Visibility}"
+                       Visibility="{Binding RedPiece3Visibility}"
                 />
                 </Button>
                 <Button Command="{Binding PieceCommand}"
                     Background="Transparent"
-                    Canvas.Left="389" 
-                    Canvas.Top="70"
+                    Canvas.Left="{Binding RedPiece4CoordinateX}" 
+                    Canvas.Top="{Binding RedPiece4CoordinateY}"
                     Padding="0">
                     <Image Width="19" Height="30"
                        Source="ms-appx:///Assets/PieceRed.png" 
-                       Visibility="{Binding RedPiece1Visibility}"
+                       Visibility="{Binding RedPiece4Visibility}"
                 />
                 </Button>
 
                 <!--Green Piece-->
                 <Button Command="{Binding PieceCommand}"
                     Background="Transparent" 
-                    Canvas.Left="339" 
-                    Canvas.Top="297"
+                    Canvas.Left="{Binding GreenPiece1CoordinateX}" 
+                    Canvas.Top="{Binding GreenPiece1CoordinateY}"
                     Padding="0">
                     <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceGreen.png" 
@@ -104,40 +104,40 @@
                 </Button>
                 <Button Command="{Binding PieceCommand}"
                     Background="Transparent"
-                    Canvas.Left="389" 
-                    Canvas.Top="346"
+                    Canvas.Left="{Binding GreenPiece2CoordinateX}" 
+                    Canvas.Top="{Binding GreenPiece2CoordinateY}"
                     Padding="0">
                     <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceGreen.png"
-                       Visibility="{Binding GreenPiece1Visibility}"
+                       Visibility="{Binding GreenPiece2Visibility}"
                 />
                 </Button>
                 <Button Command="{Binding PieceCommand}"
                     Background="Transparent" 
-                    Canvas.Left="339" 
-                    Canvas.Top="346"
+                    Canvas.Left="{Binding GreenPiece3CoordinateX}" 
+                    Canvas.Top="{Binding GreenPiece3CoordinateY}"
                     Padding="0">
                     <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceGreen.png" 
-                       Visibility="{Binding GreenPiece1Visibility}"
+                       Visibility="{Binding GreenPiece3Visibility}"
                 />
                 </Button>
                 <Button Command="{Binding PieceCommand}"
                     Background="Transparent" 
-                    Canvas.Left="389"
-                    Canvas.Top="297"
+                    Canvas.Left="{Binding GreenPiece4CoordinateX}"
+                    Canvas.Top="{Binding GreenPiece4CoordinateY}"
                     Padding="0">
                     <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceGreen.png"
-                       Visibility="{Binding GreenPiece1Visibility}"
+                       Visibility="{Binding GreenPiece4Visibility}"
                 />
                 </Button>
 
                 <!--Yellow Piece-->
                 <Button Command="{Binding PieceCommand}"
                     Background="Transparent" 
-                    Canvas.Left="39" 
-                    Canvas.Top="297"
+                    Canvas.Left="{Binding YellowPiece1CoordinateX}" 
+                    Canvas.Top="{Binding YellowPiece1CoordinateY}"
                     Padding="0">
                     <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceYellow.png" 
@@ -146,40 +146,40 @@
                 </Button>
                 <Button Command="{Binding PieceCommand}"
                     Background="Transparent" 
-                    Canvas.Left="89" 
-                    Canvas.Top="346"
+                    Canvas.Left="{Binding YellowPiece2CoordinateX}" 
+                    Canvas.Top="{Binding YellowPiece2CoordinateY}"
                     Padding="0">
                     <Image Width="19" Height="30"
                        Source="ms-appx:///Assets/PieceYellow.png" 
-                       Visibility="{Binding YellowPiece1Visibility}"
+                       Visibility="{Binding YellowPiece2Visibility}"
                 />
                 </Button>
                 <Button Command="{Binding PieceCommand}"
                     Background="Transparent" 
-                    Canvas.Left="39" 
-                    Canvas.Top="346"
+                    Canvas.Left="{Binding YellowPiece3CoordinateX}" 
+                    Canvas.Top="{Binding YellowPiece3CoordinateY}"
                     Padding="0">
                     <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceYellow.png" 
-                       Visibility="{Binding YellowPiece1Visibility}"
+                       Visibility="{Binding YellowPiece3Visibility}"
                 />
                 </Button>
                 <Button Command="{Binding PieceCommand}"
                     Background="Transparent" 
-                    Canvas.Left="89" 
-                    Canvas.Top="297"
+                    Canvas.Left="{Binding YellowPiece4CoordinateX}" 
+                    Canvas.Top="{Binding YellowPiece4CoordinateY}"
                     Padding="0">
                     <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceYellow.png"
-                       Visibility="{Binding YellowPiece1Visibility}"
+                       Visibility="{Binding YellowPiece4Visibility}"
                 />
                 </Button>
 
                 <!--Blue Piece-->
                 <Button Command="{Binding PieceCommand}"
                     Background="Transparent" 
-                    Canvas.Left="39" 
-                    Canvas.Top="21"
+                    Canvas.Left="{Binding BluePiece1CoordinateX}" 
+                    Canvas.Top="{Binding BluePiece1CoordinateY}"
                     Padding="0" HorizontalAlignment="Center">
                     <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceBlue.png" 
@@ -188,32 +188,32 @@
                 </Button>
                 <Button Command="{Binding PieceCommand}"
                     Background="Transparent" 
-                    Canvas.Left="89" 
-                    Canvas.Top="21"
+                    Canvas.Left="{Binding BluePiece2CoordinateX}" 
+                    Canvas.Top="{Binding BluePiece2CoordinateY}"
                     Padding="0">
                     <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceBlue.png" 
-                       Visibility="{Binding BluePiece1Visibility}"
+                       Visibility="{Binding BluePiece2Visibility}"
                 />
                 </Button>
                 <Button Command="{Binding PieceCommand}"
                     Background="Transparent" 
-                    Canvas.Left="39" 
-                    Canvas.Top="70"
+                    Canvas.Left="{Binding BluePiece3CoordinateX}" 
+                    Canvas.Top="{Binding BluePiece3CoordinateY}"
                     Padding="0">
                     <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceBlue.png" 
-                       Visibility="{Binding BluePiece1Visibility}"
+                       Visibility="{Binding BluePiece3Visibility}"
                 />
                 </Button>
                 <Button Command="{Binding PieceCommand}"
                     Background="Transparent" 
-                    Canvas.Left="89" 
-                    Canvas.Top="70"
+                    Canvas.Left="{Binding BluePiece4CoordinateX}" 
+                    Canvas.Top="{Binding BluePiece4CoordinateY}"
                     Padding="0">
                     <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceBlue.png" 
-                       Visibility="{Binding BluePiece1Visibility}"
+                       Visibility="{Binding BluePiece4Visibility}"
                 />
                 </Button>
             </Canvas>
