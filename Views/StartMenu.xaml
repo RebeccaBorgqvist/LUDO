@@ -6,16 +6,17 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="#D9D9D9"
-    Width="960"
-    Height="720">
+    Background="#D9D9D9" 
+    d:DesignWidth="960" 
+    d:DesignHeight="720">
 
     <Page.Resources>
         <Style x:Key="StartButtonStyle" TargetType="Button">
-            <Setter Property="FontSize" Value="72"/>
+            <Setter Property="FontSize" Value="72" />
             <Setter Property="Background" Value="#FFFFFF"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="CornerRadius" Value="15"/>
+            <Setter Property="Foreground" Value="Black"/>
         </Style>
     </Page.Resources>
 

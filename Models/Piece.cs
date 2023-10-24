@@ -17,8 +17,8 @@ namespace LUDO.Models
         private int colorInt;
         public int[] Coordinates
         {
-            get { return _coordinates; }
-            set { _coordinates = value; }
+            get { return _coordinateX; }
+            set { _coordinateX = value; }
         }
         public Helpers.Color PieceColor { get { return _pieceColor; } }
         public int Id
