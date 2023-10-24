@@ -21,25 +21,25 @@ namespace LUDO.ViewModels
         private bool _isPlayer3ColorVisible;
         private bool _isPlayer4ColorVisible;
 
-        private bool _blue1 = true;
+        private bool _blue1;
         private bool _blue2;
         private bool _blue3;
         private bool _blue4;
 
         private bool _red1;
-        private bool _red2 = true;
+        private bool _red2;
         private bool _red3;
         private bool _red4;
 
         private bool _green1;
         private bool _green2;
-        private bool _green3 = true;
+        private bool _green3;
         private bool _green4;
 
         private bool _yellow1;
         private bool _yellow2;
         private bool _yellow3;
-        private bool _yellow4 = true;
+        private bool _yellow4;
 
         private string _addRemoveText = "Add more players";
 
