@@ -6,6 +6,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
+using System.Threading;
 
 namespace LUDO.Models
 {
@@ -23,7 +25,7 @@ namespace LUDO.Models
         {
             players = new List<Player>();
         }
-        public static void SetPlayerColor()
+        public void SetPlayerColor()
         {
             if (GameSettingsViewModel.Instance.Red1) player1Color = Color.Red;
             if (GameSettingsViewModel.Instance.Green1) player1Color = Color.Green;
@@ -80,6 +82,7 @@ namespace LUDO.Models
             {
                 foreach (Player player in playersRandomized) //loop according to the player order
                 {
+
                     //Pausa och vänta på att spelare klickar på tärningen
                     int heltal = GameBoardViewModel.Instance.DiceResult;//throw the dice and return the result, say 0
                     foreach (Piece piece in player.Pieces)
@@ -90,6 +93,8 @@ namespace LUDO.Models
                         GameBoardViewModel.Highlighting(xNuvarande, yNuvarande, newCoordinateInX, newCoordinateInY);
                         //Pause todo
                     }
+
+                    // Dice.Instance.DiceRollEvent.Reset();
                     //show me which options I have
                     //take decision
                     endTheGame = true; //for testing 
@@ -98,6 +103,15 @@ namespace LUDO.Models
                 }
                 //check if all players finished and if so change bool
             }
+        }
+
+        public void PlayerTurn()
+        {
+            int player = 0;
+            Player activePlayer = playersRandomized[player];
+           
+
+            player++;
         }
     }
 }

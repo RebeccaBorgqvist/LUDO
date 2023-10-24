@@ -12,15 +12,17 @@ using Windows.UI;
 using Windows.UI.Xaml.Controls;
 using System.Diagnostics;
 using Windows.Foundation;
-
+using Windows.UI.Xaml;
 
 namespace LUDO.ViewModels
 {
     internal class GameBoardViewModel : ViewModelBase
     {
         public ICommand RollDiceCommand { get; set; }
+        public ICommand StartGameCommand { get; set; }
         public CanvasControl GameBoardCanvas { get; set; } //property for building game board (win2d class)
         public static GameBoardViewModel Instance { get; private set; }
+
         private Dice _diceModel;
         private int _diceResult;
         private Board _boardModel;
@@ -42,6 +44,20 @@ namespace LUDO.ViewModels
         private int _highlightCurrentCoordinateY;
         private int _highlightVisualizedCoordinateX;
         private int _highlightVisualizedCoordinateY;
+
+        private Visibility _startButtonVisibility;
+        public Visibility StartButtonVisibility 
+        {
+            get { return _startButtonVisibility; }
+            set
+            {
+                if (value != _startButtonVisibility)
+                {
+                    _startButtonVisibility = value;
+                    OnPropertyChanged(nameof(StartButtonVisibility));
+                }
+            }
+        }
         public int DiceResult { get; set; }
         public bool RedPiece1Visibility 
         {
@@ -216,12 +232,19 @@ namespace LUDO.ViewModels
         public GameBoardViewModel()
         {
             Instance = this;
-            _diceModel = new Dice();
+            
             RollDiceCommand = new RollDiceCommand();
+            StartGameCommand = new StartGameCommand();
+
             CurrentDiceImage = "ms-appx:///Assets/roll_dice.png";
+        }
+
+        public void CreateGame()
+        {
+            _diceModel = new Dice();
             _boardModel = new Board();
             _gameLogicModel = new GameLogic();
-            GameLogic.SetPlayerColor();
+            _gameLogicModel.SetPlayerColor();
             _gameLogicModel.CreatePlayerOrder();
             _gameLogicModel.StartGame();
         }

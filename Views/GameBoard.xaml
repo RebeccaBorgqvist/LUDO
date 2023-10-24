@@ -12,22 +12,26 @@
     xmlns:xaml="using:Microsoft.Graphics.Canvas.UI.Xaml"
     Background="#D9D9D9"
     DataContext="{Binding GameBoardViewModelInstance}"
-    d:DesignWidth="580.5" 
-    d:DesignHeight="550">
+    d:DesignWidth="960" 
+    d:DesignHeight="720">
 
-    <Grid Background="#666363">
-        <Canvas VerticalAlignment="Center" HorizontalAlignment="Center" Width="452" Height="426">
-            <Canvas.Background>
-                <ImageBrush ImageSource="ms-appx:///Assets/GameBoard.png"/>
-            </Canvas.Background>
-            <xaml:CanvasControl x:Name="GameBoardCanvas" Width="452" Height="426">
-                <xaml:CanvasControl.RenderTransform>
-                    <CompositeTransform SkewX="0" TranslateX="0" SkewY="0" TranslateY="0"/>
-                </xaml:CanvasControl.RenderTransform>
-            </xaml:CanvasControl>
 
-            <!--Dice-->
-            <Button x:Name="DiceButton" 
+    <Grid Background="#666363" CornerRadius="15">
+        <Viewbox Margin="25">
+            <Canvas VerticalAlignment="Center" HorizontalAlignment="Center" Width="452" Height="426">
+                <!--<Canvas.Background>
+                    <ImageBrush ImageSource="ms-appx:///Assets/GameBoard.png"/>
+                </Canvas.Background>-->
+                <xaml:CanvasControl x:Name="GameBoardCanvas" Width="452" Height="426">
+                    <xaml:CanvasControl.RenderTransform>
+                        <CompositeTransform SkewX="0" TranslateX="0" SkewY="0" TranslateY="0"/>
+                    </xaml:CanvasControl.RenderTransform>
+                </xaml:CanvasControl>
+
+                <Button Content="START GAME" Command="{Binding StartGameCommand}" Visibility="{Binding StartButtonVisibility}" FontSize="32" Background="#D9D9D9" BorderBrush="Black" BorderThickness="2" CornerRadius="5" Margin="122.5,177.5,0,0" Padding="10"/>
+
+                <!--Dice-->
+                <Button x:Name="DiceButton" 
                     Canvas.Left="142" Canvas.Top="258"
                     Command="{Binding RollDiceCommand}"
                     Background="Transparent"
@@ -36,182 +40,183 @@
                     Padding="0"
                     BorderThickness="0">
 
-                <Button.RenderTransform>
-                    <CompositeTransform/>
-                </Button.RenderTransform>
+                    <Button.RenderTransform>
+                        <CompositeTransform/>
+                    </Button.RenderTransform>
 
-                <Image Source="{Binding CurrentDiceImage}"
+                    <Image Source="{Binding CurrentDiceImage}"
                        Stretch="UniformToFill">
-                </Image>
-            </Button>
+                    </Image>
+                </Button>
 
-            <!--Red Piece-->
-            <Button Command="{Binding PieceCommand}"
+                <!--Red Piece-->
+                <Button Command="{Binding PieceCommand}"
                     Background="Transparent" 
                     Canvas.Left="339" 
                     Canvas.Top="21"
                     Padding="0">
-                <Image Width="19" Height="30" 
+                    <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceRed.png" 
                        Visibility="{Binding RedPiece1Visibility}"
                 />
-            </Button>
-            <Button Command="{Binding PieceCommand}"
+                </Button>
+                <Button Command="{Binding PieceCommand}"
                     Background="Transparent"
                     Canvas.Left="389" 
                     Canvas.Top="21"
                     Padding="0">
-                <Image Width="19" Height="30" 
+                    <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceRed.png" 
                        Visibility="{Binding RedPiece1Visibility}"
                 />
-            </Button>
-            <Button Command="{Binding PieceCommand}"
+                </Button>
+                <Button Command="{Binding PieceCommand}"
                     Background="Transparent" 
                     Canvas.Left="339" 
                     Canvas.Top="70"
                     Padding="0">
-                <Image Width="19" Height="30" 
+                    <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceRed.png" 
                        Visibility="{Binding RedPiece1Visibility}"
                 />
-            </Button>
-            <Button Command="{Binding PieceCommand}"
+                </Button>
+                <Button Command="{Binding PieceCommand}"
                     Background="Transparent"
                     Canvas.Left="389" 
                     Canvas.Top="70"
                     Padding="0">
-                <Image Width="19" Height="30"
+                    <Image Width="19" Height="30"
                        Source="ms-appx:///Assets/PieceRed.png" 
                        Visibility="{Binding RedPiece1Visibility}"
                 />
-            </Button>
+                </Button>
 
-            <!--Green Piece-->
-            <Button Command="{Binding PieceCommand}"
+                <!--Green Piece-->
+                <Button Command="{Binding PieceCommand}"
                     Background="Transparent" 
                     Canvas.Left="339" 
                     Canvas.Top="297"
                     Padding="0">
-                <Image Width="19" Height="30" 
+                    <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceGreen.png" 
                        Visibility="{Binding GreenPiece1Visibility}"
                 />
-            </Button>
-            <Button Command="{Binding PieceCommand}"
+                </Button>
+                <Button Command="{Binding PieceCommand}"
                     Background="Transparent"
                     Canvas.Left="389" 
                     Canvas.Top="346"
                     Padding="0">
-                <Image Width="19" Height="30" 
+                    <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceGreen.png"
                        Visibility="{Binding GreenPiece1Visibility}"
                 />
-            </Button>
-            <Button Command="{Binding PieceCommand}"
+                </Button>
+                <Button Command="{Binding PieceCommand}"
                     Background="Transparent" 
                     Canvas.Left="339" 
                     Canvas.Top="346"
                     Padding="0">
-                <Image Width="19" Height="30" 
+                    <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceGreen.png" 
                        Visibility="{Binding GreenPiece1Visibility}"
                 />
-            </Button>
-            <Button Command="{Binding PieceCommand}"
+                </Button>
+                <Button Command="{Binding PieceCommand}"
                     Background="Transparent" 
                     Canvas.Left="389"
                     Canvas.Top="297"
                     Padding="0">
-                <Image Width="19" Height="30" 
+                    <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceGreen.png"
                        Visibility="{Binding GreenPiece1Visibility}"
                 />
-            </Button>
+                </Button>
 
-            <!--Yellow Piece-->
-            <Button Command="{Binding PieceCommand}"
+                <!--Yellow Piece-->
+                <Button Command="{Binding PieceCommand}"
                     Background="Transparent" 
                     Canvas.Left="39" 
                     Canvas.Top="297"
                     Padding="0">
-                <Image Width="19" Height="30" 
+                    <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceYellow.png" 
                        Visibility="{Binding YellowPiece1Visibility}"
                 />
-            </Button>
-            <Button Command="{Binding PieceCommand}"
+                </Button>
+                <Button Command="{Binding PieceCommand}"
                     Background="Transparent" 
                     Canvas.Left="89" 
                     Canvas.Top="346"
                     Padding="0">
-                <Image Width="19" Height="30"
+                    <Image Width="19" Height="30"
                        Source="ms-appx:///Assets/PieceYellow.png" 
                        Visibility="{Binding YellowPiece1Visibility}"
                 />
-            </Button>
-            <Button Command="{Binding PieceCommand}"
+                </Button>
+                <Button Command="{Binding PieceCommand}"
                     Background="Transparent" 
                     Canvas.Left="39" 
                     Canvas.Top="346"
                     Padding="0">
-                <Image Width="19" Height="30" 
+                    <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceYellow.png" 
                        Visibility="{Binding YellowPiece1Visibility}"
                 />
-            </Button>
-            <Button Command="{Binding PieceCommand}"
+                </Button>
+                <Button Command="{Binding PieceCommand}"
                     Background="Transparent" 
                     Canvas.Left="89" 
                     Canvas.Top="297"
                     Padding="0">
-                <Image Width="19" Height="30" 
+                    <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceYellow.png"
                        Visibility="{Binding YellowPiece1Visibility}"
                 />
-            </Button>
+                </Button>
 
-            <!--Blue Piece-->
-            <Button Command="{Binding PieceCommand}"
+                <!--Blue Piece-->
+                <Button Command="{Binding PieceCommand}"
                     Background="Transparent" 
                     Canvas.Left="39" 
                     Canvas.Top="21"
                     Padding="0" HorizontalAlignment="Center">
-                <Image Width="19" Height="30" 
+                    <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceBlue.png" 
                        Visibility="{Binding BluePiece1Visibility}"
                 />
-            </Button>
-            <Button Command="{Binding PieceCommand}"
+                </Button>
+                <Button Command="{Binding PieceCommand}"
                     Background="Transparent" 
                     Canvas.Left="89" 
                     Canvas.Top="21"
                     Padding="0">
-                <Image Width="19" Height="30" 
+                    <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceBlue.png" 
                        Visibility="{Binding BluePiece1Visibility}"
                 />
-            </Button>
-            <Button Command="{Binding PieceCommand}"
+                </Button>
+                <Button Command="{Binding PieceCommand}"
                     Background="Transparent" 
                     Canvas.Left="39" 
                     Canvas.Top="70"
                     Padding="0">
-                <Image Width="19" Height="30" 
+                    <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceBlue.png" 
                        Visibility="{Binding BluePiece1Visibility}"
                 />
-            </Button>
-            <Button Command="{Binding PieceCommand}"
+                </Button>
+                <Button Command="{Binding PieceCommand}"
                     Background="Transparent" 
                     Canvas.Left="89" 
                     Canvas.Top="70"
                     Padding="0">
-                <Image Width="19" Height="30" 
+                    <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceBlue.png" 
                        Visibility="{Binding BluePiece1Visibility}"
                 />
-            </Button>
-        </Canvas>
+                </Button>
+            </Canvas>
+        </Viewbox>
     </Grid>
 </Page>

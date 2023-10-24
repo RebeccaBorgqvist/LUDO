@@ -7,8 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="#D9D9D9" 
-    d:DesignWidth="900" 
-    d:DesignHeight="550">
+    d:DesignWidth="960" 
+    d:DesignHeight="720">
 
     <Page.Resources>
         <Style x:Key="StartButtonStyle" TargetType="Button">
