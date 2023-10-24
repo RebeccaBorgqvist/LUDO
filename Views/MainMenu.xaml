@@ -8,8 +8,8 @@
     xmlns:xaml="using:Microsoft.Graphics.Canvas.UI.Xaml"
     mc:Ignorable="d"
     Background="#D9D9D9" 
-    d:DesignWidth="1000" 
-    d:DesignHeight="1000">
+    d:DesignWidth="1920" 
+    d:DesignHeight="1080">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
         <Grid>
@@ -26,7 +26,7 @@
 
             <TextBlock Text="LUDO" Grid.Column="1" Grid.Row="0" FontSize="100" HorizontalAlignment="Center"/>
 
-            <Frame x:Name="MainFrame" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="1000" Height="700"/>
+            <Frame x:Name="MainFrame" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="960" Height="720"/>
 
             <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Button Background="Transparent" ToolTipService.ToolTip="Go back">

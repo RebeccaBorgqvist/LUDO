@@ -30,7 +30,7 @@ namespace LUDO.Views
             this.DataContext = new GameBoardViewModel();
 
             GameBoardViewModel.Instance.GameBoardCanvas = GameBoardCanvas;
-            GameBoardViewModel.Instance.GameBoardCanvas.Draw += GameBoardViewModel.Instance.DrawBoard;
+            GameBoardCanvas.Draw += GameBoardViewModel.Instance.DrawBoard;
         }
     }
 }
