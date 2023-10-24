@@ -21,28 +21,25 @@ namespace LUDO.ViewModels
         private bool _isPlayer3ColorVisible;
         private bool _isPlayer4ColorVisible;
 
+        private bool _blue1 = true;
+        private bool _blue2;
+        private bool _blue3;
+        private bool _blue4;
 
-        private bool _blue1 = false;
-        private bool _blue2 = false;
-        private bool _blue3 = false;
-        private bool _blue4 = false;
+        private bool _red1;
+        private bool _red2 = true;
+        private bool _red3;
+        private bool _red4;
 
-        private bool _red1 = false;
-        private bool _red2 = false;
-        private bool _red3 = false;
-        private bool _red4 = false;
+        private bool _green1;
+        private bool _green2;
+        private bool _green3 = true;
+        private bool _green4;
 
-        private bool _green1 = false;
-        private bool _green2 = false;
-        private bool _green3 = false;
-        private bool _green4 = false;
-
-
-        private bool _yellow1 = false;
-        private bool _yellow2 = false;
-        private bool _yellow3 = false;
-        private bool _yellow4 = false;
-
+        private bool _yellow1;
+        private bool _yellow2;
+        private bool _yellow3;
+        private bool _yellow4 = true;
 
         private string _addRemoveText = "Add more players";
 
@@ -53,17 +50,11 @@ namespace LUDO.ViewModels
         private string _player3Name = "Player 3";
         private string _player4Name = "Player 4";
 
-        // Properties for selected colors
-        private string _selectedColorPlayer1;
-        private string _selectedColorPlayer2;
-        private string _selectedColorPlayer3;
-        private string _selectedColorPlayer4;
-
         public ICommand PlusPlayerCommand { get; set; }
         public ICommand MinusPlayerCommand { get; set; }
         public ICommand ForwardCommand { get; set; }
         public ICommand ChangeNameCommand { get; set; }
-        public ICommand PlayersSelectedColorCommand { get; set; }
+        public ICommand ChangeColor { get; set; }
         public static GameSettingsViewModel Instance { get; set; }
         public bool IsPlayer3Visible
         {
@@ -170,49 +161,6 @@ namespace LUDO.ViewModels
                 OnPropertyChanged(nameof(IsPlayer4ColorsVisible));
             }
         }
-
-        public string SelectedColorPlayer1
-        {
-            get { return _selectedColorPlayer1; }
-            set
-            {
-                _selectedColorPlayer1 = value;
-                OnPropertyChanged(SelectedColorPlayer1);
-            }
-        }
-
-        public string SelectedColorPlayer2
-        {
-            get { return _selectedColorPlayer2; }
-            set
-            {
-                _selectedColorPlayer2 = value;
-                OnPropertyChanged(SelectedColorPlayer2);
-            }
-        }
-
-        public string SelectedColorPlayer3
-        {
-            get { return _selectedColorPlayer3; }
-            set
-            {
-                _selectedColorPlayer3 = value;
-                OnPropertyChanged(SelectedColorPlayer3);
-            }
-        }
-
-        public string SelectedColorPlayer4
-        {
-            get { return _selectedColorPlayer4; }
-            set
-            {
-                _selectedColorPlayer4 = value;
-                OnPropertyChanged(SelectedColorPlayer4);
-            }
-        }
-
-        
-
         // BLUE
         public bool Blue1
         {
@@ -371,7 +319,7 @@ namespace LUDO.ViewModels
             MinusPlayerCommand = new RemovePlayerCommand();
             ForwardCommand = new ForwardCommand();
             ChangeNameCommand = new ChangeNameCommand();
-            PlayersSelectedColorCommand = new PlayersSelectedColorCommand();
+            ChangeColor = new PlayersSelectedColorCommand();
         }
 
     }
