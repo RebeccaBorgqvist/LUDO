@@ -82,18 +82,19 @@ namespace LUDO.Models
                 foreach (Player player in playersRandomized) //loop according to the player order
                 {
                     //Pausa och vänta på att spelare klickar på tärningen
-                    int heltal = GameBoardViewModel.Instance.DiceResult;//throw the dice and return the result, say 0
+                    int heltal = 2;//throw the dice and return the result, say 0
                     foreach (Piece piece in player.Pieces)
                     {
-                        int xNuvarande = piece.CoordinateX;
-                        int yNuvarande = piece.CoordinateY;
-                        var (newCoordinateInX, newCoordinateInY) = piece.SimulatePieceMove(heltal);
-                        GameBoardViewModel.Highlighting(xNuvarande, yNuvarande, newCoordinateInX, newCoordinateInY);
+                        int xNuvarande = piece.Coordinates[0];
+                        int yNuvarande = piece.Coordinates[1];
+                        //var (newCoordinateInX, newCoordinateInY) = piece.SimulatePieceMove(heltal);
+                        //GameBoardViewModel.Highlighting(xNuvarande, yNuvarande, newCoordinateInX, newCoordinateInY);
                         //Pause todo
-                        player.Pieces[0].PieceMove(heltal); //move according to decision
+                        //player.Pieces[0].PieceMove(heltal); //move according to decision
                     }
                     //show me which options I have
                     //take decision
+                    player.Pieces[0].PieceMove(heltal);
                     endTheGame = true; //for testing 
                     break; //for testing
                 }
