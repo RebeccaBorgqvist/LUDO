@@ -25,7 +25,7 @@ namespace LUDO.ViewModels
 
         private Dice _diceModel;
         private int _diceResult;
-        private Board _boardModel;
+        private Board _boardModel = new Board();
         private GameLogic _gameLogicModel; //not sure so far if we are required this later on :/
         private string _currentDiceImage;
         private bool _redPiece1Visibility = false;
@@ -562,18 +562,6 @@ namespace LUDO.ViewModels
             }
         }
 
-
-        public static GameBoardViewModel Instance { get; private set; }
-
-        public Board BoardModel
-        {
-            get { return _highlightVisualizedCoordinateY; }
-            set
-            {
-                _highlightVisualizedCoordinateY = value;
-                OnPropertyChanged(nameof(HighlightVisualizedCoordinateY));
-            }
-        }
         public Dice DiceModel
         {
             get { return _diceModel; }
@@ -615,7 +603,6 @@ namespace LUDO.ViewModels
         public void CreateGame()
         {
             _diceModel = new Dice();
-            _boardModel = new Board();
             _gameLogicModel = new GameLogic();
             _gameLogicModel.SetPlayerColor();
             _gameLogicModel.CreatePlayerOrder();
@@ -737,17 +724,9 @@ namespace LUDO.ViewModels
             Instance.HighlightVisualizedCoordinateY = newCoordinateInY;
         }
 
-        public static void Highlighting(int xNuvarande, int yNuvarande, int newCoordinateInX, int newCoordinateInY)
-        {
-            Instance.HighlightCurrentCoordinateX = xNuvarande;
-            Instance.HighlightCurrentCoordinateY = yNuvarande;
-            Instance.HighlightVisualizedCoordinateX = newCoordinateInX;
-            Instance.HighlightVisualizedCoordinateY = newCoordinateInY;
-        }
         //USAGE OF WIN2D API: DRAWING CELLS OF THE GAME BOARD(fields, finals, finish and nests)     
         internal void DrawBoard(CanvasControl sender, CanvasDrawEventArgs args)
         {
-
             List<Cell> gameBoardCells = new List<Cell>();
 
             CanvasDevice device = CanvasDevice.GetSharedDevice();
@@ -995,6 +974,7 @@ namespace LUDO.ViewModels
                 }
                 args.DrawingSession.DrawImage(renderTarget);
             }
+            BoardModel.GameCells = gameBoardCells;
         }
     }
 }
