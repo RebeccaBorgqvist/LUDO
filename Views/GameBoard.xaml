@@ -14,6 +14,22 @@
     DataContext="{Binding GameBoardViewModelInstance}"
     d:DesignWidth="580.5" 
     d:DesignHeight="550">
+    <Page.Resources>
+        <Storyboard x:Name="HighlightPiece">
+            <!-- ScaleX -->
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)">
+                <LinearDoubleKeyFrame KeyTime="00:00:00.5" Value="1.2"/>
+                <LinearDoubleKeyFrame KeyTime="00:00:01" Value="1.0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <!-- ScaleY -->
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <LinearDoubleKeyFrame KeyTime="00:00:00.5" Value="1.2"/>
+                <LinearDoubleKeyFrame KeyTime="00:00:01" Value="1.0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
+
 
     <Grid Background="#666363">
         <Canvas VerticalAlignment="Center" HorizontalAlignment="Center" Width="452" Height="426">
@@ -101,11 +117,14 @@
             </Button>
 
             <!--Red Piece-->
-            <Button Command="{Binding PieceCommand}"
+            <Button x:Name="button" Command="{Binding PieceCommand}"
                     Background="Transparent" 
                     Canvas.Left="339" 
                     Canvas.Top="21"
                     Padding="0">
+                <Button.RenderTransform>
+                    <CompositeTransform/>
+                </Button.RenderTransform>
                 <Image Width="19" Height="30" 
                        Source="ms-appx:///Assets/PieceRed.png" 
                        Visibility="{Binding RedPiece1Visibility}"

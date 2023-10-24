@@ -13,9 +13,10 @@ namespace LUDO.Models
         private int _coordinateX;
         private int _coordinateY;
         private Color _pieceColor;
+        public static Piece Instance;
 
-        public bool HighlightValidPiece { get; internal set; }
-        public bool PieceInNest { get; internal set; }
+        public bool HighlightValidPiece { get; set; }
+        public bool PieceInNest { get; set; }
 
         public Color PieceColor { get { return _pieceColor; } }
         public int CoordinateX
@@ -29,10 +30,17 @@ namespace LUDO.Models
             set { _coordinateY = value; }
         }
 
+        public static bool IsHighlighted { get; internal set; }
+
         public Piece(Color playerColor)
         {
             _pieceColor = playerColor;
             this.SetStartingCoordinates();
+        }
+
+        public Piece()
+        {
+            Instance = this;
         }
 
         public void SetStartingCoordinates()

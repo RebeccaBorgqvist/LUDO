@@ -121,6 +121,7 @@
     </Compile>
     <Compile Include="Commands\AddPlayerCommand.cs" />
     <Compile Include="Commands\BaseCommands.cs" />
+    <Compile Include="Commands\PieceCommand.cs" />
     <Compile Include="Commands\RollDiceCommand.cs" />
     <Compile Include="Commands\ChangeNameCommand.cs" />
     <Compile Include="Commands\ForwardCommand.cs" />

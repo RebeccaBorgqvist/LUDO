@@ -1,4 +1,5 @@
 ﻿using LUDO.Helpers;
+using LUDO.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,13 @@ namespace LUDO.Models
         private int _colorInt;
         private bool _isTurnToRoll;
         private List<Piece> _pieces;
+
+        private bool _isHighlighted;
+        public bool IsHighlighted
+        {
+            get { return _isHighlighted; }
+            set { _isHighlighted = value; }
+        }
 
         public string Name { get { return _name; } set { _name = value; } }
         public Color Color { get { return _color; } set { _color = value; } }
@@ -31,6 +39,7 @@ namespace LUDO.Models
 
         public Player(string name, Color color)
         {
+            _isHighlighted = false;
             _name = name;
             _color = color;
             _colorInt = (int)color;
@@ -43,5 +52,20 @@ namespace LUDO.Models
                 new Piece(color)
             };
         }
+        /*
+        public void PieceCommand(int diceResult)
+        {
+            if (diceResult == 6)
+            {
+                foreach (var piece in Pieces)
+                {
+                    if (piece.PieceInNest)  // Antag att IsInNest är en egenskap i Piece-klassen som indikerar om pjäsen är i boet
+                    {
+                        Piece.IsHighlighted = true;
+                    }
+                }
+            }
+        }
+        */
     }
 }

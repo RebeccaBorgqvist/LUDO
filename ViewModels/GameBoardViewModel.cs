@@ -20,6 +20,7 @@ namespace LUDO.ViewModels
     {
         public GameLogic GameLogicInstance { get; set; }
         public Helpers.Color CurrentPlayerColor { get; set; }
+        //public ICommand PieceCommand { get; set; }
 
         public ICommand RollDiceCommand { get; set; }
         public CanvasControl GameBoardCanvas { get; set; } //property for building game board (win2d class)
@@ -290,15 +291,19 @@ namespace LUDO.ViewModels
         public GameBoardViewModel()
         {
             Instance = this;
-            _diceModel = new Dice();
+
+            //PieceCommand = new PieceCommand();
             RollDiceCommand = new RollDiceCommand();
-            CurrentDiceImage = "ms-appx:///Assets/roll_dice.png";
+            GameLogicInstance = new GameLogic();
+            _diceModel = new Dice();
             _boardModel = new Board();
             _gameLogicModel = new GameLogic();
-            GameLogic.SetPlayerColor();
+
             _gameLogicModel.CreatePlayerOrder();
             _gameLogicModel.StartGame();
-            GameLogicInstance = new GameLogic();
+            GameLogic.SetPlayerColor();
+
+            CurrentDiceImage = "ms-appx:///Assets/roll_dice.png";
         }
 
         public void ShowPieceOnBoard(Helpers.Color pieceColor, int pieceCoordinateX, int pieceCoordinateY)
@@ -350,7 +355,7 @@ namespace LUDO.ViewModels
             {
                 BluePiece1CoordinateX = pieceCoordinateX;
                 BluePiece1CoordinateY = pieceCoordinateY;
-            }
+            }            
         }
 
         // Highlight for gameboard cells
