@@ -197,7 +197,7 @@ namespace LUDO.Models
                     }
                     else if (cell.PiecesVisiting.Count > 0) 
                     {
-                        //Todo. Share cell with own other piece
+                        this.ShareCellWithPiece(cell); //Todo. Share cell with own other piece
                         moveLegit = true;
                     }
                     else //not occupied
@@ -229,6 +229,10 @@ namespace LUDO.Models
                     cell.PiecesVisiting.RemoveAt(0);
                 }
             }
+        }
+        public void ShareCellWithPiece(Cell cellToShare)
+        {
+
         }
     }
 }
