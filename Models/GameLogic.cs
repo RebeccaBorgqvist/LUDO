@@ -130,33 +130,10 @@ namespace LUDO.Models
 
         public void StartGame()
         {
-            bool endTheGame = false; // set TRUE only if all 4 pieces of a player reached the finish
-            while (!endTheGame)
-            {
-                foreach (Player player in playersRandomized) //loop according to the player order
-                {
-                    //Pausa och vänta på att spelare klickar på tärningen
-                    int heltal = GameBoardViewModel.Instance.DiceResult;//throw the dice and return the result, say 0
-                    foreach (Piece piece in player.Pieces)
-                    {
-                        int xNuvarande = piece.CoordinateX;
-                        int yNuvarande = piece.CoordinateY;
-                        var (newCoordinateInX, newCoordinateInY) = piece.SimulatePieceMove(heltal);
-                        GameBoardViewModel.Highlighting(xNuvarande, yNuvarande, newCoordinateInX, newCoordinateInY);
-                        //Pause todo
-
-                        //playerQueue.Enqueue(currentPlayer); // put the current player back at the end of the queue
-                    }
-
-                    // Dice.Instance.DiceRollEvent.Reset();
-                    //show me which options I have
-                    //take decision
-                    endTheGame = true; //for testing 
-                    break; //for testing
-                    //player.Pieces[0].PieceMove(heltal); //move according to decision
-                }
-                //check if all players finished and if so change bool
-            }
+            // only for testing
+            //playersRandomized[0].Pieces[0].PieceMove(6);
+            //playersRandomized[0].Pieces[0].PieceMove(5);
+            //playersRandomized[1].Pieces[2].PieceMove(6);
         }
 
         public void PlayerTurn()

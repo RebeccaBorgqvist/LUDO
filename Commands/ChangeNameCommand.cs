@@ -13,6 +13,7 @@ namespace LUDO.Commands
 {
     internal class ChangeNameCommand : BaseCommands
     {
+
         public override async void Execute(object parameter)
         {
             ContentDialog dialog = new ContentDialog
@@ -20,20 +21,18 @@ namespace LUDO.Commands
                 PrimaryButtonText = "OK",
                 CloseButtonText = "Cancel"
             };
+
             StackPanel panel = new StackPanel();
             TextBox inputTextBox = new TextBox
             {
                 MaxLength = 12
             };
 
-            // Handle KeyUp event for the TextBox
-            inputTextBox.KeyUp += async (sender, e) =>
+            void HandleDialogResult(string newName)
             {
-                if (e.Key == Windows.System.VirtualKey.Enter)
+                if (!string.IsNullOrWhiteSpace(newName))
                 {
-                    dialog.Hide(); // Close the dialog
-                    string newName = inputTextBox.Text;
-
+                    // Determine which player's name to change based on the parameter
                     switch (parameter.ToString())
                     {
                         case "Player1Name":
@@ -50,10 +49,31 @@ namespace LUDO.Commands
                             break;
                     }
                 }
+            }
+
+            // Attach a callback to the PrimaryButtonClick event (OK button)
+            dialog.PrimaryButtonClick += (sender, args) =>
+            {
+                string newName = inputTextBox.Text;
+                HandleDialogResult(newName);
             };
 
+            // Handle KeyUp event for the TextBox
+            inputTextBox.KeyUp += async (sender, e) =>
+            {
+                if (e.Key == Windows.System.VirtualKey.Enter)
+                {
+                    dialog.Hide(); // Close the dialog
+                    string newName = inputTextBox.Text;
+                    HandleDialogResult(newName);
+                }
+            };
+
+            // Add the TextBox to the StackPanel
             panel.Children.Add(inputTextBox);
             dialog.Content = panel;
+
+            // Show the ContentDialog and await the result
             ContentDialogResult result = await dialog.ShowAsync();
         }
     }

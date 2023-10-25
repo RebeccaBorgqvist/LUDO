@@ -10,32 +10,40 @@ namespace LUDO.Models
 {
     internal class Piece
     {
-        private int _coordinateX;
-        private int _coordinateY;
+        private int _id;
+        private Cell _atCell;
+        private int colorInt;
+        private int[] _coordinates;
         private Color _pieceColor;
-        public static Piece Instance;
 
+        public static Piece Instance;
         public bool HighlightValidPiece { get; set; }
         public bool PieceInNest { get; set; }
-
         public Color PieceColor { get { return _pieceColor; } }
-        public int CoordinateX
+
+        public int[] Coordinates
         {
-            get { return _coordinateX; }
-            set { _coordinateX = value; }
-        }
-        public int CoordinateY
-        {
-            get { return _coordinateY; }
-            set { _coordinateY = value; }
+            get { return _coordinates; }
+            set { _coordinates = value; }
         }
 
-        public static bool IsHighlighted { get; internal set; }
+        public int Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
+        public Cell AtCell
+        {
+            get { return _atCell; }
+            set { _atCell = value; }
+        }
 
-        public Piece(Color playerColor)
+        public Piece(Color playerColor, int id, int colorInt)
         {
             _pieceColor = playerColor;
+            _id = id;
             this.SetStartingCoordinates();
+            this.colorInt = colorInt;
         }
 
         public Piece()
@@ -45,67 +53,195 @@ namespace LUDO.Models
 
         public void SetStartingCoordinates()
         {
-            if (this._pieceColor == Color.Red) 
+            if (this.PieceColor == Color.Red) 
             {
-                this._coordinateX = 400;
-                this._coordinateY = 50;
-                GameBoardViewModel.Instance.ShowPieceOnBoard(Color.Red, this._coordinateX, this._coordinateY);
+                switch (this.Id)
+                {
+                    case 1:
+                        GameBoardViewModel.Instance.BoardModel.GameCells[19].PiecesVisiting.Add(this);
+                        this.Coordinates = GameBoardViewModel.Instance.BoardModel.GameCells[19].Coordinates;
+                        this.AtCell = GameBoardViewModel.Instance.BoardModel.GameCells[19];
+                        break;
+                    case 2:
+                        GameBoardViewModel.Instance.BoardModel.GameCells[20].PiecesVisiting.Add(this);
+                        this.Coordinates = GameBoardViewModel.Instance.BoardModel.GameCells[20].Coordinates;
+                        this.AtCell = GameBoardViewModel.Instance.BoardModel.GameCells[20];
+                        break;
+                    case 3:
+                        GameBoardViewModel.Instance.BoardModel.GameCells[21].PiecesVisiting.Add(this);
+                        this.Coordinates = GameBoardViewModel.Instance.BoardModel.GameCells[21].Coordinates;
+                        this.AtCell = GameBoardViewModel.Instance.BoardModel.GameCells[21];
+                        break;
+                    case 4:
+                        GameBoardViewModel.Instance.BoardModel.GameCells[22].PiecesVisiting.Add(this);
+                        this.Coordinates = GameBoardViewModel.Instance.BoardModel.GameCells[22].Coordinates;
+                        this.AtCell = GameBoardViewModel.Instance.BoardModel.GameCells[22];
+                        break;
+                }
+                GameBoardViewModel.Instance.ShowPieceOnBoard(Color.Red, true, this.Id, this.Coordinates);
             }
-            else if (this._pieceColor == Color.Green) 
+            else if (this.PieceColor == Color.Green) 
             {
-                this._coordinateX = 400;
-                this._coordinateY = 400;
-                GameBoardViewModel.Instance.ShowPieceOnBoard(Color.Green, this._coordinateX, this._coordinateY);
+                switch (this.Id)
+                {
+                    case 1:
+                        GameBoardViewModel.Instance.BoardModel.GameCells[42].PiecesVisiting.Add(this);
+                        this.Coordinates = GameBoardViewModel.Instance.BoardModel.GameCells[42].Coordinates;
+                        this.AtCell = GameBoardViewModel.Instance.BoardModel.GameCells[42];
+                        break;
+                    case 2:
+                        GameBoardViewModel.Instance.BoardModel.GameCells[43].PiecesVisiting.Add(this);
+                        this.Coordinates = GameBoardViewModel.Instance.BoardModel.GameCells[43].Coordinates;
+                        this.AtCell = GameBoardViewModel.Instance.BoardModel.GameCells[43];
+                        break;
+                    case 3:
+                        GameBoardViewModel.Instance.BoardModel.GameCells[44].PiecesVisiting.Add(this);
+                        this.Coordinates = GameBoardViewModel.Instance.BoardModel.GameCells[44].Coordinates;
+                        this.AtCell = GameBoardViewModel.Instance.BoardModel.GameCells[44];
+                        break;
+                    case 4:
+                        GameBoardViewModel.Instance.BoardModel.GameCells[45].PiecesVisiting.Add(this);
+                        this.Coordinates = GameBoardViewModel.Instance.BoardModel.GameCells[45].Coordinates;
+                        this.AtCell = GameBoardViewModel.Instance.BoardModel.GameCells[45];
+                        break;
+                }
+                GameBoardViewModel.Instance.ShowPieceOnBoard(Color.Green, true, this.Id, this.Coordinates);
             }
-            else if (this._pieceColor == Color.Yellow)
+            else if (this.PieceColor == Color.Yellow)
             {
-                this._coordinateX = 50;
-                this._coordinateY = 400;
-                GameBoardViewModel.Instance.ShowPieceOnBoard(Color.Yellow, this._coordinateX, this._coordinateY);
+                switch (this.Id)
+                {
+                    case 1:
+                        GameBoardViewModel.Instance.BoardModel.GameCells[65].PiecesVisiting.Add(this);
+                        this.Coordinates = GameBoardViewModel.Instance.BoardModel.GameCells[65].Coordinates;
+                        this.AtCell = GameBoardViewModel.Instance.BoardModel.GameCells[65];
+                        break;
+                    case 2:
+                        GameBoardViewModel.Instance.BoardModel.GameCells[66].PiecesVisiting.Add(this);
+                        this.Coordinates = GameBoardViewModel.Instance.BoardModel.GameCells[66].Coordinates;
+                        this.AtCell = GameBoardViewModel.Instance.BoardModel.GameCells[66];
+                        break;
+                    case 3:
+                        GameBoardViewModel.Instance.BoardModel.GameCells[67].PiecesVisiting.Add(this);
+                        this.Coordinates = GameBoardViewModel.Instance.BoardModel.GameCells[67].Coordinates;
+                        this.AtCell = GameBoardViewModel.Instance.BoardModel.GameCells[67];
+                        break;
+                    case 4:
+                        GameBoardViewModel.Instance.BoardModel.GameCells[68].PiecesVisiting.Add(this);
+                        this.Coordinates = GameBoardViewModel.Instance.BoardModel.GameCells[68].Coordinates;
+                        this.AtCell = GameBoardViewModel.Instance.BoardModel.GameCells[68];
+                        break;
+                }
+                GameBoardViewModel.Instance.ShowPieceOnBoard(Color.Yellow, true, this.Id, this.Coordinates);
             }
             else
             {
-                this._coordinateX = 50;
-                this._coordinateY = 50;
-                GameBoardViewModel.Instance.ShowPieceOnBoard(Color.Blue, this._coordinateX, this._coordinateY);
+                switch (this.Id)
+                {
+                    case 1:
+                        GameBoardViewModel.Instance.BoardModel.GameCells[88].PiecesVisiting.Add(this);
+                        this.Coordinates = GameBoardViewModel.Instance.BoardModel.GameCells[88].Coordinates;
+                        this.AtCell = GameBoardViewModel.Instance.BoardModel.GameCells[88];
+                        break;
+                    case 2:
+                        GameBoardViewModel.Instance.BoardModel.GameCells[89].PiecesVisiting.Add(this);
+                        this.Coordinates = GameBoardViewModel.Instance.BoardModel.GameCells[89].Coordinates;
+                        this.AtCell = GameBoardViewModel.Instance.BoardModel.GameCells[89];
+                        break;
+                    case 3:
+                        GameBoardViewModel.Instance.BoardModel.GameCells[90].PiecesVisiting.Add(this);
+                        this.Coordinates = GameBoardViewModel.Instance.BoardModel.GameCells[90].Coordinates;
+                        this.AtCell = GameBoardViewModel.Instance.BoardModel.GameCells[90];
+                        break;
+                    case 4:
+                        GameBoardViewModel.Instance.BoardModel.GameCells[91].PiecesVisiting.Add(this);
+                        this.Coordinates = GameBoardViewModel.Instance.BoardModel.GameCells[91].Coordinates;
+                        this.AtCell = GameBoardViewModel.Instance.BoardModel.GameCells[91];
+                        break;
+                }
+                GameBoardViewModel.Instance.ShowPieceOnBoard(Color.Blue, true, this.Id, this.Coordinates);
             }
         }
 
-        // TBD: this is for highlighting a cell thats possible to move a valid piece to after throwing the dice
-        public (int, int) SimulatePieceMove(int diceResult)
+        public int[] SimulatePieceMove(int diceResult) // ska användas ihop med highlight för att se en valid piece move
         {
-            return PieceMove(diceResult, false);
+            return PieceMove(diceResult, true);
         }
 
-        public (int, int) PieceMove(int diceResult, bool move = true)
+        public int[] PieceMove(int diceResult, bool onlySimulateMove = false)
         {
-            int testMoveInX = new Random().Next(30,200);
-            int testMoveInY = new Random().Next(30, 200);
-            if (move)
+            int newId = diceResult + this.AtCell.Id;
+            int newSection = this.AtCell.Section;
+            bool newFinal = this.AtCell.IsFinal;
+            bool moveLegit = true;
+
+            if (this.AtCell.IsFinal && newId > 5) //Finalizing
             {
-                if (diceResult == 0) //this is only for testing
+                newId = 6;
+            }
+            else if (newId > 7 && this.AtCell.Id < 8 && this.colorInt == this.AtCell.Section) //Enter final area
+            {
+                newFinal = true;
+                newId = newId - 7;
+            }
+            else if (newId > 13) //Enter next section
+            {
+                newId = newId - 13;
+                if (this.AtCell.Section > 2) newSection = 0;
+                else newSection = this.AtCell.Section + 1;
+            }
+            else if (this.AtCell.Id < 0 && diceResult == 6) //Move out from nest
+            {
+                newId = 9;
+            }
+            else if (this.AtCell.Id < 0 && diceResult != 6) //Trying to move out from nest
+            {
+                return this.Coordinates;
+            }
+
+            foreach (Cell cell in GameBoardViewModel.Instance.BoardModel.GameCells) //Check if move is legit and update piece with new position
+            {
+                if (cell.Section == newSection && cell.Id == newId && cell.IsFinal == newFinal)
                 {
-                    this._coordinateX += testMoveInX;
-                    this._coordinateY += testMoveInY;
-                    if (this._pieceColor == Color.Red)
+                    if (cell.PiecesVisiting.Count > 0 && cell.PiecesVisiting[0].PieceColor != this.PieceColor)
                     {
-                        GameBoardViewModel.Instance.MovePieceOnBoard(Color.Red, this._coordinateX, this._coordinateY);
+                        //Todo. Crash with other pieces of different color
+                        moveLegit = true;
                     }
-                    else if (this._pieceColor == Color.Green)
+                    else if (cell.PiecesVisiting.Count > 0) 
                     {
-                        GameBoardViewModel.Instance.MovePieceOnBoard(Color.Green, this._coordinateX, this._coordinateY);
+                        //Todo. Share cell with own other piece
+                        moveLegit = true;
                     }
-                    else if (this._pieceColor == Color.Yellow)
+                    else //not occupied
                     {
-                        GameBoardViewModel.Instance.MovePieceOnBoard(Color.Yellow, this._coordinateX, this._coordinateY);
+                        moveLegit = true;
                     }
-                    else
+
+                    if (moveLegit && !onlySimulateMove)
                     {
-                        GameBoardViewModel.Instance.MovePieceOnBoard(Color.Blue, this._coordinateX, this._coordinateY);
+                        this.RemoveOldPosition();
+                        this.AtCell = cell;
+                        cell.PiecesVisiting.Add(this);
+                        GameBoardViewModel.Instance.ShowPieceOnBoard(this.PieceColor, true, this.Id, this.AtCell.Coordinates);
+                    }
+                    else if (moveLegit && onlySimulateMove)
+                    {
+                        return cell.Coordinates;
                     }
                 }
             }
-            return (testMoveInX, testMoveInY);
+            return this.Coordinates; //Returns the original coordinates if move not legit (for the simulation)
+        }
+        public void RemoveOldPosition()
+        {
+            foreach (Cell cell in GameBoardViewModel.Instance.BoardModel.GameCells)
+            {
+                if (cell.Section == this.AtCell.Section && cell.Id == this.AtCell.Id && cell.IsFinal == this.AtCell.IsFinal)
+                {
+                    cell.PiecesVisiting.RemoveAt(0);
+                }
+            }
         }
     }
 }
