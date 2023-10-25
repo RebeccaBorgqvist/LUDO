@@ -609,31 +609,33 @@ namespace LUDO.ViewModels
             _gameLogicModel.StartGame();
         }
 
-        public void ShowPieceOnBoard(Helpers.Color pieceColor, bool visibility, int pieceId, int[] pieceCoordinates)
+        public void ShowPieceOnBoard(Helpers.Color pieceColor, bool visibility, int pieceId, int[] pieceCoordinates, bool severalPiecesOnCell = false)
         {
+            int adjustCoordinate = 0;
+            if (severalPiecesOnCell) { adjustCoordinate = 10; }
             if(pieceColor == Helpers.Color.Red)
             {
                 switch (pieceId)
                 {
                     case 1:
                         RedPiece1Visibility = visibility;
-                        RedPiece1CoordinateX = pieceCoordinates[0];
-                        RedPiece1CoordinateY = pieceCoordinates[1];
+                        RedPiece1CoordinateX = pieceCoordinates[0] - adjustCoordinate;
+                        RedPiece1CoordinateY = pieceCoordinates[1] - adjustCoordinate;
                         break;
                     case 2:
                         RedPiece2Visibility = visibility;
-                        RedPiece2CoordinateX = pieceCoordinates[0];
-                        RedPiece2CoordinateY = pieceCoordinates[1];
+                        RedPiece2CoordinateX = pieceCoordinates[0] + adjustCoordinate;
+                        RedPiece2CoordinateY = pieceCoordinates[1] - adjustCoordinate;
                         break;
                     case 3:
                         RedPiece3Visibility = visibility;
-                        RedPiece3CoordinateX = pieceCoordinates[0];
-                        RedPiece3CoordinateY = pieceCoordinates[1];
+                        RedPiece3CoordinateX = pieceCoordinates[0] - adjustCoordinate;
+                        RedPiece3CoordinateY = pieceCoordinates[1] + adjustCoordinate;
                         break;
                     case 4:
                         RedPiece4Visibility = visibility;
-                        RedPiece4CoordinateX = pieceCoordinates[0];
-                        RedPiece4CoordinateY = pieceCoordinates[1];
+                        RedPiece4CoordinateX = pieceCoordinates[0] + adjustCoordinate;
+                        RedPiece4CoordinateY = pieceCoordinates[1] + adjustCoordinate;
                         break;
                 }
             }
@@ -643,23 +645,23 @@ namespace LUDO.ViewModels
                 {
                     case 1:
                         GreenPiece1Visibility = visibility;
-                        GreenPiece1CoordinateX = pieceCoordinates[0];
-                        GreenPiece1CoordinateY = pieceCoordinates[1];
+                        GreenPiece1CoordinateX = pieceCoordinates[0] - adjustCoordinate;
+                        GreenPiece1CoordinateY = pieceCoordinates[1] - adjustCoordinate;
                         break;
                     case 2:
                         GreenPiece2Visibility = visibility;
-                        GreenPiece2CoordinateX = pieceCoordinates[0];
-                        GreenPiece2CoordinateY = pieceCoordinates[1];
+                        GreenPiece2CoordinateX = pieceCoordinates[0] + adjustCoordinate;
+                        GreenPiece2CoordinateY = pieceCoordinates[1] - adjustCoordinate;
                         break;
                     case 3:
                         GreenPiece3Visibility = visibility;
-                        GreenPiece3CoordinateX = pieceCoordinates[0];
-                        GreenPiece3CoordinateY = pieceCoordinates[1];
+                        GreenPiece3CoordinateX = pieceCoordinates[0] - adjustCoordinate;
+                        GreenPiece3CoordinateY = pieceCoordinates[1] + adjustCoordinate;
                         break;
                     case 4:
                         GreenPiece4Visibility = visibility;
-                        GreenPiece4CoordinateX = pieceCoordinates[0];
-                        GreenPiece4CoordinateY = pieceCoordinates[1];
+                        GreenPiece4CoordinateX = pieceCoordinates[0] + adjustCoordinate;
+                        GreenPiece4CoordinateY = pieceCoordinates[1] + adjustCoordinate;
                         break;
                 }
             }
@@ -669,23 +671,23 @@ namespace LUDO.ViewModels
                 {
                     case 1:
                         YellowPiece1Visibility = visibility;
-                        YellowPiece1CoordinateX = pieceCoordinates[0];
-                        YellowPiece1CoordinateY = pieceCoordinates[1];
+                        YellowPiece1CoordinateX = pieceCoordinates[0] - adjustCoordinate;
+                        YellowPiece1CoordinateY = pieceCoordinates[1] - adjustCoordinate;
                         break;
                     case 2:
                         YellowPiece2Visibility = visibility;
-                        YellowPiece2CoordinateX = pieceCoordinates[0];
-                        YellowPiece2CoordinateY = pieceCoordinates[1];
+                        YellowPiece2CoordinateX = pieceCoordinates[0] + adjustCoordinate;
+                        YellowPiece2CoordinateY = pieceCoordinates[1] - adjustCoordinate;
                         break;
                     case 3:
                         YellowPiece3Visibility = visibility;
-                        YellowPiece3CoordinateX = pieceCoordinates[0];
-                        YellowPiece3CoordinateY = pieceCoordinates[1];
+                        YellowPiece3CoordinateX = pieceCoordinates[0] - adjustCoordinate;
+                        YellowPiece3CoordinateY = pieceCoordinates[1] + adjustCoordinate;
                         break;
                     case 4:
                         YellowPiece4Visibility = visibility;
-                        YellowPiece4CoordinateX = pieceCoordinates[0];
-                        YellowPiece4CoordinateY = pieceCoordinates[1];
+                        YellowPiece4CoordinateX = pieceCoordinates[0] + adjustCoordinate;
+                        YellowPiece4CoordinateY = pieceCoordinates[1] + adjustCoordinate;
                         break;
                 }
             }
@@ -695,23 +697,23 @@ namespace LUDO.ViewModels
                 {
                     case 1:
                         BluePiece1Visibility = visibility;
-                        BluePiece1CoordinateX = pieceCoordinates[0];
-                        BluePiece1CoordinateY = pieceCoordinates[1];
+                        BluePiece1CoordinateX = pieceCoordinates[0] - adjustCoordinate;
+                        BluePiece1CoordinateY = pieceCoordinates[1] - adjustCoordinate;
                         break;
                     case 2:
                         BluePiece2Visibility = visibility;
-                        BluePiece2CoordinateX = pieceCoordinates[0];
-                        BluePiece2CoordinateY = pieceCoordinates[1];
+                        BluePiece2CoordinateX = pieceCoordinates[0] + adjustCoordinate;
+                        BluePiece2CoordinateY = pieceCoordinates[1] - adjustCoordinate;
                         break;
                     case 3:
                         BluePiece3Visibility = visibility;
-                        BluePiece3CoordinateX = pieceCoordinates[0];
-                        BluePiece3CoordinateY = pieceCoordinates[1];
+                        BluePiece3CoordinateX = pieceCoordinates[0] - adjustCoordinate;
+                        BluePiece3CoordinateY = pieceCoordinates[1] + adjustCoordinate;
                         break;
                     case 4:
                         BluePiece4Visibility = visibility;
-                        BluePiece4CoordinateX = pieceCoordinates[0];
-                        BluePiece4CoordinateY = pieceCoordinates[1];
+                        BluePiece4CoordinateX = pieceCoordinates[0] + adjustCoordinate;
+                        BluePiece4CoordinateY = pieceCoordinates[1] + adjustCoordinate;
                         break;
                 }
             }
