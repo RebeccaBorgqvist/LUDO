@@ -845,6 +845,7 @@ namespace LUDO.ViewModels
                                 if (section == 2) y += 30;
                                 if (section == 3) x -= 30;
                                 //back end  
+                                cellsCoordinates[1] -= 10;
                                 Cell fieldCell = new Cell(section, ++fieldsID, false, cellsCoordinates);
                                 gameBoardCells.Add(fieldCell);
                             }
@@ -861,6 +862,7 @@ namespace LUDO.ViewModels
                                     if (section == 2) y -= 30;
                                     if (section == 3) x += 30;
                                     //back end
+                                    cellsCoordinates[1] -= 10;
                                     Cell fieldCell = new Cell(section, ++fieldsID, false, cellsCoordinates);
                                     gameBoardCells.Add(fieldCell);
 
@@ -875,7 +877,8 @@ namespace LUDO.ViewModels
                                     if (section == 1) x -= 30;
                                     if (section == 2) y -= 30;
                                     if (section == 3) x += 30;
-                                    //back end                                   
+                                    //back end
+                                    cellsCoordinates[1] -= 10;
                                     Cell finalCell = new Cell(section, ++finalsID, true, cellsCoordinates);
                                     gameBoardCells.Add(finalCell);
                                 }
@@ -889,7 +892,8 @@ namespace LUDO.ViewModels
                                 if (section == 1) x -= 30;
                                 if (section == 2) y -= 30;
                                 if (section == 3) x += 30;
-                                //back end     
+                                //back end
+                                cellsCoordinates[1] -= 10;
                                 Cell fieldCell = new Cell(section, ++fieldsID, false, cellsCoordinates);
                                 gameBoardCells.Add(fieldCell);
                             }
@@ -920,6 +924,8 @@ namespace LUDO.ViewModels
 
                     //back end for finish cell
                     int[] finish_coordinates = new int[] { x_finish, y_finish };
+                    finish_coordinates[0] -= 10;
+                    finish_coordinates[1] -= 20;
                     Cell finishCell = new Cell(section, 6, true, finish_coordinates);
                     gameBoardCells.Add(finishCell);
 
@@ -965,6 +971,8 @@ namespace LUDO.ViewModels
 
                         //back end
                         int[] coordinates = new int[] { coordX, coordY };
+                        coordinates[0] -= 10;
+                        coordinates[1] -= 20;
 
                         Cell nestCellObj = new Cell(section, nestCellsID, false, coordinates);
                         //nestCellObj.PiecesVisiting = new List<Piece>();
