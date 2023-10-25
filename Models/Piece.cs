@@ -190,6 +190,7 @@ namespace LUDO.Models
             {
                 if (cell.Section == newSection && cell.Id == newId && cell.IsFinal == newFinal)
                 {
+                    bool shareCell = false;
                     if (cell.PiecesVisiting.Count > 0 && cell.PiecesVisiting[0].PieceColor != this.PieceColor)
                     {
                         this.CrashWithOtherPieces(cell); //Crash with other pieces of different color
@@ -197,7 +198,8 @@ namespace LUDO.Models
                     }
                     else if (cell.PiecesVisiting.Count > 0) 
                     {
-                        this.ShareCellWithPiece(cell); //Todo. Share cell with own other piece
+                        //Share cell with own other piece
+                        shareCell = true;
                         moveLegit = true;
                     }
                     else //Not occupied cell
@@ -210,7 +212,7 @@ namespace LUDO.Models
                         this.RemoveOldPosition();
                         this.AtCell = cell;
                         cell.PiecesVisiting.Add(this);
-                        GameBoardViewModel.Instance.ShowPieceOnBoard(this.PieceColor, true, this.Id, this.AtCell.Coordinates);
+                        GameBoardViewModel.Instance.ShowPieceOnBoard(this.PieceColor, true, this.Id, this.AtCell.Coordinates, shareCell);
                     }
                     else if (moveLegit && onlySimulateMove)
                     {
