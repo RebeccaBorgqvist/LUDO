@@ -10,6 +10,7 @@ using LUDO.Models;
 using System.Collections.ObjectModel;
 using Windows.UI.Xaml.Media;
 using LUDO.Helpers;
+using Windows.UI.Xaml;
 
 namespace LUDO.ViewModels
 {
@@ -50,6 +51,8 @@ namespace LUDO.ViewModels
 
         private bool _black4;
 
+        private bool _areSelectionsValid;
+
         private string _addRemoveText = "Add more players";
 
         private int _players = 2;
@@ -59,7 +62,11 @@ namespace LUDO.ViewModels
         private string _player3Name = "Player 3";
         private string _player4Name = "Player 4";
 
+        private string _feedbackMessage;
+
         private List<Color> _playersList;
+
+        private Visibility _isFeedbackVisible = Visibility.Collapsed;
 
         public ICommand PlusPlayerCommand { get; set; }
         public ICommand MinusPlayerCommand { get; set; }
@@ -148,6 +155,17 @@ namespace LUDO.ViewModels
                 OnPropertyChanged(nameof(Player4Name));
             }
         }
+
+        public string FeedbackMessage
+        {
+            get { return _feedbackMessage; }
+            set
+            {
+                _feedbackMessage = value;
+                OnPropertyChanged(nameof(FeedbackMessage));
+            }
+        }
+
         public int Players
         {
             get { return _players; }
@@ -160,6 +178,16 @@ namespace LUDO.ViewModels
             {
                 _isPlayer3ColorVisible = value;
                 OnPropertyChanged(nameof(IsPlayer3ColorsVisible));
+            }
+        }
+
+        public Visibility IsFeedbackVisible
+        {
+            get { return _isFeedbackVisible; }
+            set
+            {
+                _isFeedbackVisible = value;
+                OnPropertyChanged(nameof(IsFeedbackVisible));
             }
         }
 
@@ -181,6 +209,17 @@ namespace LUDO.ViewModels
                 OnPropertyChanged(nameof(PlayersList));
             }
         }
+
+        public bool AreSelectionsValid
+        {
+            get { return _areSelectionsValid; }
+            set
+            {
+                _areSelectionsValid = value;
+                OnPropertyChanged(nameof(AreSelectionsValid));
+            }
+        }
+
         // BLUE
         public bool Blue1
         {
@@ -332,43 +371,73 @@ namespace LUDO.ViewModels
             }
         }
         // BLACK
-        public bool Black1
-        {
-            get { return _black1; }
-            set
+        /* public bool Black1
+         {
+             get { return _black1; }
+             set
+             {
+                 _black1 = value;
+                 OnPropertyChanged(nameof(Black1));
+             }
+         }
+         public bool Black2
+         {
+             get { return _black2; }
+             set
+             {
+                 _black2 = value;
+                 OnPropertyChanged(nameof(Black2));
+             }
+         }
+         public bool Black3
+         {
+             get { return _black3; }
+             set
+             {
+                 _black1 = value;
+                 OnPropertyChanged(nameof(Black3));
+             }
+         }
+
+         public bool Black4
+         {
+             get { return _black4; }
+             set
+             {
+                 _black4 = value;
+                 OnPropertyChanged(nameof(Black4));
+             }
+         }*/
+
+        internal void CheckSelectionsValidity()
+        {// Check if a color is selected for each player
+            bool isValid = true;
+
+            for (int player = 1; player <= 4; player++)
             {
-                _black1 = value;
-                OnPropertyChanged(nameof(Black1));
+                bool isAnyColorSelected = false;
+
+                foreach (Color color in PlayersList)
+                {
+                    if (color != Color.None) // Assuming 'None' represents an unselected state in your enum
+                    {
+                        isAnyColorSelected = true;
+                        break;
+                    }
+                }
+
+                if (!isAnyColorSelected)
+                {
+                    isValid = false;
+                    FeedbackMessage = "Please select colors for all players.";
+                    IsFeedbackVisible = Visibility.Visible;
+                    break;
+                }
             }
-        }
-        public bool Black2
-        {
-            get { return _black2; }
-            set
-            {
-                _black2 = value;
-                OnPropertyChanged(nameof(Black2));
-            }
-        }
-        public bool Black3
-        {
-            get { return _black3; }
-            set
-            {
-                _black1 = value;
-                OnPropertyChanged(nameof(Black3));
-            }
+
+            AreSelectionsValid = isValid;
         }
 
-        public bool Black4
-        {
-            get { return _black4; }
-            set
-            {
-                _black4 = value;
-                OnPropertyChanged(nameof(Black4));
-            }
-        }
         public GameSettingsViewModel()
         {
             Instance = this;
