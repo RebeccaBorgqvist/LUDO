@@ -9,20 +9,18 @@ using static LUDO.ViewModels.GameSettingsViewModel;
 using LUDO.Views;
 using Windows.UI.Popups;
 using System.Reflection;
-using LUDO.Helpers;
 
 namespace LUDO.Commands
 {
     internal class PlayersSelectedColorCommand : BaseCommands
     {
-        public override void Execute(object parameter)
+       public override void Execute(object parameter)
         {
             string[] colorNames = { "Blue", "Red", "Green", "Yellow" };
-            var playersList = new List<Color>();
 
             for (int player = 1; player <= 4; player++)
             {
-                Color selectedColor = Color.Blue; // Default color if none is selected
+                bool isPlayerSelected = false;
 
                 foreach (string color in colorNames)
                 {
@@ -33,15 +31,30 @@ namespace LUDO.Commands
 
                     if (isColorSelected)
                     {
-                        selectedColor = (Color)Enum.Parse(typeof(Color), color);
-                        break; // Exit the loop as soon as a color is selected
+                        // If the color is selected, set it to true
+                        isPlayerSelected = true;
+                    }
+                    else
+                    {
+                        // If the color is not selected, set it to false
+                        GameSettingsViewModel.Instance.GetType()
+                            .GetProperty($"{color}{player}")
+                            .SetValue(GameSettingsViewModel.Instance, false);
                     }
                 }
 
-                playersList.Add(selectedColor);
+                // If no color is selected for the player, set all colors to false
+                if (!isPlayerSelected)
+                {
+                    foreach (string color in colorNames)
+                    {
+                        GameSettingsViewModel.Instance.GetType()
+                            .GetProperty($"{color}{player}")
+                            .SetValue(GameSettingsViewModel.Instance, false);
+                    }
+                }
             }
 
-            GameSettingsViewModel.Instance.PlayersList = playersList;
         }
 
     }

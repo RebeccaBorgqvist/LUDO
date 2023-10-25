@@ -9,7 +9,6 @@ using Windows.Devices.I2c;
 using LUDO.Models;
 using System.Collections.ObjectModel;
 using Windows.UI.Xaml.Media;
-using LUDO.Helpers;
 
 namespace LUDO.ViewModels
 {
@@ -50,8 +49,6 @@ namespace LUDO.ViewModels
         private string _player2Name = "Player 2";
         private string _player3Name = "Player 3";
         private string _player4Name = "Player 4";
-
-        private List<Color> _playersList;
 
         public ICommand PlusPlayerCommand { get; set; }
         public ICommand MinusPlayerCommand { get; set; }
@@ -162,15 +159,6 @@ namespace LUDO.ViewModels
             {
                 _isPlayer4ColorVisible = value;
                 OnPropertyChanged(nameof(IsPlayer4ColorsVisible));
-            }
-        }
-        public List<Color> PlayersList
-        {
-            get { return _playersList; }
-            set
-            {
-                _playersList = value;
-                OnPropertyChanged(nameof(PlayersList));
             }
         }
         // BLUE
