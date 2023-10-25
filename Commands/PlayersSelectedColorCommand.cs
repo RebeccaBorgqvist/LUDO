@@ -42,7 +42,7 @@ namespace LUDO.Commands
                 // Create a new Player instance with the selected color and add it to the list
                 var newPlayer = new Player($"Player {player}", selectedColor);
                 playersList.Add(newPlayer);
-               // Debug.WriteLine($"Player {player} selected color: {selectedColor}");
+                //Debug.WriteLine($"Player {newPlayer} selected color: {selectedColor}");
             }
             GameSettingsViewModel.Instance.PlayersList = playersList;
         }
