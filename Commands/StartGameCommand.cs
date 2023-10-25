@@ -1,20 +1,20 @@
 ﻿using LUDO.Models;
 using LUDO.ViewModels;
-using LUDO.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.UI.Xaml.Media.Animation;
+using Windows.UI.Xaml;
 
 namespace LUDO.Commands
 {
-    internal class ForwardCommand : BaseCommands
+    internal class StartGameCommand : BaseCommands
     {
         public override void Execute(object parameter)
         {
-            MainMenuViewModel.Instance.MainMenuFrame.Navigate(typeof(GameBoard), null, new SuppressNavigationTransitionInfo());
+            GameBoardViewModel.Instance.StartButtonVisibility = Visibility.Collapsed;
+            GameBoardViewModel.Instance.CreateGame();
         }
     }
 }

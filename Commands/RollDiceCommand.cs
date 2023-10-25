@@ -14,8 +14,38 @@ namespace LUDO.Commands
     {
         public override void Execute(object parameter)
         {
-            var (rollResult, imagePath) = Dice.RollDice();
-            GameBoardViewModel.Instance.CurrentDiceImage = imagePath;
+            if (Dice.Instance != null)
+            {
+                var (rollResult, imagePath) = Dice.Instance.DiceRoll();
+                GameBoardViewModel.Instance.CurrentDiceImage = imagePath;
+                GameBoardViewModel.Instance.DiceResult = rollResult;
+                GameBoardViewModel.Instance.IsDiceEnabled = false;
+
+                bool possibleMove = false;
+                foreach (Piece piece in GameLogic.Instance.activePlayer.Pieces)
+                {
+                    if (piece.SimulatePieceMove(rollResult))
+                    {
+                        possibleMove = true;
+                    }
+                }
+
+                if (!possibleMove)
+                {
+                    var dialog = new MessageDialog($"▶ NO VALID MOVE FOR DICE ROLL: {rollResult}");
+                    dialog.Title = "NO VALID MOVE";
+                    dialog.Commands.Clear();
+                    dialog.Commands.Add(new UICommand("OK", new UICommandInvokedHandler(NextTurn)));
+                    Task.Run(() => dialog.ShowAsync()).GetAwaiter();
+                }
+            }
+        }
+
+        private void NextTurn(IUICommand command)
+        {
+            GameLogic.Instance.SetNextPlayer();
+            GameBoardViewModel.Instance.IsDiceEnabled = true;
+            GameBoardViewModel.Instance.IsSimulateMoveButtonVisible = false;
         }
     }
 }

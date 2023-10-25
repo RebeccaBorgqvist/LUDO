@@ -13,7 +13,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using LUDO.ViewModels;
-using LUDO.ViewModels; // Denna läggs till för att kunna nå ViewModels filerna
 using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Geometry;
 using Microsoft.Graphics.Canvas.UI.Xaml;
@@ -24,8 +23,7 @@ using LUDO.Models;
 namespace LUDO.Views
 {
     public sealed partial class GameBoard : Page
-    {
-      
+    {      
         public GameBoard()
         {
             this.InitializeComponent();
@@ -33,7 +31,6 @@ namespace LUDO.Views
 
             GameBoardViewModel.Instance.GameBoardCanvas = GameBoardCanvas;
             GameBoardCanvas.Draw += GameBoardViewModel.Instance.DrawBoard;
-
 
 
             //labels for players
@@ -44,6 +41,7 @@ namespace LUDO.Views
                 player3Name.Text = GameSettingsViewModel.Instance.Player3Name;
                 if (GameSettingsViewModel.Instance.Players > 3) player4Name.Text = GameSettingsViewModel.Instance.Player4Name;
             } 
+
         }
 
     }

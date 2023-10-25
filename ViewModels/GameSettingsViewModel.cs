@@ -21,25 +21,25 @@ namespace LUDO.ViewModels
         private bool _isPlayer3ColorVisible;
         private bool _isPlayer4ColorVisible;
 
-        private bool _blue1 = true;
-        private bool _blue2 = true;
-        private bool _blue3 = true;
-        private bool _blue4 = true;
+        private bool _blue1;
+        private bool _blue2;
+        private bool _blue3;
+        private bool _blue4;
 
-        private bool _red1 = true;
-        private bool _red2 = true;
-        private bool _red3 = true;
-        private bool _red4 = true;
+        private bool _red1;
+        private bool _red2;
+        private bool _red3;
+        private bool _red4;
 
-        private bool _green1 = true;
-        private bool _green2 = true;
-        private bool _green3 = true;
-        private bool _green4 = true;
+        private bool _green1;
+        private bool _green2;
+        private bool _green3;
+        private bool _green4;
 
-        private bool _yellow1 = true;
-        private bool _yellow2 = true;
-        private bool _yellow3 = true;
-        private bool _yellow4 = true;
+        private bool _yellow1;
+        private bool _yellow2;
+        private bool _yellow3;
+        private bool _yellow4;
 
         private string _addRemoveText = "Add more players";
 
@@ -54,6 +54,9 @@ namespace LUDO.ViewModels
         public List<Player> PlayerList { get; set; }
         //
 
+        public List<Player> PlayerList { get; set; }
+
+
         public ICommand PlusPlayerCommand { get; set; }
         public ICommand MinusPlayerCommand { get; set; }
         public ICommand ForwardCommand { get; set; }
@@ -63,10 +66,10 @@ namespace LUDO.ViewModels
         public bool IsPlayer3Visible
         {
             get { return _isPlayer3Visible; }
-            set 
-            { 
+            set
+            {
                 _isPlayer3Visible = value;
-                OnPropertyChanged(nameof(IsPlayer3Visible));   
+                OnPropertyChanged(nameof(IsPlayer3Visible));
             }
         }
         public bool IsPlayer4Visible
@@ -99,7 +102,7 @@ namespace LUDO.ViewModels
         public string AddRemoveText
         {
             get { return _addRemoveText; }
-            set 
+            set
             {
                 _addRemoveText = value;
                 OnPropertyChanged(nameof(AddRemoveText));
@@ -328,6 +331,17 @@ namespace LUDO.ViewModels
             ForwardCommand = new ForwardCommand();
             ChangeNameCommand = new ChangeNameCommand();
             ChangeColor = new PlayersSelectedColorCommand();
+
+            ResetPlayerList();
+        }
+
+        public void ResetPlayerList()
+        {
+            PlayerList = new List<Player>()
+            {
+                new Player("Player 1"),
+                new Player("Player 2")
+            };
         }
 
     }

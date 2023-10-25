@@ -3,72 +3,74 @@
                     xmlns:local="clr-namespace:LUDO"
                     xmlns:viewmodels="using:LUDO.ViewModels"
                     xmlns:muxc="clr-namespace:Microsoft.UI.Xaml.Controls;assembly=Microsoft.UI.Xaml.Controls">
-	<!-- Radio Button Style -->
+    <!-- Radio Button Style -->
     <Style x:Key="BlueRadioButtonStyle" TargetType="RadioButton">
 
         <Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="RadioButton">
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="Auto"/>
-							<ColumnDefinition Width="*"/>
-						</Grid.ColumnDefinitions>
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-						<!-- Create a Rectangle for the checkbox appearance -->
-						<Rectangle x:Name="Checkbox"
-                                   Width="20"
-                                   Height="20"
+                        <!-- Create a Rectangle for the checkbox appearance -->
+                        <Rectangle x:Name="Checkbox"
+                                   Width="64"
+                                   Height="64"
                                    Fill="Blue"
                                    Stroke="Blue"
                                    StrokeThickness="2"
                                    RadiusX="2"
                                    RadiusY="2"
                                    VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"/>
+                                   HorizontalAlignment="Center"/>
 
-						<!-- Create a Path for the checkmark -->
-						<Path x:Name="CheckMark" Data="M0,5 L7,12 L16,0"
-                              Stroke="#4CAF50"
-                              StrokeThickness="2"
-                              Visibility="Collapsed"
-                              VerticalAlignment="Center"
-                              HorizontalAlignment="Left"/>
-
+                        <!-- Create a Path for the checkmark -->
+                        <Viewbox Width="64" Height="64" Margin="10">
+                            <Path x:Name="CheckMark"
+                                  Data="M0,5 L7,12 L16,0"
+                                  Stroke="#4CAF50"
+                                  StrokeThickness="2"
+                                  Visibility="Collapsed"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center"/>
+                        </Viewbox>
 
                         <!-- Define the content (text) for the radio button -->
-						<ContentPresenter Grid.Column="1" VerticalAlignment="Center"/>
+                        <ContentPresenter Grid.Column="1" VerticalAlignment="Center"/>
 
-						<VisualStateManager.VisualStateGroups>
-							<VisualStateGroup x:Name="CommonStates">
-								<VisualState x:Name="Normal"/>
-								<VisualState x:Name="PointerOver">
-									<Storyboard>
-										<!-- Define visual changes for PointerOver state -->
-										<!-- Change the background color when the pointer is over the control -->
-										<ColorAnimation Storyboard.TargetName="Checkbox" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="#E0E0E0" Duration="0:0:0.1"/>
-									</Storyboard>
-								</VisualState>
-								<VisualState x:Name="Checked">
-									<Storyboard>
-										<!-- Hide the Checkbox when checked -->
-										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="Checkbox" Storyboard.TargetProperty="Visibility">
-											<DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
-										</ObjectAnimationUsingKeyFrames>
-										<!-- Show the CheckMark when checked -->
-										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckMark" Storyboard.TargetProperty="Visibility">
-											<DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
-										</ObjectAnimationUsingKeyFrames>
-									</Storyboard>
-								</VisualState>
-								<!-- Add more states and transitions as needed -->
-							</VisualStateGroup>
-						</VisualStateManager.VisualStateGroups>
-					</Grid>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="PointerOver">
+                                    <Storyboard>
+                                        <!-- Define visual changes for PointerOver state -->
+                                        <!-- Change the background color when the pointer is over the control -->
+                                        <ColorAnimation Storyboard.TargetName="Checkbox" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="#00008B" Duration="0:0:0.1"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Checked">
+                                    <Storyboard>
+                                        <!-- Hide the Checkbox when checked -->
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Checkbox" Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <!-- Show the CheckMark when checked -->
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckMark" Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <!-- Add more states and transitions as needed -->
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <Style x:Key="RedRadioButtonStyle" TargetType="RadioButton">
 
@@ -83,23 +85,26 @@
 
                         <!-- Create a Rectangle for the checkbox appearance -->
                         <Rectangle x:Name="Checkbox"
-                                   Width="20"
-                                   Height="20"
+                                   Width="64"
+                                   Height="64"
                                    Fill="Red"
                                    Stroke="Red"
                                    StrokeThickness="2"
                                    RadiusX="2"
                                    RadiusY="2"
                                    VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"/>
+                                   HorizontalAlignment="Center"/>
 
                         <!-- Create a Path for the checkmark -->
-                        <Path x:Name="CheckMark" Data="M0,5 L7,12 L16,0"
-                              Stroke="#4CAF50"
-                              StrokeThickness="2"
-                              Visibility="Collapsed"
-                              VerticalAlignment="Center"
-                              HorizontalAlignment="Left"/>
+                        <Viewbox Width="64" Height="64" Margin="10">
+                            <Path x:Name="CheckMark"
+                                  Data="M0,5 L7,12 L16,0"
+                                  Stroke="#4CAF50"
+                                  StrokeThickness="2"
+                                  Visibility="Collapsed"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center"/>
+                        </Viewbox>
 
                         <!-- Define the content (text) for the radio button -->
                         <ContentPresenter Grid.Column="1" VerticalAlignment="Center"/>
@@ -111,7 +116,7 @@
                                     <Storyboard>
                                         <!-- Define visual changes for PointerOver state -->
                                         <!-- Change the background color when the pointer is over the control -->
-                                        <ColorAnimation Storyboard.TargetName="Checkbox" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="#E0E0E0" Duration="0:0:0.1"/>
+                                        <ColorAnimation Storyboard.TargetName="Checkbox" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="#8B0000" Duration="0:0:0.1"/>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Checked">
@@ -147,23 +152,26 @@
 
                         <!-- Create a Rectangle for the checkbox appearance -->
                         <Rectangle x:Name="Checkbox"
-                                   Width="20"
-                                   Height="20"
+                                   Width="64"
+                                   Height="64"
                                    Fill="Green"
                                    Stroke="Green"
                                    StrokeThickness="2"
                                    RadiusX="2"
                                    RadiusY="2"
                                    VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"/>
+                                   HorizontalAlignment="Center"/>
 
                         <!-- Create a Path for the checkmark -->
-                        <Path x:Name="CheckMark" Data="M0,5 L7,12 L16,0"
-                              Stroke="#4CAF50"
-                              StrokeThickness="2"
-                              Visibility="Collapsed"
-                              VerticalAlignment="Center"
-                              HorizontalAlignment="Left"/>
+                        <Viewbox Width="64" Height="64" Margin="10">
+                            <Path x:Name="CheckMark"
+                                  Data="M0,5 L7,12 L16,0"
+                                  Stroke="#4CAF50"
+                                  StrokeThickness="2"
+                                  Visibility="Collapsed"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center"/>
+                        </Viewbox>
 
                         <!-- Define the content (text) for the radio button -->
                         <ContentPresenter Grid.Column="1" VerticalAlignment="Center"/>
@@ -175,7 +183,7 @@
                                     <Storyboard>
                                         <!-- Define visual changes for PointerOver state -->
                                         <!-- Change the background color when the pointer is over the control -->
-                                        <ColorAnimation Storyboard.TargetName="Checkbox" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="#E0E0E0" Duration="0:0:0.1"/>
+                                        <ColorAnimation Storyboard.TargetName="Checkbox" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="#023020" Duration="0:0:0.1"/>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Checked">
@@ -211,23 +219,26 @@
 
                         <!-- Create a Rectangle for the checkbox appearance -->
                         <Rectangle x:Name="Checkbox"
-                                   Width="20"
-                                   Height="20"
+                                   Width="64"
+                                   Height="64"
                                    Fill="Yellow"
                                    Stroke="Yellow"
                                    StrokeThickness="2"
                                    RadiusX="2"
                                    RadiusY="2"
                                    VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"/>
+                                   HorizontalAlignment="Center"/>
 
                         <!-- Create a Path for the checkmark -->
-                        <Path x:Name="CheckMark" Data="M0,5 L7,12 L16,0"
-                              Stroke="#4CAF50"
-                              StrokeThickness="2"
-                              Visibility="Collapsed"
-                              VerticalAlignment="Center"
-                              HorizontalAlignment="Left"/>
+                        <Viewbox Width="64" Height="64" Margin="10">
+                            <Path x:Name="CheckMark"
+                                  Data="M0,5 L7,12 L16,0"
+                                  Stroke="#4CAF50"
+                                  StrokeThickness="2"
+                                  Visibility="Collapsed"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center"/>
+                        </Viewbox>
 
                         <!-- Define the content (text) for the radio button -->
                         <ContentPresenter Grid.Column="1" VerticalAlignment="Center"/>
@@ -239,7 +250,7 @@
                                     <Storyboard>
                                         <!-- Define visual changes for PointerOver state -->
                                         <!-- Change the background color when the pointer is over the control -->
-                                        <ColorAnimation Storyboard.TargetName="Checkbox" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="#E0E0E0" Duration="0:0:0.1"/>
+                                        <ColorAnimation Storyboard.TargetName="Checkbox" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="#8B8000" Duration="0:0:0.1"/>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Checked">

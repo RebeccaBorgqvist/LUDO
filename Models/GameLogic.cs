@@ -1,4 +1,5 @@
 ﻿using LUDO.ViewModels;
+using LUDO.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,21 +9,30 @@ using System.Threading.Tasks;
 using Windows.UI.Popups;
 using System.Threading;
 using Windows.UI.Core;
+
 using Windows.UI.Xaml.Controls;
+
 
 namespace LUDO.Models
 {
     internal class GameLogic
     {
-        private List<Player> _players;
+        public static GameLogic Instance { get; set; }
+
+        private int activePlayerIndex;
+        public Player activePlayer;
+        public List<Player> playerList;
 
         public GameLogic()
-        { 
-            _players = new List<Player>();
+        {
+            Instance = this;
+            activePlayerIndex = 0;
+            playerList = new List<Player>();
         }
 
-        public void StartGame()
+        public void SetPlayerList()
         {
+
             Debug.WriteLine($"Players playing: {GameSettingsViewModel.Instance.Players}");
 
             // Orders list by color Blue > Red > Green > Yellow.
@@ -41,71 +51,108 @@ namespace LUDO.Models
 
             //the players are to be added to the List 
             for(int player = 0; player < GameSettingsViewModel.Instance.Players; player++) 
+
+            // Gets participating players from game settings view model.
+            foreach (Player player in GameSettingsViewModel.Instance.PlayerList)
+
             {
-                Player newPlayer = new Player("");
-
-                if (player == 0)
-                {
-                    newPlayer.Name = GameSettingsViewModel.Instance.Player1Name;
-                }
-
-                if (player == 1)
-                {
-                    newPlayer.Name = GameSettingsViewModel.Instance.Player2Name;
-                }
-
-                if (player == 2)
-                {
-                    newPlayer.Name = GameSettingsViewModel.Instance.Player3Name;
-                }
-                else if (player == 3) 
-                {
-                    newPlayer.Name = GameSettingsViewModel.Instance.Player4Name;
-                }
-
-
-
-                if (player == playerToStart)
-                {
-                    newPlayer.IsTurnToRoll = true;
-                } 
-
-                _players.Add(newPlayer);
+                playerList.Add(player);
             }
 
+            // Orders list by color Blue > Red > Green > Yellow.
+            // Sets active player randomly.
+            playerList = playerList.OrderBy(player => player.Color).ToList();
+            activePlayerIndex = new Random().Next(0, playerList.Count());
+            activePlayer = playerList[activePlayerIndex];
+        }
 
-          
-            bool endTheGame = false; // set TRUE only if all 4 pieces of a player reached the finish
-
-            // MAIN GAME LOOP====================================================================================================================
-            while (!endTheGame)
+        public void CreatePlayerPieces()
+        {
+            foreach (Player player in playerList)
             {
-
-                //A TEST LOOP JUST TO SEE HOW THE PLAYER´S TURN TO ROLL DICE IS CHANGING. later on - endTheGame once the finish is reached.
-                for (int throww = 0; throww < 3; throww++)
-                {
-                    
-                    for (int playerOnTurn = 0; playerOnTurn < GameSettingsViewModel.Instance.Players; playerOnTurn++)
-                    {
-                        //TBD: do some magic stuff with pieces...
-
-                        if (_players[playerOnTurn].IsTurnToRoll) 
-                        {
-                            Debug.WriteLine($"{_players[playerOnTurn].Name}, your turn to roll dice!");
-                            _players[playerOnTurn].IsTurnToRoll = false;
-
-
-                            if (playerToStart + 1 < GameSettingsViewModel.Instance.Players) playerToStart++;
-                            else if (playerToStart + 1 == GameSettingsViewModel.Instance.Players) playerToStart = 0;
-
-                            _players[playerToStart].IsTurnToRoll = true;
-                        }
-                    }
-                }
-                endTheGame = true;
+                player.CreatePieces();
             }
-            Debug.WriteLine("game over ladies and gentlemen");
+        }
 
+        public void StartGame()
+        {
+            ShowActivePlayerMessage();
+            MoveDice(activePlayer);
+        }
+
+        public void PlayerTurn()
+        {
+            /*
+             * 
+             * < CODE FOR PLAYER TURN >
+             * 
+            */
+
+            int diceResult = GameBoardViewModel.Instance.DiceResult;
+            activePlayer.Pieces[0].PieceMove(diceResult);
+
+            SetNextPlayer();
+        }
+
+        public void SetNextPlayer()
+        {
+            // If active player is the last player in list, set active player to first player in list.
+            // Else set active player to next player in list.
+            if (activePlayer == playerList[playerList.Count - 1])
+            {
+                activePlayerIndex = 0;
+                activePlayer = playerList[activePlayerIndex];
+            }
+            else
+            {
+                activePlayerIndex++;
+                activePlayer = playerList[activePlayerIndex];
+            }
+
+            ShowActivePlayerMessage();
+            MoveDice(activePlayer);
+            GameBoardViewModel.Instance.ResetDiceImage();
+        }
+
+        private void ShowActivePlayerMessage()
+        {
+            var dialog = new MessageDialog($"▶ {activePlayer.Color} {activePlayer.Name}'s Turn!");
+            dialog.Title = "PLAYER TURN";
+            dialog.Commands.Clear();
+            dialog.Commands.Add(new UICommand("OK"));
+            Task.Run(() => dialog.ShowAsync()).GetAwaiter();
+        }
+
+        private void SetDiceVisibility(bool red, bool blue, bool green, bool yellow)
+        {
+            GameBoardViewModel.Instance.DiceVisibilityRed = red;
+            GameBoardViewModel.Instance.DiceVisibilityBlue = blue;
+            GameBoardViewModel.Instance.DiceVisibilityGreen = green;
+            GameBoardViewModel.Instance.DiceVisibilityYellow = yellow;
+        }
+
+        public void MoveDice(Player player)
+        {
+            if (player.Color == Color.Red)
+            {
+                SetDiceVisibility(true, false, false, false);
+            }
+            else if (player.Color == Color.Blue)
+            {
+                SetDiceVisibility(false, true, false, false);
+            }
+            else if (player.Color == Color.Green)
+            {
+                SetDiceVisibility(false, false, true, false);
+            }
+            else if (player.Color == Color.Yellow)
+            {
+                SetDiceVisibility(false, false, false, true);
+            }
+            else
+            {
+                throw new InvalidOperationException($"Invalid player color: {player.Color}");
+            }
         }
     }
 }
