@@ -9,55 +9,46 @@ using static LUDO.ViewModels.GameSettingsViewModel;
 using LUDO.Views;
 using Windows.UI.Popups;
 using System.Reflection;
+using LUDO.Helpers;
+using LUDO.Models;
 
 namespace LUDO.Commands
 {
     internal class PlayersSelectedColorCommand : BaseCommands
     {
-       public override void Execute(object parameter)
-        {
-            string[] colorNames = { "Blue", "Red", "Green", "Yellow" };
-
-            for (int player = 1; player <= 4; player++)
+            public override void Execute(object parameter)
             {
-                bool isPlayerSelected = false;
+                string[] colorNames = { "Blue", "Red", "Green", "Yellow" };
+                var playerList = new List<Player>();
 
-                foreach (string color in colorNames)
+                for (int player = 1; player <= 4; player++)
                 {
-                    bool isColorSelected = (bool)GameSettingsViewModel.Instance
-                        .GetType()
-                        .GetProperty($"{color}{player}")
-                        .GetValue(GameSettingsViewModel.Instance);
+                    Color selectedColor = Color.None; // Default color if none is selected
 
-                    if (isColorSelected)
-                    {
-                        // If the color is selected, set it to true
-                        isPlayerSelected = true;
-                    }
-                    else
-                    {
-                        // If the color is not selected, set it to false
-                        GameSettingsViewModel.Instance.GetType()
-                            .GetProperty($"{color}{player}")
-                            .SetValue(GameSettingsViewModel.Instance, false);
-                    }
-                }
-
-                // If no color is selected for the player, set all colors to false
-                if (!isPlayerSelected)
-                {
                     foreach (string color in colorNames)
                     {
-                        GameSettingsViewModel.Instance.GetType()
+                        bool isColorSelected = (bool)GameSettingsViewModel.Instance
+                            .GetType()
                             .GetProperty($"{color}{player}")
-                            .SetValue(GameSettingsViewModel.Instance, false);
+                            .GetValue(GameSettingsViewModel.Instance);
+
+                        if (isColorSelected)
+                        {
+                            selectedColor = (Color)Enum.Parse(typeof(Color), color);
+                            break; // Exit the loop as soon as a color is selected
+                        }
                     }
-                }
+
+                // Create a new Player instance with the selected color and add it to the list
+                var newPlayer = new Player($"Player {player}", selectedColor);
+                playerList.Add(newPlayer);
+                //Debug.WriteLine($"Player {newPlayer} selected color: {selectedColor}");
             }
-
+            GameSettingsViewModel.Instance.PlayerList = playerList;
         }
-
     }
+
 }
+  
 
 
