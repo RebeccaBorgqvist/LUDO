@@ -192,7 +192,7 @@ namespace LUDO.Models
                 {
                     if (cell.PiecesVisiting.Count > 0 && cell.PiecesVisiting[0].PieceColor != this.PieceColor)
                     {
-                        //Todo. Crash with other pieces of different color
+                        this.CrashWithOtherPieces(cell); //Crash with other pieces of different color
                         moveLegit = true;
                     }
                     else if (cell.PiecesVisiting.Count > 0) 
@@ -200,7 +200,7 @@ namespace LUDO.Models
                         //Todo. Share cell with own other piece
                         moveLegit = true;
                     }
-                    else //not occupied
+                    else //Not occupied cell
                     {
                         moveLegit = true;
                     }
@@ -229,6 +229,14 @@ namespace LUDO.Models
                     cell.PiecesVisiting.RemoveAt(0);
                 }
             }
+        }
+        public void CrashWithOtherPieces(Cell cellAtCrash)
+        {
+            foreach (Piece knockedPiece in cellAtCrash.PiecesVisiting)
+            {
+                knockedPiece.SetStartingCoordinates();
+            }
+            cellAtCrash.PiecesVisiting.Clear();
         }
     }
 }
