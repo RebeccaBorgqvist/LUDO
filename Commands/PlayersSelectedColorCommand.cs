@@ -39,7 +39,7 @@ namespace LUDO.Commands
                     }
 
                     playersList.Add(selectedColor);
-                Debug.WriteLine($"Player {player} selected color: {selectedColor}");
+               // Debug.WriteLine($"Player {player} selected color: {selectedColor}");
             }
 
                 GameSettingsViewModel.Instance.PlayersList = playersList;
