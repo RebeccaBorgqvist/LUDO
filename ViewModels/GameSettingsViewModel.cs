@@ -409,7 +409,7 @@ namespace LUDO.ViewModels
              }
          }*/
 
-        internal void CheckSelectionsValidity()
+        /*internal void CheckSelectionsValidity()
         {// Check if a color is selected for each player
             bool isValid = true;
 
@@ -436,7 +436,7 @@ namespace LUDO.ViewModels
             }
 
             AreSelectionsValid = isValid;
-        }
+        }*/
 
         public GameSettingsViewModel()
         {

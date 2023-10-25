@@ -15,36 +15,35 @@ namespace LUDO.Commands
 {
     internal class PlayersSelectedColorCommand : BaseCommands
     {
-        /*public override void Execute(object parameter)
-        {
-            string[] colorNames = { "Red", "Green", "Yellow", "Blue", "Black"};
-            var playersList = new List<Color>();
-
-            for (int player = 1; player <= 4; player++)
+            public override void Execute(object parameter)
             {
-                Color selectedColor = Color.Black; // Default color if none is selected
+                string[] colorNames = { "Blue", "Red", "Green", "Yellow" };
+                var playersList = new List<Color>();
 
-                foreach (string color in colorNames)
+                for (int player = 1; player <= 4; player++)
                 {
-                    bool isColorSelected = (bool)GameSettingsViewModel.Instance
-                        .GetType()
-                        .GetProperty($"{color}{player}")
-                        .GetValue(GameSettingsViewModel.Instance);
+                    Color selectedColor = Color.Blue; // Default color if none is selected
 
-                    if (isColorSelected)
+                    foreach (string color in colorNames)
                     {
-                        selectedColor = (Color)Enum.Parse(typeof(Color), color);
-                        break; // Exit the loop as soon as a color is selected
+                        bool isColorSelected = (bool)GameSettingsViewModel.Instance
+                            .GetType()
+                            .GetProperty($"{color}{player}")
+                            .GetValue(GameSettingsViewModel.Instance);
+
+                        if (isColorSelected)
+                        {
+                            selectedColor = (Color)Enum.Parse(typeof(Color), color);
+                            break; // Exit the loop as soon as a color is selected
+                        }
                     }
+
+                    playersList.Add(selectedColor);
                 }
 
-                playersList.Add(selectedColor);
+                GameSettingsViewModel.Instance.PlayersList = playersList;
             }
-
-            GameSettingsViewModel.Instance.PlayersList = playersList;
-        }
-
-    }*/
+    }
 
         /* public override void Execute(object parameter)
          {
@@ -83,9 +82,9 @@ namespace LUDO.Commands
              }
 
              GameSettingsViewModel.Instance.PlayersList = playersList;
-         }*/
+         }*
 
-        public override void Execute(object parameter)
+        /*public override void Execute(object parameter)
         {
             string[] colorNames = { "Blue", "Red", "Green", "Yellow" };
             var playersList = new List<Color>();
@@ -118,9 +117,9 @@ namespace LUDO.Commands
 
             // Check the validity of selections
             GameSettingsViewModel.Instance.CheckSelectionsValidity();
-        }
+        }*/
 
     }
-  }
+  
 
 

@@ -13,12 +13,12 @@ namespace LUDO.Commands
 {
     internal class ForwardCommand : BaseCommands
     {
-        /* public override void Execute(object parameter)
+        public override void Execute(object parameter)
          {
              MainMenuViewModel.Instance.MainMenuFrame.Navigate(typeof(GameBoard), null, new SuppressNavigationTransitionInfo());
-         }*/
+         }
 
-        public override async void Execute(object parameter)
+       /* public override async void Execute(object parameter)
         {
             if (GameSettingsViewModel.Instance.AreSelectionsValid)
             {
@@ -30,6 +30,6 @@ namespace LUDO.Commands
                 var messageDialog = new MessageDialog("Please select colors for all players before starting the game.");
                 await messageDialog.ShowAsync();
             }
-        }
+        }*/
     }
 }

@@ -78,7 +78,7 @@
             <RadioButton Name="Green4" GroupName="Player4" Visibility="{Binding IsPlayer4Visible}" Background="Green" Style="{StaticResource GreenRadioButtonStyle}" Grid.Column="3" Grid.Row="4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Command="{Binding ChangeColor}" IsChecked="{Binding Green4, Mode=TwoWay}" Margin="20,0,0,10"/>
             <RadioButton Name="Yellow4" GroupName="Player4" Visibility="{Binding IsPlayer4Visible}" Background="Yellow" Style="{StaticResource YellowRadioButtonStyle}" Grid.Column="4" Grid.Row="4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Command="{Binding ChangeColor}" IsChecked="{Binding Yellow4, Mode=TwoWay}" Margin="20,0,0,10"/>
         </Grid>
-        
+
         <Grid Grid.Column="1" Grid.Row="3" Margin="0,5,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
@@ -93,8 +93,8 @@
                     <Image Width="54" Height="54" Source="ms-appx:///Assets/minusIcon.png"/>
                 </Button>
             </StackPanel>
+
             <TextBlock Text="{Binding AddRemoveText}" Grid.Column="1" FontSize="36" Foreground="White" VerticalAlignment="Top" Margin="0,5,0,0"/>
-            <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding FeedbackMessage}" Foreground="Red" FontSize="18" Visibility="{Binding IsFeedbackVisible}"/>
         </Grid>
 
         <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
@@ -102,7 +102,7 @@
 				Click → to start the game
             </TextBlock>
 
-            <Button Command="{Binding ForwardCommand}" Background="Transparent" IsEnabled="{Binding AreSelectionsValid}">
+            <Button Command="{Binding ForwardCommand}" Background="Transparent">
                 <Image Width="76" Height="76" Source="ms-appx:///Assets/forwardIcon.png"/>
             </Button>
         </StackPanel>
