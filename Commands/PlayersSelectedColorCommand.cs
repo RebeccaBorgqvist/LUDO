@@ -16,9 +16,6 @@ namespace LUDO.Commands
     {
         public override void Execute(object parameter)
         {
-            //var dialog = new MessageDialog(parameter.ToString());
-            //Task.Run(() => dialog.ShowAsync()).GetAwaiter();
-
             if (parameter is string playerColor)
             {
                 if (playerColor.EndsWith("1"))
@@ -86,12 +83,6 @@ namespace LUDO.Commands
             //    }
             //}
         }
-
-        private void SetColor(string colorID)
-        {
-
-        }
-
     }
 }
 

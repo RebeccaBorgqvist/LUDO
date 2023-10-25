@@ -14,17 +14,15 @@ namespace LUDO.Models
 {
     internal class GameLogic
     {
+        public static GameLogic Instance { get; set; }
+
         private int activePlayerIndex;
-        private Player activePlayer;
-        private List<Player> playerList;
-        private int playerToStart;
-        private static Color player1Color;
-        private static Color player2Color;
-        private static Color player3Color;
-        private static Color player4Color;
+        public Player activePlayer;
+        public List<Player> playerList;
 
         public GameLogic()
         {
+            Instance = this;
             activePlayerIndex = 0;
             playerList = new List<Player>();
         }
@@ -52,87 +50,10 @@ namespace LUDO.Models
             }
         }
 
-        //public void SetPlayerColor()
-        //{
-        //    if (GameSettingsViewModel.Instance.Red1) player1Color = Color.Red;
-        //    if (GameSettingsViewModel.Instance.Green1) player1Color = Color.Green;
-        //    if (GameSettingsViewModel.Instance.Yellow1) player1Color = Color.Yellow;
-        //    if (GameSettingsViewModel.Instance.Blue1) player1Color = Color.Blue;
-
-        //    if (GameSettingsViewModel.Instance.Red2) player2Color = Color.Red;
-        //    if (GameSettingsViewModel.Instance.Green2) player2Color = Color.Green;
-        //    if (GameSettingsViewModel.Instance.Yellow2) player2Color = Color.Yellow;
-        //    if (GameSettingsViewModel.Instance.Blue2) player2Color = Color.Blue;
-
-        //    if (GameSettingsViewModel.Instance.Red3) player3Color = Color.Red;
-        //    if (GameSettingsViewModel.Instance.Green3) player3Color = Color.Green;
-        //    if (GameSettingsViewModel.Instance.Yellow3) player3Color = Color.Yellow;
-        //    if (GameSettingsViewModel.Instance.Blue3) player3Color = Color.Blue;
-
-        //    if (GameSettingsViewModel.Instance.Red4) player4Color = Color.Red;
-        //    if (GameSettingsViewModel.Instance.Green4) player4Color = Color.Green;
-        //    if (GameSettingsViewModel.Instance.Yellow4) player4Color = Color.Yellow;
-        //    if (GameSettingsViewModel.Instance.Blue4) player4Color = Color.Blue;
-        //}
-        //public void CreatePlayerOrder()
-        //{
-        //    if (GameSettingsViewModel.Instance.Players == 3)
-        //    {
-        //        players.Add(new Player(GameSettingsViewModel.Instance.Player1Name, player1Color));
-        //        players.Add(new Player(GameSettingsViewModel.Instance.Player2Name, player2Color));
-        //        players.Add(new Player(GameSettingsViewModel.Instance.Player3Name, player3Color));
-        //    }
-        //    if (GameSettingsViewModel.Instance.Players == 4)
-        //    {
-        //        players.Add(new Player(GameSettingsViewModel.Instance.Player1Name, player1Color));
-        //        players.Add(new Player(GameSettingsViewModel.Instance.Player2Name, player2Color));
-        //        players.Add(new Player(GameSettingsViewModel.Instance.Player3Name, player3Color));
-        //        players.Add(new Player(GameSettingsViewModel.Instance.Player4Name, player4Color));
-        //    }
-        //    else
-        //    {
-        //        players.Add(new Player(GameSettingsViewModel.Instance.Player1Name, player1Color));
-        //        players.Add(new Player(GameSettingsViewModel.Instance.Player2Name, player2Color));
-        //    }
-
-        //    List<Player> playersSortedByColor = players.OrderBy(player => player.ColorInt).ToList();
-        //    playerToStart = new Random().Next(0, GameSettingsViewModel.Instance.Players - 1);
-        //    playersSortedByColor[playerToStart].IsTurnToRoll = true;
-        //    List<Player> playersBeforeNewStart = playersSortedByColor.Take(playerToStart).ToList();
-        //    List<Player> playersAfterNewStart = playersSortedByColor.Skip(playerToStart).ToList();
-        //    playersRandomized = playersAfterNewStart.Concat(playersBeforeNewStart).ToList();
-        //}
-
         public void StartGame()
         {
             ShowActivePlayerMessage();
-
-            //bool endTheGame = false; // set TRUE only if all 4 pieces of a player reached the finish
-            //while (!endTheGame)
-            //{
-            //    foreach (Player player in playersRandomized) //loop according to the player order
-            //    {
-
-            //        //Pausa och vänta på att spelare klickar på tärningen
-            //        int heltal = GameBoardViewModel.Instance.DiceResult;//throw the dice and return the result, say 0
-            //        foreach (Piece piece in player.Pieces)
-            //        {
-            //            int xNuvarande = piece.CoordinateX;
-            //            int yNuvarande = piece.CoordinateY;
-            //            var (newCoordinateInX, newCoordinateInY) = piece.SimulatePieceMove(heltal);
-            //            GameBoardViewModel.Highlighting(xNuvarande, yNuvarande, newCoordinateInX, newCoordinateInY);
-            //            //Pause todo
-            //        }
-
-            //        // Dice.Instance.DiceRollEvent.Reset();
-            //        //show me which options I have
-            //        //take decision
-            //        endTheGame = true; //for testing 
-            //        break; //for testing
-            //        //player.Pieces[0].PieceMove(heltal); //move according to decision
-            //    }
-            //    //check if all players finished and if so change bool
-            //}
+            MoveDice(activePlayer);
         }
 
         public void PlayerTurn()
@@ -142,11 +63,14 @@ namespace LUDO.Models
              * < CODE FOR PLAYER TURN >
              * 
             */
-            
+
+            int diceResult = GameBoardViewModel.Instance.DiceResult;
+            activePlayer.Pieces[0].PieceMove(diceResult);
+
             SetNextPlayer();
         }
 
-        private void SetNextPlayer()
+        public void SetNextPlayer()
         {
             // If active player is the last player in list, set active player to first player in list.
             // Else set active player to next player in list.
@@ -162,15 +86,49 @@ namespace LUDO.Models
             }
 
             ShowActivePlayerMessage();
+            MoveDice(activePlayer);
+            GameBoardViewModel.Instance.ResetDiceImage();
         }
 
         private void ShowActivePlayerMessage()
         {
-            var dialog = new MessageDialog($"▶ {activePlayer.Name}'s Turn!");
+            var dialog = new MessageDialog($"▶ {activePlayer.Color} {activePlayer.Name}'s Turn!");
             dialog.Title = "PLAYER TURN";
             dialog.Commands.Clear();
             dialog.Commands.Add(new UICommand("OK"));
             Task.Run(() => dialog.ShowAsync()).GetAwaiter();
+        }
+
+        private void SetDiceVisibility(bool red, bool blue, bool green, bool yellow)
+        {
+            GameBoardViewModel.Instance.DiceVisibilityRed = red;
+            GameBoardViewModel.Instance.DiceVisibilityBlue = blue;
+            GameBoardViewModel.Instance.DiceVisibilityGreen = green;
+            GameBoardViewModel.Instance.DiceVisibilityYellow = yellow;
+        }
+
+        public void MoveDice(Player player)
+        {
+            if (player.Color == Color.Red)
+            {
+                SetDiceVisibility(true, false, false, false);
+            }
+            else if (player.Color == Color.Blue)
+            {
+                SetDiceVisibility(false, true, false, false);
+            }
+            else if (player.Color == Color.Green)
+            {
+                SetDiceVisibility(false, false, true, false);
+            }
+            else if (player.Color == Color.Yellow)
+            {
+                SetDiceVisibility(false, false, false, true);
+            }
+            else
+            {
+                throw new InvalidOperationException($"Invalid player color: {player.Color}");
+            }
         }
     }
 }

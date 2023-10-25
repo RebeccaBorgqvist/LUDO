@@ -19,6 +19,8 @@ namespace LUDO.Models
         private bool _isTurnToRoll;
         private List<Piece> _pieces;
 
+        public Piece SelectedPiece { get; set; }
+
         public string Name { get { return _name; } set { _name = value; } }
         public Color Color { get { return _color; } set { _color = value; } }
         public int ColorInt { get { return _colorInt; } private set { _colorInt = value; } }

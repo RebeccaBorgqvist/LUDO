@@ -15,7 +15,6 @@
     d:DesignWidth="960" 
     d:DesignHeight="720">
 
-
     <Grid Background="#666363" CornerRadius="15">
         <Viewbox Margin="25">
             <Canvas VerticalAlignment="Center" HorizontalAlignment="Center" Width="452" Height="426">
@@ -28,17 +27,90 @@
                     </xaml:CanvasControl.RenderTransform>
                 </xaml:CanvasControl>
 
+                <Button Content="GO HERE"
+                        Command="{Binding MovePieceCommand}"
+                        Width="40"
+                        Height="40"
+                        Canvas.Left="{Binding HighlightVisualizedCoordinateX}" Canvas.Top="{Binding HighlightVisualizedCoordinateY}"
+                        Visibility="{Binding IsSimulateMoveButtonVisible}">
+                </Button>
+
                 <Button Content="START GAME" Command="{Binding StartGameCommand}" Visibility="{Binding StartButtonVisibility}" FontSize="32" Background="#D9D9D9" BorderBrush="Black" BorderThickness="2" CornerRadius="5" Margin="122.5,177.5,0,0" Padding="10"/>
 
-                <!--Dice-->
-                <Button x:Name="DiceButton" 
-                    Canvas.Left="142" Canvas.Top="258"
+                <!--Dice to blue-->
+                <Button x:Name="DiceButtonBlue" 
+                    Canvas.Left="140" Canvas.Top="125"
                     Command="{Binding RollDiceCommand}"
+                    IsEnabled="{Binding IsDiceEnabled}"
+                    Visibility="{Binding DiceVisibilityBlue}"
                     Background="Transparent"
                     Width="35"
                     Height="35"
                     Padding="0"
-                    BorderThickness="0">
+                    BorderThickness="0" VerticalAlignment="Top">
+
+                    <Button.RenderTransform>
+                        <CompositeTransform/>
+                    </Button.RenderTransform>
+
+                    <Image Source="{Binding CurrentDiceImage}"
+                       Stretch="UniformToFill">
+                    </Image>
+                </Button>
+
+                <!--Dice to red-->
+                <Button x:Name="DiceButtonRed" 
+                    Canvas.Left="278" Canvas.Top="125"
+                    Command="{Binding RollDiceCommand}"
+                    IsEnabled="{Binding IsDiceEnabled}"
+                    Visibility="{Binding DiceVisibilityRed}"
+                    Background="Transparent"
+                    Width="35"
+                    Height="35"
+                    Padding="0"
+                    BorderThickness="0" VerticalAlignment="Top">
+
+                    <Button.RenderTransform>
+                        <CompositeTransform/>
+                    </Button.RenderTransform>
+
+                    <Image Source="{Binding CurrentDiceImage}"
+                       Stretch="UniformToFill">
+                    </Image>
+                </Button>
+
+                <!--Dice to green-->
+                <Button x:Name="DiceButtonGreen" 
+                    Canvas.Left="278" Canvas.Top="260"
+                    Command="{Binding RollDiceCommand}"
+                    IsEnabled="{Binding IsDiceEnabled}"
+                    Visibility="{Binding DiceVisibilityGreen}"
+                    Background="Transparent"
+                    Width="35"
+                    Height="35"
+                    Padding="0"
+                    BorderThickness="0" VerticalAlignment="Top">
+
+                    <Button.RenderTransform>
+                        <CompositeTransform/>
+                    </Button.RenderTransform>
+
+                    <Image Source="{Binding CurrentDiceImage}"
+                       Stretch="UniformToFill">
+                    </Image>
+                </Button>
+
+                <!--Dice to yellow-->
+                <Button x:Name="DiceButtonYellow" 
+                    Canvas.Left="140" Canvas.Top="260"
+                    Command="{Binding RollDiceCommand}"
+                    IsEnabled="{Binding IsDiceEnabled}"
+                    Visibility="{Binding DiceVisibilityYellow}"
+                    Background="Transparent"
+                    Width="35"
+                    Height="35"
+                    Padding="0"
+                    BorderThickness="0" VerticalAlignment="Top">
 
                     <Button.RenderTransform>
                         <CompositeTransform/>
@@ -51,6 +123,7 @@
 
                 <!--Red Piece-->
                 <Button Command="{Binding PieceCommand}"
+                        CommandParameter="Red1"
                     Background="Transparent" 
                     Canvas.Left="{Binding RedPiece1CoordinateX}" 
                     Canvas.Top="{Binding RedPiece1CoordinateY}"
@@ -61,6 +134,7 @@
                 />
                 </Button>
                 <Button Command="{Binding PieceCommand}"
+                        CommandParameter="Red2"
                     Background="Transparent"
                     Canvas.Left="{Binding RedPiece2CoordinateX}" 
                     Canvas.Top="{Binding RedPiece2CoordinateY}"
@@ -71,6 +145,7 @@
                 />
                 </Button>
                 <Button Command="{Binding PieceCommand}"
+                        CommandParameter="Red3"
                     Background="Transparent" 
                     Canvas.Left="{Binding RedPiece3CoordinateX}" 
                     Canvas.Top="{Binding RedPiece3CoordinateY}"
@@ -81,6 +156,7 @@
                 />
                 </Button>
                 <Button Command="{Binding PieceCommand}"
+                        CommandParameter="Red4"
                     Background="Transparent"
                     Canvas.Left="{Binding RedPiece4CoordinateX}" 
                     Canvas.Top="{Binding RedPiece4CoordinateY}"
@@ -93,6 +169,7 @@
 
                 <!--Green Piece-->
                 <Button Command="{Binding PieceCommand}"
+                        CommandParameter="Green1"
                     Background="Transparent" 
                     Canvas.Left="{Binding GreenPiece1CoordinateX}" 
                     Canvas.Top="{Binding GreenPiece1CoordinateY}"
@@ -103,6 +180,7 @@
                 />
                 </Button>
                 <Button Command="{Binding PieceCommand}"
+                        CommandParameter="Green2"
                     Background="Transparent"
                     Canvas.Left="{Binding GreenPiece2CoordinateX}" 
                     Canvas.Top="{Binding GreenPiece2CoordinateY}"
@@ -113,6 +191,7 @@
                 />
                 </Button>
                 <Button Command="{Binding PieceCommand}"
+                        CommandParameter="Green3"
                     Background="Transparent" 
                     Canvas.Left="{Binding GreenPiece3CoordinateX}" 
                     Canvas.Top="{Binding GreenPiece3CoordinateY}"
@@ -123,6 +202,7 @@
                 />
                 </Button>
                 <Button Command="{Binding PieceCommand}"
+                        CommandParameter="Green4"
                     Background="Transparent" 
                     Canvas.Left="{Binding GreenPiece4CoordinateX}"
                     Canvas.Top="{Binding GreenPiece4CoordinateY}"
@@ -135,6 +215,7 @@
 
                 <!--Yellow Piece-->
                 <Button Command="{Binding PieceCommand}"
+                        CommandParameter="Yellow1"
                     Background="Transparent" 
                     Canvas.Left="{Binding YellowPiece1CoordinateX}" 
                     Canvas.Top="{Binding YellowPiece1CoordinateY}"
@@ -145,6 +226,7 @@
                 />
                 </Button>
                 <Button Command="{Binding PieceCommand}"
+                        CommandParameter="Yellow2"
                     Background="Transparent" 
                     Canvas.Left="{Binding YellowPiece2CoordinateX}" 
                     Canvas.Top="{Binding YellowPiece2CoordinateY}"
@@ -155,6 +237,7 @@
                 />
                 </Button>
                 <Button Command="{Binding PieceCommand}"
+                        CommandParameter="Yellow3"
                     Background="Transparent" 
                     Canvas.Left="{Binding YellowPiece3CoordinateX}" 
                     Canvas.Top="{Binding YellowPiece3CoordinateY}"
@@ -165,6 +248,7 @@
                 />
                 </Button>
                 <Button Command="{Binding PieceCommand}"
+                        CommandParameter="Yellow4"
                     Background="Transparent" 
                     Canvas.Left="{Binding YellowPiece4CoordinateX}" 
                     Canvas.Top="{Binding YellowPiece4CoordinateY}"
@@ -177,6 +261,7 @@
 
                 <!--Blue Piece-->
                 <Button Command="{Binding PieceCommand}"
+                        CommandParameter="Blue1"
                     Background="Transparent" 
                     Canvas.Left="{Binding BluePiece1CoordinateX}" 
                     Canvas.Top="{Binding BluePiece1CoordinateY}"
@@ -187,6 +272,7 @@
                 />
                 </Button>
                 <Button Command="{Binding PieceCommand}"
+                        CommandParameter="Blue2"
                     Background="Transparent" 
                     Canvas.Left="{Binding BluePiece2CoordinateX}" 
                     Canvas.Top="{Binding BluePiece2CoordinateY}"
@@ -197,6 +283,7 @@
                 />
                 </Button>
                 <Button Command="{Binding PieceCommand}"
+                        CommandParameter="Blue3"
                     Background="Transparent" 
                     Canvas.Left="{Binding BluePiece3CoordinateX}" 
                     Canvas.Top="{Binding BluePiece3CoordinateY}"
@@ -207,6 +294,7 @@
                 />
                 </Button>
                 <Button Command="{Binding PieceCommand}"
+                        CommandParameter="Blue4"
                     Background="Transparent" 
                     Canvas.Left="{Binding BluePiece4CoordinateX}" 
                     Canvas.Top="{Binding BluePiece4CoordinateY}"

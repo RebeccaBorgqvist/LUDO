@@ -18,6 +18,8 @@ namespace LUDO.ViewModels
 {
     internal class GameBoardViewModel : ViewModelBase
     {
+        public ICommand MovePieceCommand {  get; set; }
+        public ICommand PieceCommand { get; set; }
         public ICommand RollDiceCommand { get; set; }
         public ICommand StartGameCommand { get; set; }
         public CanvasControl GameBoardCanvas { get; set; } //property for building game board (win2d class)
@@ -82,6 +84,28 @@ namespace LUDO.ViewModels
         private int _highlightVisualizedCoordinateX;
         private int _highlightVisualizedCoordinateY;
         public int DiceResult { get; set; }
+
+        private bool _isSimulateMoveButtonVisible;
+        public bool IsSimulateMoveButtonVisible
+        {
+            get { return _isSimulateMoveButtonVisible; }
+            set
+            {
+                _isSimulateMoveButtonVisible = value;
+                OnPropertyChanged(nameof(IsSimulateMoveButtonVisible));
+            }
+        }
+
+        private bool _isDiceEnabled;
+        public bool IsDiceEnabled
+        {
+            get { return _isDiceEnabled; }
+            set
+            {
+                _isDiceEnabled = value;
+                OnPropertyChanged(nameof(IsDiceEnabled));
+            }
+        }
         public bool RedPiece1Visibility 
         {
             get { return _redPiece1Visibility;}
@@ -562,6 +586,50 @@ namespace LUDO.ViewModels
             }
         }
 
+        private bool _diceVisibilityYellow;
+        private bool _diceVisibilityGreen;
+        private bool _diceVisibilityRed;
+        private bool _diceVisibilityBlue;
+        public bool DiceVisibilityBlue
+        {
+            get { return _diceVisibilityBlue; }
+            set
+            {
+                _diceVisibilityBlue = value;
+                OnPropertyChanged(nameof(DiceVisibilityBlue));
+            }
+        }
+
+        public bool DiceVisibilityRed
+        {
+            get { return _diceVisibilityRed; }
+            set
+            {
+                _diceVisibilityRed = value;
+                OnPropertyChanged(nameof(DiceVisibilityRed));
+            }
+        }
+
+        public bool DiceVisibilityGreen
+        {
+            get { return _diceVisibilityGreen; }
+            set
+            {
+                _diceVisibilityGreen = value;
+                OnPropertyChanged(nameof(DiceVisibilityGreen));
+            }
+        }
+
+        public bool DiceVisibilityYellow
+        {
+            get { return _diceVisibilityYellow; }
+            set
+            {
+                _diceVisibilityYellow = value;
+                OnPropertyChanged(nameof(DiceVisibilityYellow));
+            }
+        }
+
         public Dice DiceModel
         {
             get { return _diceModel; }
@@ -593,7 +661,12 @@ namespace LUDO.ViewModels
         public GameBoardViewModel()
         {
             Instance = this;
-            
+
+            IsDiceEnabled = true;
+            IsSimulateMoveButtonVisible = false;
+
+            MovePieceCommand = new MovePieceCommand();
+            PieceCommand = new SelectPieceCommand();
             RollDiceCommand = new RollDiceCommand();
             StartGameCommand = new StartGameCommand();
 
@@ -610,6 +683,11 @@ namespace LUDO.ViewModels
             _gameLogicModel.SetPlayerList();
             _gameLogicModel.CreatePlayerPieces();
             _gameLogicModel.StartGame();
+        }
+
+        public void ResetDiceImage()
+        {
+            CurrentDiceImage = "ms-appx:///Assets/roll_dice.png";
         }
 
         public void ShowPieceOnBoard(Helpers.Color pieceColor, bool visibility, int pieceId, int[] pieceCoordinates, bool severalPiecesOnCell = false)
@@ -721,12 +799,18 @@ namespace LUDO.ViewModels
                 }
             }
         }
-        public static void Highlighting(int xNuvarande, int yNuvarande, int newCoordinateInX, int newCoordinateInY)
+        public bool Highlighting(int xCurrentCoordinate, int yCurrentCoordinate, int[] newCoordinate)
         {
-            Instance.HighlightCurrentCoordinateX = xNuvarande;
-            Instance.HighlightCurrentCoordinateY = yNuvarande;
-            Instance.HighlightVisualizedCoordinateX = newCoordinateInX;
-            Instance.HighlightVisualizedCoordinateY = newCoordinateInY;
+            if (xCurrentCoordinate == newCoordinate[0] && yCurrentCoordinate == newCoordinate[1])
+            {
+                return false;
+            }
+            else
+            {
+                Instance.HighlightVisualizedCoordinateX = newCoordinate[0];
+                Instance.HighlightVisualizedCoordinateY = newCoordinate[1];
+                return true;
+            }
         }
 
         //USAGE OF WIN2D API: DRAWING CELLS OF THE GAME BOARD(fields, finals, finish and nests)     
