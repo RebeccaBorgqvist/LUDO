@@ -17,19 +17,5 @@ namespace LUDO.Commands
          {
              MainMenuViewModel.Instance.MainMenuFrame.Navigate(typeof(GameBoard), null, new SuppressNavigationTransitionInfo());
          }
-
-       /* public override async void Execute(object parameter)
-        {
-            if (GameSettingsViewModel.Instance.AreSelectionsValid)
-            {
-                MainMenuViewModel.Instance.MainMenuFrame.Navigate(typeof(GameBoard), null, new SuppressNavigationTransitionInfo());
-            }
-            else
-            {
-                // Display a warning message to the user
-                var messageDialog = new MessageDialog("Please select colors for all players before starting the game.");
-                await messageDialog.ShowAsync();
-            }
-        }*/
     }
 }
