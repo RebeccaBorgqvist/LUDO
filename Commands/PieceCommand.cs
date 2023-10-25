@@ -13,9 +13,10 @@ namespace LUDO.Commands
     {
         public override void Execute(object parameter)
         {
-            //GameBoardViewModel.Instance.CurrentPlayer.PieceCommand(GameBoardViewModel.Instance.DiceResult);
-            //Piece.Instance.HighlightValidPieces();
-            //GameBoardViewModel.Instance.GameLogicInstance.MoveToNextPlayer();
+            if (Piece.Instance != null)
+            {
+                var highlightPieceStoryboard = Piece.Instance.HighlightPieceStoryboard;
+            }
         }
     }
 }

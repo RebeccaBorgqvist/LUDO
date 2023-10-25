@@ -187,6 +187,7 @@
     <Content Include="Assets\menuIcon.png" />
     <Content Include="Assets\PieceBlue.png" />
     <Content Include="Assets\PieceGreen.png" />
+    <Content Include="Assets\PieceMoveExample.png" />
     <Content Include="Assets\PieceRed.png" />
     <Content Include="Assets\PieceYellow.png" />
     <Content Include="Assets\roll_dice.png">

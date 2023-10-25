@@ -787,12 +787,17 @@ namespace LUDO.ViewModels
         }
 
         // Highlight for gameboard cells
-        public static void Highlighting(int xNuvarande, int yNuvarande, int newCoordinateInX, int newCoordinateInY)
+        public void Highlighting(int xCurrentCoordinate, int yCurrentCoordinate, int[] newCoordinate)
         {
-            Instance.HighlightCurrentCoordinateX = xNuvarande;
-            Instance.HighlightCurrentCoordinateY = yNuvarande;
-            Instance.HighlightVisualizedCoordinateX = newCoordinateInX;
-            Instance.HighlightVisualizedCoordinateY = newCoordinateInY;
+            if (xCurrentCoordinate == newCoordinate[0] && yCurrentCoordinate == newCoordinate[1])
+            {
+                return;
+            }
+            else
+            {
+                Instance.HighlightVisualizedCoordinateX = newCoordinate[0];
+                Instance.HighlightVisualizedCoordinateY = newCoordinate[1];
+            }
         }
 
         public void HighlightValidPieces()

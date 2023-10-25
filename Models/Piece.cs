@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media.Animation;
 
 namespace LUDO.Models
 {
@@ -17,6 +19,7 @@ namespace LUDO.Models
         private Color _pieceColor;
 
         public static Piece Instance;
+        public Storyboard HighlightPieceStoryboard { get; set; }
         public bool HighlightValidPiece { get; set; }
         public bool PieceInNest { get; set; }
         public Color PieceColor { get { return _pieceColor; } }
@@ -44,6 +47,11 @@ namespace LUDO.Models
             _id = id;
             this.SetStartingCoordinates();
             this.colorInt = colorInt;
+
+            //HighlightPieceStoryboard = (Storyboard)Application.Current.Resources["HighlightPiece"];
+            //Storyboard.SetTarget(HighlightPieceStoryboard, this);
+            //HighlightPieceStoryboard.RepeatBehavior = RepeatBehavior.Forever;
+            //HighlightPieceStoryboard.Begin();
         }
 
         public Piece()

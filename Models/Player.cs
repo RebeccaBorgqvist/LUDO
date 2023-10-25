@@ -52,20 +52,5 @@ namespace LUDO.Models
                 new Piece(color, 4, _colorInt)
             };
         }
-        /*
-        public void PieceCommand(int diceResult)
-        {
-            if (diceResult == 6)
-            {
-                foreach (var piece in Pieces)
-                {
-                    if (piece.PieceInNest)  // Antag att IsInNest är en egenskap i Piece-klassen som indikerar om pjäsen är i boet
-                    {
-                        Piece.IsHighlighted = true;
-                    }
-                }
-            }
-        }
-        */
     }
 }

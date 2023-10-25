@@ -20,7 +20,6 @@ namespace LUDO.Models
         private static Color player2Color;
         private static Color player3Color;
         private static Color player4Color;
-        //private Queue<Player> playerQueue;
 
         public GameLogic()
         {
@@ -73,28 +72,11 @@ namespace LUDO.Models
             playerToStart = new Random().Next(0, GameSettingsViewModel.Instance.Players - 1);
             playersSortedByColor[playerToStart].IsTurnToRoll = true;
 
-            //GameBoardViewModel.Instance.CurrentPlayer = playersSortedByColor[playerToStart];
-            //MoveDice(playersSortedByColor[playerToStart]);
-
             List<Player> playersBeforeNewStart = playersSortedByColor.Take(playerToStart).ToList();
             List<Player> playersAfterNewStart = playersSortedByColor.Skip(playerToStart).ToList();
             playersRandomized = playersAfterNewStart.Concat(playersBeforeNewStart).ToList();
 
-            //playerQueue = new Queue<Player>(playersRandomized);
         }
-        /*
-        public void MoveToNextPlayer()
-        {
-            Player currentPlayer = playerQueue.Dequeue();
-            currentPlayer.IsTurnToRoll = false;
-
-            Player nextPlayer = playerQueue.Peek();
-            nextPlayer.IsTurnToRoll = true;
-
-            GameBoardViewModel.Instance.CurrentPlayer = nextPlayer;
-
-            playerQueue.Enqueue(currentPlayer);
-        }*/
 
         private void SetDiceVisibility(bool red, bool blue, bool green, bool yellow)
         {
@@ -131,9 +113,26 @@ namespace LUDO.Models
         public void StartGame()
         {
             // only for testing
-            //playersRandomized[0].Pieces[0].PieceMove(6);
-            //playersRandomized[0].Pieces[0].PieceMove(5);
-            //playersRandomized[1].Pieces[2].PieceMove(6);
+
+            playersRandomized[0].Pieces[0].PieceMove(6);
+            playersRandomized[0].Pieces[0].PieceMove(4);
+
+            playersRandomized[0].Pieces[1].PieceMove(6);
+            playersRandomized[0].Pieces[1].PieceMove(3);
+
+            playersRandomized[0].Pieces[2].PieceMove(6);
+            playersRandomized[0].Pieces[2].PieceMove(5);
+
+            playersRandomized[0].Pieces[3].PieceMove(6);
+            playersRandomized[0].Pieces[3].PieceMove(6);
+
+            int x = playersRandomized[0].Pieces[0].Coordinates[0];
+            int y = playersRandomized[0].Pieces[0].Coordinates[1];
+
+            GameBoardViewModel.Instance.Highlighting(x, y, playersRandomized[0].Pieces[0].SimulatePieceMove(6));            
+            GameBoardViewModel.Instance.Highlighting(x, y, playersRandomized[0].Pieces[1].SimulatePieceMove(4));
+            GameBoardViewModel.Instance.Highlighting(x, y, playersRandomized[0].Pieces[2].SimulatePieceMove(1));
+            GameBoardViewModel.Instance.Highlighting(x, y, playersRandomized[0].Pieces[3].SimulatePieceMove(2));
         }
 
         public void PlayerTurn()
