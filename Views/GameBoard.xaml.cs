@@ -32,7 +32,19 @@ namespace LUDO.Views
             this.DataContext = new GameBoardViewModel();
 
             GameBoardViewModel.Instance.GameBoardCanvas = GameBoardCanvas;
-            GameBoardViewModel.Instance.GameBoardCanvas.Draw += GameBoardViewModel.Instance.DrawBoard;
+            GameBoardCanvas.Draw += GameBoardViewModel.Instance.DrawBoard;
+
+
+
+            //labels for players
+            player1Name.Text = GameSettingsViewModel.Instance.Player1Name;
+            player2Name.Text = GameSettingsViewModel.Instance.Player2Name;
+            if (GameSettingsViewModel.Instance.Players > 2)
+            {
+                player3Name.Text = GameSettingsViewModel.Instance.Player3Name;
+                if (GameSettingsViewModel.Instance.Players > 3) player4Name.Text = GameSettingsViewModel.Instance.Player4Name;
+            } 
         }
+
     }
 }

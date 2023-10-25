@@ -5,6 +5,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
+using System.Threading;
+using Windows.UI.Core;
+using Windows.UI.Xaml.Controls;
 
 namespace LUDO.Models
 {
@@ -21,8 +25,18 @@ namespace LUDO.Models
         {
             Debug.WriteLine($"Players playing: {GameSettingsViewModel.Instance.Players}");
 
-            Random rd = new Random();
-            int playerToStart = rd.Next(0, GameSettingsViewModel.Instance.Players);
+            // Orders list by color Blue > Red > Green > Yellow.
+            // Sets active player randomly.
+            playerList = playerList.OrderBy(player => player.Color).ToList();
+            activePlayerIndex = new Random().Next(0, playerList.Count());
+            activePlayer = playerList[activePlayerIndex];
+
+
+
+            //front-end; sets labels of the players
+            //player1Name.Text = "";
+
+        }
 
 
             //the players are to be added to the List 

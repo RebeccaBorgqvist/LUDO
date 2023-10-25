@@ -7,10 +7,41 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:xaml="using:Microsoft.Graphics.Canvas.UI.Xaml"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-   
-    <Grid>
-        <Frame x:Name="MainFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="25"/>
-    </Grid>
+    Background="#D9D9D9" 
+    d:DesignWidth="1920" 
+    d:DesignHeight="1080">
+
+    <!--CHANGE SIZE HERE-->
+    <Viewbox Width="1280" Height="720" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="LUDO" Grid.Column="1" Grid.Row="0" FontSize="100" HorizontalAlignment="Center"/>
+
+                <Frame x:Name="MainFrame" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="960" Height="720"/>
+
+                <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Background="Transparent" Command="{Binding GoBackOneFrameCommand}" ToolTipService.ToolTip="Go back">
+                        <Image Source="ms-appx:///Assets/backIcon.png"/>
+                    </Button>
+                    <Button Background="Transparent" Command="{Binding GoToMainMenuCommand}" ToolTipService.ToolTip="Go to main menu">
+                        <Image Source="ms-appx:///Assets/menuIcon.png"/>
+                    </Button>
+                    <Button Background="Transparent" Command="{Binding HighscoreButtonCommand}" ToolTipService.ToolTip="Show highscore">
+                        <Image Source="ms-appx:///Assets/highscoreIcon.png"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </Viewbox>
 </Page>
-<!--Binding kopplas ihop med en fil i ViewModels för att kunna minska på xaml koden och arbeta lättare med förändringar-->

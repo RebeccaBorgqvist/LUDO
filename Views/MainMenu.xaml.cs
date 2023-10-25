@@ -36,7 +36,9 @@ namespace LUDO.Views
         private void GoToGameBoard(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(GameBoard));
-        }       
+        } 
+        
+        
         
     }
 }

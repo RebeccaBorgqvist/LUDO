@@ -50,6 +50,10 @@ namespace LUDO.ViewModels
         private string _player3Name = "Player 3";
         private string _player4Name = "Player 4";
 
+
+        public List<Player> PlayerList { get; set; }
+        //
+
         public ICommand PlusPlayerCommand { get; set; }
         public ICommand MinusPlayerCommand { get; set; }
         public ICommand ForwardCommand { get; set; }
@@ -101,6 +105,8 @@ namespace LUDO.ViewModels
                 OnPropertyChanged(nameof(AddRemoveText));
             }
         }
+
+
         public string Player1Name
         {
             get { return _player1Name; }
@@ -137,6 +143,8 @@ namespace LUDO.ViewModels
                 OnPropertyChanged(nameof(Player4Name));
             }
         }
+
+
         public int Players
         {
             get { return _players; }

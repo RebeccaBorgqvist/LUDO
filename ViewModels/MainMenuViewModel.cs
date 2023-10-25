@@ -19,6 +19,8 @@ namespace LUDO.ViewModels
         public ICommand PlayButtonCommand { get; private set; }
         public ICommand HighscoreButtonCommand { get; private set; }
         public ICommand RulesButtonCommand { get; private set; }
+        public ICommand GoToMainMenuCommand { get; private set; }
+        public ICommand GoBackOneFrameCommand { get; private set; }
 
         public MainMenuViewModel()
         {
@@ -29,6 +31,10 @@ namespace LUDO.ViewModels
             PlayButtonCommand = new PlayButtonCommand();
             HighscoreButtonCommand = new HighscoreButtonCommand();
             RulesButtonCommand = new RulesButtonCommand();
+
+            //navigation within the application
+            GoToMainMenuCommand = new GoToMainMenuCommand();
+            GoBackOneFrameCommand = new GoBackOneFrameCommand();
         }
     }
 }
