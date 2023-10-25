@@ -197,7 +197,7 @@ namespace LUDO.Models
                     }
                     else if (cell.PiecesVisiting.Count > 0) 
                     {
-                        //Todo. Share cell with own other piece
+                        this.ShareCellWithPiece(cell); //Todo. Share cell with own other piece
                         moveLegit = true;
                     }
                     else //Not occupied cell
