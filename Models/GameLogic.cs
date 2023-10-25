@@ -16,7 +16,7 @@ namespace LUDO.Models
     {
         private int activePlayerIndex;
         private Player activePlayer;
-        private Player[] players;
+        private List<Player> playerList;
         private int playerToStart;
         private static Color player1Color;
         private static Color player2Color;
@@ -26,51 +26,27 @@ namespace LUDO.Models
         public GameLogic()
         {
             activePlayerIndex = 0;
+            playerList = new List<Player>();
         }
 
-        public void SetRandomizedPlayers()
+        public void SetPlayerList()
         {
-
-            // BRGY
-
-            // Gets players from game settings view model.
+            // Gets participating players from game settings view model.
             foreach (Player player in GameSettingsViewModel.Instance.PlayerList)
             {
-                if (player.Color == Color.Blue)
-                {
-                }
-                else if (player.Color == Color.Red) 
-                {
-                }
-                else if (player.Color == Color.Green)
-                {
-                }
-                else if (player.Color == Color.Yellow)
-                {
-                }
+                playerList.Add(player);
             }
 
-            // Randomizes player order.
-            // TODO: Emil fix.
-            Random random = new Random();
-
-            int p = players.Count;
-            for (int i = p - 1; i > 0; i--)
-            {
-                int r = random.Next(0, i + 1);
-
-                Player tempPlayer = players[i];
-                players[i] = players[r];
-                players[r] = tempPlayer;
-            }
-
-            // Sets active player.
-            activePlayer = players[0];
+            // Orders list by color Blue > Red > Green > Yellow.
+            // Sets active player randomly.
+            playerList = playerList.OrderBy(player => player.Color).ToList();
+            activePlayerIndex = new Random().Next(0, playerList.Count());
+            activePlayer = playerList[activePlayerIndex];
         }
 
         public void CreatePlayerPieces()
         {
-            foreach (Player player in players)
+            foreach (Player player in playerList)
             {
                 player.CreatePieces();
             }
@@ -129,7 +105,7 @@ namespace LUDO.Models
 
         public void StartGame()
         {
-            ShowPlayerOrderMessage();
+            ShowActivePlayerMessage();
 
             //bool endTheGame = false; // set TRUE only if all 4 pieces of a player reached the finish
             //while (!endTheGame)
@@ -174,41 +150,26 @@ namespace LUDO.Models
         {
             // If active player is the last player in list, set active player to first player in list.
             // Else set active player to next player in list.
-            if (activePlayer == players[players.Count - 1])
+            if (activePlayer == playerList[playerList.Count - 1])
             {
                 activePlayerIndex = 0;
-                activePlayer = players[activePlayerIndex];
+                activePlayer = playerList[activePlayerIndex];
             }
             else
             {
                 activePlayerIndex++;
-                activePlayer = players[activePlayerIndex];
+                activePlayer = playerList[activePlayerIndex];
             }
 
             ShowActivePlayerMessage();
         }
 
-        private void ShowActivePlayerMessage(IUICommand command = null)
+        private void ShowActivePlayerMessage()
         {
             var dialog = new MessageDialog($"▶ {activePlayer.Name}'s Turn!");
             dialog.Title = "PLAYER TURN";
-            Task.Run(() => dialog.ShowAsync()).GetAwaiter();
-        }
-
-        private void ShowPlayerOrderMessage()
-        {
-            string playerOrder = string.Empty;
-            int i = 1;
-            foreach (var player in players)
-            {
-                playerOrder += $"▶ {i}. {player.Name}\n";
-                i++;
-            }
-
-            var dialog = new MessageDialog(playerOrder);
-            dialog.Title = "PLAYER ORDER";
             dialog.Commands.Clear();
-            dialog.Commands.Add(new UICommand("OK", new UICommandInvokedHandler(this.ShowActivePlayerMessage)));
+            dialog.Commands.Add(new UICommand("OK"));
             Task.Run(() => dialog.ShowAsync()).GetAwaiter();
         }
     }

@@ -45,10 +45,10 @@ namespace LUDO.Models
         {
             _pieces = new List<Piece>()
             {
-                new Piece(Color),
-                new Piece(Color),
-                new Piece(Color),
-                new Piece(Color)
+                new Piece(Color, 1),
+                new Piece(Color, 2),
+                new Piece(Color, 3),
+                new Piece(Color, 4)
             };
         }
     }
