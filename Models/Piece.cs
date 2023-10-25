@@ -32,12 +32,12 @@ namespace LUDO.Models
             set { _atCell = value; }
         }
 
-        public Piece(Color playerColor, int id, int colorInt)
+        public Piece(Color playerColor, int id)
         {
             _pieceColor = playerColor;
             _id = id;
             this.SetStartingCoordinates();
-            this.colorInt = colorInt;
+            this.colorInt = (int)playerColor;
         }
 
         public void SetStartingCoordinates()
@@ -123,7 +123,7 @@ namespace LUDO.Models
                 }
                 GameBoardViewModel.Instance.ShowPieceOnBoard(Color.Yellow, true, this.Id, this.Coordinates);
             }
-            else
+            else if (this.PieceColor == Color.Blue)
             {
                 switch (this.Id)
                 {
@@ -151,9 +151,9 @@ namespace LUDO.Models
                 GameBoardViewModel.Instance.ShowPieceOnBoard(Color.Blue, true, this.Id, this.Coordinates);
             }
         }
-        public int[] SimulatePieceMove(int diceResult)
+        public bool SimulatePieceMove(int diceResult)
         {
-            return PieceMove(diceResult, true);
+            return GameBoardViewModel.Instance.Highlighting(this.Coordinates[0], this.Coordinates[1], PieceMove(diceResult, true));
         }
         public int[] PieceMove(int diceResult, bool onlySimulateMove = false)
         {

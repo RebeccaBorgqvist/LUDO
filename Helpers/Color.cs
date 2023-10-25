@@ -11,6 +11,7 @@ namespace LUDO.Helpers
         Red = 0,
         Green = 1,
         Yellow = 2,
-        Blue = 3
+        Blue = 3,
+        Black = 4
     }
 }

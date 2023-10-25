@@ -17,6 +17,7 @@ namespace LUDO.Commands
                 GameSettingsViewModel.Instance.IsMinusButtonVisible = true;
                 GameSettingsViewModel.Instance.AddRemoveText = "Remove or add players";
                 GameSettingsViewModel.Instance.Players = 3;
+                GameSettingsViewModel.Instance.PlayerList.Add(new Models.Player("Player 3"));
             }
             else 
             {
@@ -24,7 +25,10 @@ namespace LUDO.Commands
                 GameSettingsViewModel.Instance.IsPlusButtonVisible = false;
                 GameSettingsViewModel.Instance.AddRemoveText = "Remove players";
                 GameSettingsViewModel.Instance.Players = 4;
+                GameSettingsViewModel.Instance.PlayerList.Add(new Models.Player("Player 4"));
             }
+
+            
         }
     }
 }
