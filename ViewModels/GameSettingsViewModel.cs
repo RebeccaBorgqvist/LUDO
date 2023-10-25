@@ -53,14 +53,20 @@ namespace LUDO.ViewModels
         private string _player3Name = "Player 3";
         private string _player4Name = "Player 4";
 
-        private List<Color> _playersList;
+        private List<Player> _playersList;
+
+
 
         public ICommand PlusPlayerCommand { get; set; }
         public ICommand MinusPlayerCommand { get; set; }
         public ICommand ForwardCommand { get; set; }
         public ICommand ChangeNameCommand { get; set; }
         public ICommand ChangeColor { get; set; }
+
+
         public static GameSettingsViewModel Instance { get; set; }
+
+
         public bool IsPlayer3Visible
         {
             get { return _isPlayer3Visible; }
@@ -167,7 +173,8 @@ namespace LUDO.ViewModels
                 OnPropertyChanged(nameof(IsPlayer4ColorsVisible));
             }
         }
-        public List<Color> PlayersList
+
+        public List<Player> PlayersList
         {
             get { return _playersList; }
             set

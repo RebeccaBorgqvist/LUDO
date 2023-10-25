@@ -21,6 +21,7 @@ namespace LUDO.Models
         private static Color player3Color;
         private static Color player4Color;
 
+
         public GameLogic()
         {
             players = new List<Player>();

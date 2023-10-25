@@ -10,6 +10,7 @@ using LUDO.Views;
 using Windows.UI.Popups;
 using System.Reflection;
 using LUDO.Helpers;
+using LUDO.Models;
 
 namespace LUDO.Commands
 {
@@ -18,7 +19,7 @@ namespace LUDO.Commands
             public override void Execute(object parameter)
             {
                 string[] colorNames = { "Blue", "Red", "Green", "Yellow" };
-                var playersList = new List<Color>();
+                var playersList = new List<Player>();
 
                 for (int player = 1; player <= 4; player++)
                 {
@@ -38,12 +39,13 @@ namespace LUDO.Commands
                         }
                     }
 
-                    playersList.Add(selectedColor);
+                // Create a new Player instance with the selected color and add it to the list
+                var newPlayer = new Player($"Player {player}", selectedColor);
+                playersList.Add(newPlayer);
                // Debug.WriteLine($"Player {player} selected color: {selectedColor}");
             }
-
-                GameSettingsViewModel.Instance.PlayersList = playersList;
-            }
+            GameSettingsViewModel.Instance.PlayersList = playersList;
+        }
     }
 
 }
