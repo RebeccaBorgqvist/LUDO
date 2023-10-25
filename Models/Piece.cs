@@ -202,7 +202,7 @@ namespace LUDO.Models
                         shareCell = true;
                         moveLegit = true;
                     }
-                    else //not occupied
+                    else //Not occupied cell
                     {
                         moveLegit = true;
                     }
