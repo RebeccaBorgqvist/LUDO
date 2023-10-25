@@ -19,7 +19,7 @@ namespace LUDO.Commands
             public override void Execute(object parameter)
             {
                 string[] colorNames = { "Blue", "Red", "Green", "Yellow" };
-                var playersList = new List<Player>();
+                var playerList = new List<Player>();
 
                 for (int player = 1; player <= 4; player++)
                 {
@@ -41,10 +41,10 @@ namespace LUDO.Commands
 
                 // Create a new Player instance with the selected color and add it to the list
                 var newPlayer = new Player($"Player {player}", selectedColor);
-                playersList.Add(newPlayer);
+                playerList.Add(newPlayer);
                 //Debug.WriteLine($"Player {newPlayer} selected color: {selectedColor}");
             }
-            GameSettingsViewModel.Instance.PlayersList = playersList;
+            GameSettingsViewModel.Instance.PlayerList = playerList;
         }
     }
 

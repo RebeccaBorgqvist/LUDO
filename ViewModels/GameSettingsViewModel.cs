@@ -53,7 +53,7 @@ namespace LUDO.ViewModels
         private string _player3Name = "Player 3";
         private string _player4Name = "Player 4";
 
-        private List<Player> _playersList;
+        private List<Player> _playerList;
 
 
 
@@ -174,13 +174,13 @@ namespace LUDO.ViewModels
             }
         }
 
-        public List<Player> PlayersList
+        public List<Player> PlayerList
         {
-            get { return _playersList; }
+            get { return _playerList; }
             set
             {
-                _playersList = value;
-                OnPropertyChanged(nameof(PlayersList));
+                _playerList = value;
+                OnPropertyChanged(nameof(PlayerList));
             }
         }
 
