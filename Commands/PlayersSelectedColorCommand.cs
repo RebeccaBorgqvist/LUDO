@@ -22,7 +22,7 @@ namespace LUDO.Commands
 
                 for (int player = 1; player <= 4; player++)
                 {
-                    Color selectedColor = Color.Blue; // Default color if none is selected
+                    Color selectedColor = Color.None; // Default color if none is selected
 
                     foreach (string color in colorNames)
                     {
@@ -39,7 +39,7 @@ namespace LUDO.Commands
                     }
 
                     playersList.Add(selectedColor);
-                //Debug.WriteLine($"Player {player} selected color: {selectedColor}");
+                Debug.WriteLine($"Player {player} selected color: {selectedColor}");
             }
 
                 GameSettingsViewModel.Instance.PlayersList = playersList;
