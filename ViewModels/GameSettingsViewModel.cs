@@ -9,6 +9,7 @@ using Windows.Devices.I2c;
 using LUDO.Models;
 using System.Collections.ObjectModel;
 using Windows.UI.Xaml.Media;
+using LUDO.Helpers;
 
 namespace LUDO.ViewModels
 {
@@ -41,6 +42,14 @@ namespace LUDO.ViewModels
         private bool _yellow3;
         private bool _yellow4;
 
+        private bool _black1;
+
+        private bool _black2;
+
+        private bool _black3;
+
+        private bool _black4;
+
         private string _addRemoveText = "Add more players";
 
         private int _players = 2;
@@ -49,6 +58,8 @@ namespace LUDO.ViewModels
         private string _player2Name = "Player 2";
         private string _player3Name = "Player 3";
         private string _player4Name = "Player 4";
+
+        private List<Color> _playersList;
 
         public ICommand PlusPlayerCommand { get; set; }
         public ICommand MinusPlayerCommand { get; set; }
@@ -159,6 +170,15 @@ namespace LUDO.ViewModels
             {
                 _isPlayer4ColorVisible = value;
                 OnPropertyChanged(nameof(IsPlayer4ColorsVisible));
+            }
+        }
+        public List<Color> PlayersList
+        {
+            get { return _playersList; }
+            set
+            {
+                _playersList = value;
+                OnPropertyChanged(nameof(PlayersList));
             }
         }
         // BLUE
@@ -311,7 +331,44 @@ namespace LUDO.ViewModels
                 OnPropertyChanged(nameof(Yellow4));
             }
         }
+        // BLACK
+        public bool Black1
+        {
+            get { return _black1; }
+            set
+            {
+                _black1 = value;
+                OnPropertyChanged(nameof(Black1));
+            }
+        }
+        public bool Black2
+        {
+            get { return _black2; }
+            set
+            {
+                _black2 = value;
+                OnPropertyChanged(nameof(Black2));
+            }
+        }
+        public bool Black3
+        {
+            get { return _black3; }
+            set
+            {
+                _black1 = value;
+                OnPropertyChanged(nameof(Black3));
+            }
+        }
 
+        public bool Black4
+        {
+            get { return _black4; }
+            set
+            {
+                _black4 = value;
+                OnPropertyChanged(nameof(Black4));
+            }
+        }
         public GameSettingsViewModel()
         {
             Instance = this;
