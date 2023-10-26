@@ -18,10 +18,12 @@ namespace LUDO.ViewModels
 {
     internal class GameBoardViewModel : ViewModelBase
     {
-        public GameLogic GameLogicInstance { get; set; }
+        /*public GameLogic GameLogicInstance { get; set; }
         public Helpers.Color CurrentPlayerColor { get; set; }
-        //public ICommand PieceCommand { get; set; }
+        public ICommand PieceCommand { get; set; }*/
 
+        public ICommand MovePieceCommand {  get; set; }
+        public ICommand PieceCommand { get; set; }
         public ICommand RollDiceCommand { get; set; }
         public ICommand StartGameCommand { get; set; }
         public CanvasControl GameBoardCanvas { get; set; } //property for building game board (win2d class)
@@ -85,43 +87,30 @@ namespace LUDO.ViewModels
         private int _highlightCurrentCoordinateY;
         private int _highlightVisualizedCoordinateX;
         private int _highlightVisualizedCoordinateY;
-
-        private bool _diceVisibilityYellow;
-        private bool _diceVisibilityGreen;
-        private bool _diceVisibilityRed;
-        private bool _diceVisibilityBlue;
-
-        private Player _currentPlayer;
-        public Player CurrentPlayer
-        {
-            get { return _currentPlayer; }
-            set
-            {
-                _currentPlayer = value;
-                OnPropertyChanged(nameof(CurrentPlayer));
-                OnPropertyChanged(nameof(DiceVisibilityBlue));
-                OnPropertyChanged(nameof(DiceVisibilityRed));
-                OnPropertyChanged(nameof(DiceVisibilityGreen));
-                OnPropertyChanged(nameof(DiceVisibilityYellow));
-            }
-        }
-
-        private Visibility _startButtonVisibility;
-        public Visibility StartButtonVisibility 
-        {
-            get { return _startButtonVisibility; }
-            set
-            {
-                if (value != _startButtonVisibility)
-                {
-                    _startButtonVisibility = value;
-                    OnPropertyChanged(nameof(StartButtonVisibility));
-                }
-            }
-        }
         public int DiceResult { get; set; }
 
-        public bool RedPiece1Visibility
+        private bool _isSimulateMoveButtonVisible;
+        public bool IsSimulateMoveButtonVisible
+        {
+            get { return _isSimulateMoveButtonVisible; }
+            set
+            {
+                _isSimulateMoveButtonVisible = value;
+                OnPropertyChanged(nameof(IsSimulateMoveButtonVisible));
+            }
+        }
+
+        private bool _isDiceEnabled;
+        public bool IsDiceEnabled
+        {
+            get { return _isDiceEnabled; }
+            set
+            {
+                _isDiceEnabled = value;
+                OnPropertyChanged(nameof(IsDiceEnabled));
+            }
+        }
+        public bool RedPiece1Visibility 
         {
             get { return _redPiece1Visibility; }
             set
@@ -589,13 +578,24 @@ namespace LUDO.ViewModels
                 OnPropertyChanged(nameof(HighlightVisualizedCoordinateY));
             }
         }
-
-        public Dice DiceModel
+        private Visibility _startButtonVisibility;
+        public Visibility StartButtonVisibility
         {
-            get { return _diceModel; }
-            set { _diceModel = value; }
+            get { return _startButtonVisibility; }
+            set
+            {
+                if (value != _startButtonVisibility)
+                {
+                    _startButtonVisibility = value;
+                    OnPropertyChanged(nameof(StartButtonVisibility));
+                }
+            }
         }
 
+        private bool _diceVisibilityYellow;
+        private bool _diceVisibilityGreen;
+        private bool _diceVisibilityRed;
+        private bool _diceVisibilityBlue;
         public bool DiceVisibilityBlue
         {
             get { return _diceVisibilityBlue; }
@@ -636,6 +636,12 @@ namespace LUDO.ViewModels
             }
         }
 
+        public Dice DiceModel
+        {
+            get { return _diceModel; }
+            set { _diceModel = value; }
+        }
+
         public Board BoardModel
         {
             get { return _boardModel; }
@@ -663,6 +669,11 @@ namespace LUDO.ViewModels
         {
             Instance = this;
 
+            IsDiceEnabled = true;
+            IsSimulateMoveButtonVisible = false;
+
+            MovePieceCommand = new MovePieceCommand();
+            PieceCommand = new SelectPieceCommand();
             RollDiceCommand = new RollDiceCommand();
             StartGameCommand = new StartGameCommand();
 
@@ -673,36 +684,46 @@ namespace LUDO.ViewModels
         {
             _diceModel = new Dice();
             _gameLogicModel = new GameLogic();
-            _gameLogicModel.SetPlayerColor();
-            _gameLogicModel.CreatePlayerOrder();
+            //_gameLogicModel.SetPlayerColor();
+            //_gameLogicModel.CreatePlayerOrder();
+
+            _gameLogicModel.SetPlayerList();
+            _gameLogicModel.CreatePlayerPieces();
             _gameLogicModel.StartGame();
         }
 
-        public void ShowPieceOnBoard(Helpers.Color pieceColor, bool visibility, int pieceId, int[] pieceCoordinates)
+        public void ResetDiceImage()
         {
-            if (pieceColor == Helpers.Color.Red)
+            CurrentDiceImage = "ms-appx:///Assets/roll_dice.png";
+        }
+
+        public void ShowPieceOnBoard(Helpers.Color pieceColor, bool visibility, int pieceId, int[] pieceCoordinates, bool severalPiecesOnCell = false)
+        {
+            int adjustCoordinate = 0;
+            if (severalPiecesOnCell) { adjustCoordinate = 10; }
+            if(pieceColor == Helpers.Color.Red)
             {
                 switch (pieceId)
                 {
                     case 1:
                         RedPiece1Visibility = visibility;
-                        RedPiece1CoordinateX = pieceCoordinates[0];
-                        RedPiece1CoordinateY = pieceCoordinates[1];
+                        RedPiece1CoordinateX = pieceCoordinates[0] - adjustCoordinate;
+                        RedPiece1CoordinateY = pieceCoordinates[1] - adjustCoordinate;
                         break;
                     case 2:
                         RedPiece2Visibility = visibility;
-                        RedPiece2CoordinateX = pieceCoordinates[0];
-                        RedPiece2CoordinateY = pieceCoordinates[1];
+                        RedPiece2CoordinateX = pieceCoordinates[0] + adjustCoordinate;
+                        RedPiece2CoordinateY = pieceCoordinates[1] - adjustCoordinate;
                         break;
                     case 3:
                         RedPiece3Visibility = visibility;
-                        RedPiece3CoordinateX = pieceCoordinates[0];
-                        RedPiece3CoordinateY = pieceCoordinates[1];
+                        RedPiece3CoordinateX = pieceCoordinates[0] - adjustCoordinate;
+                        RedPiece3CoordinateY = pieceCoordinates[1] + adjustCoordinate;
                         break;
                     case 4:
                         RedPiece4Visibility = visibility;
-                        RedPiece4CoordinateX = pieceCoordinates[0];
-                        RedPiece4CoordinateY = pieceCoordinates[1];
+                        RedPiece4CoordinateX = pieceCoordinates[0] + adjustCoordinate;
+                        RedPiece4CoordinateY = pieceCoordinates[1] + adjustCoordinate;
                         break;
                 }
             }
@@ -712,23 +733,23 @@ namespace LUDO.ViewModels
                 {
                     case 1:
                         GreenPiece1Visibility = visibility;
-                        GreenPiece1CoordinateX = pieceCoordinates[0];
-                        GreenPiece1CoordinateY = pieceCoordinates[1];
+                        GreenPiece1CoordinateX = pieceCoordinates[0] - adjustCoordinate;
+                        GreenPiece1CoordinateY = pieceCoordinates[1] - adjustCoordinate;
                         break;
                     case 2:
                         GreenPiece2Visibility = visibility;
-                        GreenPiece2CoordinateX = pieceCoordinates[0];
-                        GreenPiece2CoordinateY = pieceCoordinates[1];
+                        GreenPiece2CoordinateX = pieceCoordinates[0] + adjustCoordinate;
+                        GreenPiece2CoordinateY = pieceCoordinates[1] - adjustCoordinate;
                         break;
                     case 3:
                         GreenPiece3Visibility = visibility;
-                        GreenPiece3CoordinateX = pieceCoordinates[0];
-                        GreenPiece3CoordinateY = pieceCoordinates[1];
+                        GreenPiece3CoordinateX = pieceCoordinates[0] - adjustCoordinate;
+                        GreenPiece3CoordinateY = pieceCoordinates[1] + adjustCoordinate;
                         break;
                     case 4:
                         GreenPiece4Visibility = visibility;
-                        GreenPiece4CoordinateX = pieceCoordinates[0];
-                        GreenPiece4CoordinateY = pieceCoordinates[1];
+                        GreenPiece4CoordinateX = pieceCoordinates[0] + adjustCoordinate;
+                        GreenPiece4CoordinateY = pieceCoordinates[1] + adjustCoordinate;
                         break;
                 }
             }
@@ -738,23 +759,23 @@ namespace LUDO.ViewModels
                 {
                     case 1:
                         YellowPiece1Visibility = visibility;
-                        YellowPiece1CoordinateX = pieceCoordinates[0];
-                        YellowPiece1CoordinateY = pieceCoordinates[1];
+                        YellowPiece1CoordinateX = pieceCoordinates[0] - adjustCoordinate;
+                        YellowPiece1CoordinateY = pieceCoordinates[1] - adjustCoordinate;
                         break;
                     case 2:
                         YellowPiece2Visibility = visibility;
-                        YellowPiece2CoordinateX = pieceCoordinates[0];
-                        YellowPiece2CoordinateY = pieceCoordinates[1];
+                        YellowPiece2CoordinateX = pieceCoordinates[0] + adjustCoordinate;
+                        YellowPiece2CoordinateY = pieceCoordinates[1] - adjustCoordinate;
                         break;
                     case 3:
                         YellowPiece3Visibility = visibility;
-                        YellowPiece3CoordinateX = pieceCoordinates[0];
-                        YellowPiece3CoordinateY = pieceCoordinates[1];
+                        YellowPiece3CoordinateX = pieceCoordinates[0] - adjustCoordinate;
+                        YellowPiece3CoordinateY = pieceCoordinates[1] + adjustCoordinate;
                         break;
                     case 4:
                         YellowPiece4Visibility = visibility;
-                        YellowPiece4CoordinateX = pieceCoordinates[0];
-                        YellowPiece4CoordinateY = pieceCoordinates[1];
+                        YellowPiece4CoordinateX = pieceCoordinates[0] + adjustCoordinate;
+                        YellowPiece4CoordinateY = pieceCoordinates[1] + adjustCoordinate;
                         break;
                 }
             }
@@ -764,58 +785,38 @@ namespace LUDO.ViewModels
                 {
                     case 1:
                         BluePiece1Visibility = visibility;
-                        BluePiece1CoordinateX = pieceCoordinates[0];
-                        BluePiece1CoordinateY = pieceCoordinates[1];
+                        BluePiece1CoordinateX = pieceCoordinates[0] - adjustCoordinate;
+                        BluePiece1CoordinateY = pieceCoordinates[1] - adjustCoordinate;
                         break;
                     case 2:
                         BluePiece2Visibility = visibility;
-                        BluePiece2CoordinateX = pieceCoordinates[0];
-                        BluePiece2CoordinateY = pieceCoordinates[1];
+                        BluePiece2CoordinateX = pieceCoordinates[0] + adjustCoordinate;
+                        BluePiece2CoordinateY = pieceCoordinates[1] - adjustCoordinate;
                         break;
                     case 3:
                         BluePiece3Visibility = visibility;
-                        BluePiece3CoordinateX = pieceCoordinates[0];
-                        BluePiece3CoordinateY = pieceCoordinates[1];
+                        BluePiece3CoordinateX = pieceCoordinates[0] - adjustCoordinate;
+                        BluePiece3CoordinateY = pieceCoordinates[1] + adjustCoordinate;
                         break;
                     case 4:
                         BluePiece4Visibility = visibility;
-                        BluePiece4CoordinateX = pieceCoordinates[0];
-                        BluePiece4CoordinateY = pieceCoordinates[1];
+                        BluePiece4CoordinateX = pieceCoordinates[0] + adjustCoordinate;
+                        BluePiece4CoordinateY = pieceCoordinates[1] + adjustCoordinate;
                         break;
                 }
             }
         }
-
-        // Highlight for gameboard cells
-        public void Highlighting(int xCurrentCoordinate, int yCurrentCoordinate, int[] newCoordinate)
+        public bool Highlighting(int xCurrentCoordinate, int yCurrentCoordinate, int[] newCoordinate)
         {
             if (xCurrentCoordinate == newCoordinate[0] && yCurrentCoordinate == newCoordinate[1])
             {
-                return;
+                return false;
             }
             else
             {
                 Instance.HighlightVisualizedCoordinateX = newCoordinate[0];
                 Instance.HighlightVisualizedCoordinateY = newCoordinate[1];
-            }
-        }
-
-        public void HighlightValidPieces()
-        {
-            foreach (Piece piece in CurrentPlayer.Pieces)
-            {
-                if (piece.PieceInNest && DiceResult == 6)
-                {
-                    piece.HighlightValidPiece = true;
-                }
-                else if (!piece.PieceInNest)
-                {
-                    piece.HighlightValidPiece = true;
-                }
-                else
-                {
-                    piece.HighlightValidPiece = false;
-                }
+                return true;
             }
         }
 

@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Media.Animation;
 
 namespace LUDO.Models
 {
@@ -19,7 +17,7 @@ namespace LUDO.Models
         private Color _pieceColor;
 
         public static Piece Instance;
-        public Storyboard HighlightPieceStoryboard { get; set; }
+        //public Storyboard HighlightPieceStoryboard { get; set; }
         public bool HighlightValidPiece { get; set; }
         public bool PieceInNest { get; set; }
         public Color PieceColor { get { return _pieceColor; } }
@@ -41,22 +39,12 @@ namespace LUDO.Models
             set { _atCell = value; }
         }
 
-        public Piece(Color playerColor, int id, int colorInt)
+        public Piece(Color playerColor, int id)
         {
             _pieceColor = playerColor;
             _id = id;
             this.SetStartingCoordinates();
-            this.colorInt = colorInt;
-
-            //HighlightPieceStoryboard = (Storyboard)Application.Current.Resources["HighlightPiece"];
-            //Storyboard.SetTarget(HighlightPieceStoryboard, this);
-            //HighlightPieceStoryboard.RepeatBehavior = RepeatBehavior.Forever;
-            //HighlightPieceStoryboard.Begin();
-        }
-
-        public Piece()
-        {
-            Instance = this;
+            this.colorInt = (int)playerColor;
         }
 
         public void SetStartingCoordinates()
@@ -142,7 +130,7 @@ namespace LUDO.Models
                 }
                 GameBoardViewModel.Instance.ShowPieceOnBoard(Color.Yellow, true, this.Id, this.Coordinates);
             }
-            else
+            else if (this.PieceColor == Color.Blue)
             {
                 switch (this.Id)
                 {
@@ -170,10 +158,9 @@ namespace LUDO.Models
                 GameBoardViewModel.Instance.ShowPieceOnBoard(Color.Blue, true, this.Id, this.Coordinates);
             }
         }
-
-        public int[] SimulatePieceMove(int diceResult) // ska användas ihop med highlight för att se en valid piece move
+        public bool SimulatePieceMove(int diceResult)
         {
-            return PieceMove(diceResult, true);
+            return GameBoardViewModel.Instance.Highlighting(this.Coordinates[0], this.Coordinates[1], PieceMove(diceResult, true));
         }
 
         public int[] PieceMove(int diceResult, bool onlySimulateMove = false)
@@ -211,6 +198,7 @@ namespace LUDO.Models
             {
                 if (cell.Section == newSection && cell.Id == newId && cell.IsFinal == newFinal)
                 {
+                    bool shareCell = false;
                     if (cell.PiecesVisiting.Count > 0 && cell.PiecesVisiting[0].PieceColor != this.PieceColor)
                     {
                         this.CrashWithOtherPieces(cell); //Crash with other pieces of different color
@@ -218,7 +206,8 @@ namespace LUDO.Models
                     }
                     else if (cell.PiecesVisiting.Count > 0) 
                     {
-                        //Todo. Share cell with own other piece
+                        //Share cell with own other piece
+                        shareCell = true;
                         moveLegit = true;
                     }
                     else //Not occupied cell
@@ -231,7 +220,7 @@ namespace LUDO.Models
                         this.RemoveOldPosition();
                         this.AtCell = cell;
                         cell.PiecesVisiting.Add(this);
-                        GameBoardViewModel.Instance.ShowPieceOnBoard(this.PieceColor, true, this.Id, this.AtCell.Coordinates);
+                        GameBoardViewModel.Instance.ShowPieceOnBoard(this.PieceColor, true, this.Id, this.AtCell.Coordinates, shareCell);
                     }
                     else if (moveLegit && onlySimulateMove)
                     {

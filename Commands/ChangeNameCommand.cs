@@ -37,15 +37,19 @@ namespace LUDO.Commands
                     {
                         case "Player1Name":
                             GameSettingsViewModel.Instance.Player1Name = newName;
+                            GameSettingsViewModel.Instance.PlayerList[0].Name = newName;
                             break;
                         case "Player2Name":
                             GameSettingsViewModel.Instance.Player2Name = newName;
+                            GameSettingsViewModel.Instance.PlayerList[1].Name = newName;
                             break;
                         case "Player3Name":
                             GameSettingsViewModel.Instance.Player3Name = newName;
+                            GameSettingsViewModel.Instance.PlayerList[2].Name = newName;
                             break;
                         case "Player4Name":
                             GameSettingsViewModel.Instance.Player4Name = newName;
+                            GameSettingsViewModel.Instance.PlayerList[3].Name = newName;
                             break;
                     }
                 }

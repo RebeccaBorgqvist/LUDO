@@ -25,6 +25,9 @@ namespace LUDO.Commands
                 GameSettingsViewModel.Instance.AddRemoveText = "Add more players";
                 GameSettingsViewModel.Instance.Players = 2;
             }
+
+            Models.Player lastPlayer = GameSettingsViewModel.Instance.PlayerList.Last();
+            GameSettingsViewModel.Instance.PlayerList.Remove(lastPlayer);
         }
     }
 }
