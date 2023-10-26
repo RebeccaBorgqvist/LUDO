@@ -13,6 +13,9 @@ using Windows.UI.Popups;
 
 namespace LUDO.Commands
 {
+    /// <summary>
+    /// The class-command that navigates the user into the MainMenu Frame
+    /// </summary>
     internal class GoToMainMenuCommand : BaseCommands
     {
         public override void Execute(object parameter)

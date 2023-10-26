@@ -22,6 +22,10 @@ using LUDO.Models;
 
 namespace LUDO.Views
 {
+    /// <summary>
+    /// The Frame class that stands for the game board
+    /// The manipulations with the game board goes via GameBoardViewModel class
+    /// </summary>
     public sealed partial class GameBoard : Page
     {
         public GameBoard()

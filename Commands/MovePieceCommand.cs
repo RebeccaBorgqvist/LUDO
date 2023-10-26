@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace LUDO.Commands
 {
+    /// <summary>
+    /// The command-class that moves the pieces throughout the game board
+    /// </summary>
     internal class MovePieceCommand : BaseCommands
     {
         public override void Execute(object parameter)

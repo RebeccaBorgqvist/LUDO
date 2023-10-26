@@ -16,6 +16,10 @@ using LUDO.ViewModels;
 
 namespace LUDO.Views
 {
+    /// <summary>
+    /// The Frame class that stands for the game settings
+    /// The manipulations with the game board goes via GameSettingsViewModel class
+    /// </summary>
     public sealed partial class GameSettings : Page
     {
         public GameSettings()

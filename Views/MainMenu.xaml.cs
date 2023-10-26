@@ -21,6 +21,10 @@ using Microsoft.Graphics.Canvas;
 
 namespace LUDO.Views
 {
+    /// <summary>
+    /// The Frame class that stands for the main window
+    /// The manipulations with the game board goes via GameBoardViewModel class
+    /// </summary>
     public sealed partial class MainWindow : Page
     {
         public MainWindow()
@@ -29,11 +33,6 @@ namespace LUDO.Views
             this.DataContext = new MainMenuViewModel();
             MainMenuViewModel.Instance.MainMenuFrame = MainFrame;
             MainFrame.Navigate(typeof(StartMenu));
-        }
-        private void GoToGameBoard(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(GameBoard));
-        }       
-        
+        }                
     }
 }

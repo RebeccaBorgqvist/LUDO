@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace LUDO.Helpers
 {
+    /// <summary>
+    /// The enum that holds the colors used in the game 
+    /// </summary>
     internal enum Color
     {
         Red = 0,

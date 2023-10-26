@@ -11,9 +11,15 @@ using Windows.UI.Xaml.Input;
 
 namespace LUDO.Commands
 {
+    /// <summary>
+    /// A class-command that changes the player´s name.
+    /// </summary>
     internal class ChangeNameCommand : BaseCommands
     {
-
+        /// <summary>
+        /// The method changes the player´s name by replacing the old name with the new name
+        /// </summary>
+        /// <param name="parameter"></param>
         public override async void Execute(object parameter)
         {
             ContentDialog dialog = new ContentDialog

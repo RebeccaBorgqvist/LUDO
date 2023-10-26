@@ -12,6 +12,10 @@ using System.Threading;
 
 namespace LUDO.Models
 {
+    /// <summary>
+    /// The class that allows to roll the dice. 
+    /// Returns the rollResult and the appropriate image of the dice
+    /// </summary>
     public class Dice
     {
         public static Dice Instance { get; private set; }

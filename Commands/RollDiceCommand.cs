@@ -10,6 +10,9 @@ using System.Threading;
 
 namespace LUDO.Commands
 {
+    /// <summary>
+    /// The command-class that shows the dice and how much it´s been rolled
+    /// </summary>
     internal class RollDiceCommand : BaseCommands
     {
         public override void Execute(object parameter)
@@ -41,6 +44,10 @@ namespace LUDO.Commands
             }
         }
 
+        /// <summary>
+        /// The method switches onto the next on turn player to roll the dice 
+        /// </summary>
+        /// <param name="command"></param>
         private void NextTurn(IUICommand command)
         {
             GameLogic.Instance.SetNextPlayer();

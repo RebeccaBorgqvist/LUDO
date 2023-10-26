@@ -16,6 +16,9 @@ using Windows.UI.Xaml;
 
 namespace LUDO.ViewModels
 {
+    /// <summary>
+    /// The class that handles gameboard manipulations
+    /// </summary>
     internal class GameBoardViewModel : ViewModelBase
     {
         public ICommand MovePieceCommand {  get; set; }
@@ -673,6 +676,10 @@ namespace LUDO.ViewModels
             CurrentDiceImage = "ms-appx:///Assets/roll_dice.png";
         }
 
+
+        /// <summary>
+        /// The method that sets List of Players and then creates pieces for every player and finally, starts the game
+        /// </summary>
         public void CreateGame()
         {
             _diceModel = new Dice();
@@ -685,11 +692,22 @@ namespace LUDO.ViewModels
             _gameLogicModel.StartGame();
         }
 
+        /// <summary>
+        /// The method that resets the dice Image 
+        /// </summary>
         public void ResetDiceImage()
         {
             CurrentDiceImage = "ms-appx:///Assets/roll_dice.png";
         }
 
+        /// <summary>
+        /// The method that is to create the pieces on the game board 
+        /// </summary>
+        /// <param name="pieceColor"></param>
+        /// <param name="visibility"></param>
+        /// <param name="pieceId"></param>
+        /// <param name="pieceCoordinates"></param>
+        /// <param name="severalPiecesOnCell"></param>
         public void ShowPieceOnBoard(Helpers.Color pieceColor, bool visibility, int pieceId, int[] pieceCoordinates, bool severalPiecesOnCell = false)
         {
             int adjustCoordinate = 0;
@@ -799,6 +817,14 @@ namespace LUDO.ViewModels
                 }
             }
         }
+        
+        /// <summary>
+        /// The method that highlights a piece on the game board
+        /// </summary>
+        /// <param name="xCurrentCoordinate"></param>
+        /// <param name="yCurrentCoordinate"></param>
+        /// <param name="newCoordinate"></param>
+        /// <returns></returns>
         public bool Highlighting(int xCurrentCoordinate, int yCurrentCoordinate, int[] newCoordinate)
         {
             if (xCurrentCoordinate == newCoordinate[0] && yCurrentCoordinate == newCoordinate[1])
@@ -813,7 +839,12 @@ namespace LUDO.ViewModels
             }
         }
 
-        //USAGE OF WIN2D API: DRAWING CELLS OF THE GAME BOARD(fields, finals, finish and nests)     
+
+        /// <summary>
+        /// The method that draws the board using WIN2D API
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         internal void DrawBoard(CanvasControl sender, CanvasDrawEventArgs args)
         {
             List<Cell> gameBoardCells = new List<Cell>();

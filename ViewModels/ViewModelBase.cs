@@ -7,11 +7,18 @@ using System.Threading.Tasks;
 
 namespace LUDO.ViewModels
 {
-    public class ViewModelBase : INotifyPropertyChanged // Denna kod behöver man inte kunna ingående
+    /// <summary>
+    /// The class that is to be inherited by the other ViewModels classes 
+    /// </summary>
+    public class ViewModelBase : INotifyPropertyChanged 
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged(string propertyName) // Denna metod behövs i olika ViewModels för att känna av om Propertyn ändras (Propertyn som har Bindats)
+        /// <summary>
+        /// The method that requires to the different ViewModels to read off if the Property that´s BINDAD has been changed
+        /// </summary>
+        /// <param name="propertyName"></param>
+        protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

@@ -16,6 +16,10 @@ using Windows.UI.Xaml.Navigation;
 
 namespace LUDO.Views
 {
+    /// <summary>
+    /// The Frame class that stands for the start menu (with 3 different button options in there) 
+    /// The StartMenu goes together with MainMenu and its two buttons(goToMainMenu- and HighScore button)
+    /// </summary>
     public sealed partial class StartMenu : Page
     {
         public StartMenu()

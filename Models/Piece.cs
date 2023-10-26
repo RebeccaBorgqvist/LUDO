@@ -8,8 +8,13 @@ using System.Threading.Tasks;
 
 namespace LUDO.Models
 {
+    /// <summary>
+    /// The class that is responsible for forming of a piece.
+    /// The game players are moving the pieces on the game board.
+    /// </summary>
     internal class Piece
     {
+
         private int[] _coordinates;
         private Helpers.Color _pieceColor;
         private int _id;
@@ -40,6 +45,9 @@ namespace LUDO.Models
             this.colorInt = (int)playerColor;
         }
 
+        /// <summary>
+        /// The method that sets the starting coordinates for the piece
+        /// </summary>
         public void SetStartingCoordinates()
         {
             if (this.PieceColor == Color.Red) 
@@ -151,10 +159,23 @@ namespace LUDO.Models
                 GameBoardViewModel.Instance.ShowPieceOnBoard(Color.Blue, true, this.Id, this.Coordinates);
             }
         }
+
+        /// <summary>
+        /// The method that simulates the move of the piece
+        /// </summary>
+        /// <param name="diceResult"></param>
+        /// <returns></returns>
         public bool SimulatePieceMove(int diceResult)
         {
             return GameBoardViewModel.Instance.Highlighting(this.Coordinates[0], this.Coordinates[1], PieceMove(diceResult, true));
         }
+
+        /// <summary>
+        /// The method the actually moves the piece
+        /// </summary>
+        /// <param name="diceResult"></param>
+        /// <param name="onlySimulateMove"></param>
+        /// <returns></returns>
         public int[] PieceMove(int diceResult, bool onlySimulateMove = false)
         {
             int newId = diceResult + this.AtCell.Id;
@@ -222,6 +243,10 @@ namespace LUDO.Models
             }
             return this.Coordinates; //Returns the original coordinates if move not legit (for the simulation)
         }
+
+        /// <summary>
+        /// The method that removes an old position of the piece
+        /// </summary>
         public void RemoveOldPosition()
         {
             foreach (Cell cell in GameBoardViewModel.Instance.BoardModel.GameCells)
@@ -232,6 +257,11 @@ namespace LUDO.Models
                 }
             }
         }
+
+        /// <summary>
+        /// The method that in case of crash of pieces, sends the piece that  already has been in the cell back to the player´s nest
+        /// </summary>
+        /// <param name="cellAtCrash"></param>
         public void CrashWithOtherPieces(Cell cellAtCrash)
         {
             foreach (Piece knockedPiece in cellAtCrash.PiecesVisiting)
