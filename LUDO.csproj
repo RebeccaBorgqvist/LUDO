@@ -121,6 +121,7 @@
     </Compile>
     <Compile Include="Commands\AddPlayerCommand.cs" />
     <Compile Include="Commands\BaseCommands.cs" />
+    <Compile Include="Commands\GoToMainMenuCommand.cs" />
     <Compile Include="Commands\MovePieceCommand.cs" />
     <Compile Include="Commands\RollDiceCommand.cs" />
     <Compile Include="Commands\ChangeNameCommand.cs" />
@@ -199,6 +200,7 @@
     <Content Include="Assets\forwardIcon.png" />
     <Content Include="Assets\minusIcon.png" />
     <Content Include="Assets\plusIcon.png" />
+    <Content Include="Assets\SplashScreen.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Page Include="Styles\ButtonStyle.xaml">
       <SubType>Designer</SubType>

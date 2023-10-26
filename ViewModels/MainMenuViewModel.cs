@@ -20,6 +20,8 @@ namespace LUDO.ViewModels
         public ICommand HighscoreButtonCommand { get; private set; }
         public ICommand RulesButtonCommand { get; private set; }
 
+        public ICommand GoToMainMenuCommand { get; private set; }
+
         public MainMenuViewModel()
         {
             // Assigning this instance to public static property for object access
@@ -29,6 +31,9 @@ namespace LUDO.ViewModels
             PlayButtonCommand = new PlayButtonCommand();
             HighscoreButtonCommand = new HighscoreButtonCommand();
             RulesButtonCommand = new RulesButtonCommand();
+
+            //navigation within the application
+            GoToMainMenuCommand = new GoToMainMenuCommand();
         }
     }
 }
