@@ -7,6 +7,9 @@ using Windows.UI.Popups;
 
 namespace LUDO.Commands
 {
+    /// <summary>
+    /// The command-class that navigates user to the game rules (TBD)
+    /// </summary>
     internal class RulesButtonCommand : BaseCommands
     {
         public override void Execute(object parameter)

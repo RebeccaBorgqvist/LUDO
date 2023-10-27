@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace LUDO.Commands
 {
+    /// <summary>
+    /// The command-class that removes a player from the game 
+    /// (when choosing how many players there are going to play this time)
+    /// </summary>
     internal class RemovePlayerCommand : BaseCommands
     {
         public override void Execute(object parameter)

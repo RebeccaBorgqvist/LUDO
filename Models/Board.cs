@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace LUDO.Models
 {
+    /// <summary>
+    /// The class that just holds the list of the cells. The game board consists of those cells
+    /// </summary>
     internal class Board
     {
+        
         private List<Cell> _gameCells;        
 
         public List<Cell> GameCells 

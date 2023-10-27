@@ -9,6 +9,9 @@ using Windows.UI.Xaml;
 
 namespace LUDO.Commands
 {
+    /// <summary>
+    /// The command-class that starts the game 
+    /// </summary>
     internal class StartGameCommand : BaseCommands
     {
         public override void Execute(object parameter)

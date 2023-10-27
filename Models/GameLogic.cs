@@ -12,6 +12,9 @@ using Windows.UI.Core;
 
 namespace LUDO.Models
 {
+    /// <summary>
+    /// The class that is responsible for all logics happening during the game
+    /// </summary>
     internal class GameLogic
     {
         public static GameLogic Instance { get; set; }
@@ -27,6 +30,9 @@ namespace LUDO.Models
             playerList = new List<Player>();
         }
 
+        /// <summary>
+        /// The method that sets the List of Player
+        /// </summary>
         public void SetPlayerList()
         {
             // Gets participating players from game settings view model.
@@ -42,6 +48,9 @@ namespace LUDO.Models
             activePlayer = playerList[activePlayerIndex];
         }
 
+        /// <summary>
+        /// The method that creates pieces for every player
+        /// </summary>
         public void CreatePlayerPieces()
         {
             foreach (Player player in playerList)
@@ -50,12 +59,18 @@ namespace LUDO.Models
             }
         }
 
+        /// <summary>
+        /// The method that starts the game: it shows firstly a message whose turn it is to roll and then, if 6 is rolled, it moves the dice 
+        /// </summary>
         public void StartGame()
         {
             ShowActivePlayerMessage();
             MoveDice(activePlayer);
         }
 
+        /// <summary>
+        /// The method that moves the dice
+        /// </summary>
         public void PlayerTurn()
         {
             /*
@@ -70,6 +85,9 @@ namespace LUDO.Models
             SetNextPlayer();
         }
 
+        /// <summary>
+        /// The method that sets the next player on turn after the appropriate piece´s been moved.
+        /// </summary>
         public void SetNextPlayer()
         {
             // If active player is the last player in list, set active player to first player in list.
@@ -90,6 +108,9 @@ namespace LUDO.Models
             GameBoardViewModel.Instance.ResetDiceImage();
         }
 
+        /// <summary>
+        /// The method that shows a message where it says what player is on turn
+        /// </summary>
         private void ShowActivePlayerMessage()
         {
             var dialog = new MessageDialog($"▶ {activePlayer.Color} {activePlayer.Name}'s Turn!");
@@ -99,6 +120,13 @@ namespace LUDO.Models
             Task.Run(() => dialog.ShowAsync()).GetAwaiter();
         }
 
+        /// <summary>
+        /// The method that sets the visibility of the dice 
+        /// </summary>
+        /// <param name="red"></param>
+        /// <param name="blue"></param>
+        /// <param name="green"></param>
+        /// <param name="yellow"></param>
         private void SetDiceVisibility(bool red, bool blue, bool green, bool yellow)
         {
             GameBoardViewModel.Instance.DiceVisibilityRed = red;
@@ -107,6 +135,11 @@ namespace LUDO.Models
             GameBoardViewModel.Instance.DiceVisibilityYellow = yellow;
         }
 
+        /// <summary>
+        /// The method that moves the dice
+        /// </summary>
+        /// <param name="player"></param>
+        /// <exception cref="InvalidOperationException"></exception>
         public void MoveDice(Player player)
         {
             if (player.Color == Color.Red)

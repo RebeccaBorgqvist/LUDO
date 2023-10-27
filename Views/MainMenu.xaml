@@ -30,13 +30,13 @@
                 <Frame x:Name="MainFrame" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="960" Height="720"/>
 
                 <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Button Background="Transparent" ToolTipService.ToolTip="Go back">
+                    <Button Visibility="Collapsed" Background="Transparent" ToolTipService.ToolTip="Go back">
                         <Image Source="ms-appx:///Assets/backIcon.png"/>
                     </Button>
-                    <Button Background="Transparent" ToolTipService.ToolTip="Go to main menu">
+                    <Button  Background="Transparent" Command="{Binding GoToMainMenuCommand}" ToolTipService.ToolTip="Go to main menu">
                         <Image Source="ms-appx:///Assets/menuIcon.png"/>
                     </Button>
-                    <Button Background="Transparent" ToolTipService.ToolTip="Show highscore">
+                    <Button Command="{Binding HighscoreButtonCommand}" Background="Transparent" ToolTipService.ToolTip="Show highscore">
                         <Image Source="ms-appx:///Assets/highscoreIcon.png"/>
                     </Button>
                 </StackPanel>

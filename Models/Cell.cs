@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace LUDO.Models
 {
+    /// <summary>
+    /// The class that turns a cell into an object for developing the logics for the game
+    /// 
+    /// </summary>
     internal class Cell
     {
         private int section;

@@ -12,6 +12,10 @@ using Windows.UI.Xaml.Media;
 
 namespace LUDO.ViewModels
 {
+    /// <summary>
+    /// The class that handles manipulations with game settings:
+    /// (amount of players,their names and their respective colors)
+    /// </summary>
     internal class GameSettingsViewModel : ViewModelBase
     {
         private bool _isPlayer3Visible;
@@ -326,6 +330,9 @@ namespace LUDO.ViewModels
             ResetPlayerList();
         }
 
+        /// <summary>
+        /// The method that resets the List of Players to its default value (which is 2 players)
+        /// </summary>
         public void ResetPlayerList()
         {
             PlayerList = new List<Player>()

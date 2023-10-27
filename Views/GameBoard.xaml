@@ -304,6 +304,14 @@
                        Visibility="{Binding BluePiece4Visibility}"
                 />
                 </Button>
+
+                <!--Player´s labels-->
+                <TextBlock x:Name="player1Name"  Canvas.Left="444" TextWrapping="Wrap"  Canvas.Top="26" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <TextBlock x:Name="player2Name"  Canvas.Left="444" TextWrapping="Wrap"  Canvas.Top="406" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBlock x:Name="player3Name"  Canvas.Left="-49" TextWrapping="Wrap"  Canvas.Top="406" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <TextBlock x:Name="player4Name"  Canvas.Left="-49" TextWrapping="Wrap"  Canvas.Top="26" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                
+                
             </Canvas>
         </Viewbox>
     </Grid>

@@ -22,8 +22,12 @@ using LUDO.Models;
 
 namespace LUDO.Views
 {
+    /// <summary>
+    /// The Frame class that stands for the game board
+    /// The manipulations with the game board goes via GameBoardViewModel class
+    /// </summary>
     public sealed partial class GameBoard : Page
-    {      
+    {
         public GameBoard()
         {
             this.InitializeComponent();
@@ -31,6 +35,16 @@ namespace LUDO.Views
 
             GameBoardViewModel.Instance.GameBoardCanvas = GameBoardCanvas;
             GameBoardCanvas.Draw += GameBoardViewModel.Instance.DrawBoard;
+
+
+            //labels for players
+            player1Name.Text = GameSettingsViewModel.Instance.Player1Name;
+            player2Name.Text = GameSettingsViewModel.Instance.Player2Name;
+            if (GameSettingsViewModel.Instance.Players > 2)
+            {
+                player3Name.Text = GameSettingsViewModel.Instance.Player3Name;
+                if (GameSettingsViewModel.Instance.Players > 3) player4Name.Text = GameSettingsViewModel.Instance.Player4Name;
+            }
         }
     }
 }

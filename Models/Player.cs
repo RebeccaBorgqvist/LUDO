@@ -11,6 +11,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace LUDO.Models
 {
+    /// <summary>
+    /// The class that is responsible for a player and its object for the game
+    /// </summary>
     internal class Player
     {
         private string _name;
@@ -43,6 +46,9 @@ namespace LUDO.Models
             _isTurnToRoll = false;
         }
 
+        /// <summary>
+        /// The method that creates pieces for the player. Every player gets 4 pieces 
+        /// </summary>
         public void CreatePieces()
         {
             _pieces = new List<Piece>()

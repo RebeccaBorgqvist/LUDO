@@ -9,6 +9,9 @@ using Windows.ApplicationModel.Background;
 
 namespace LUDO.Commands
 {
+    /// <summary>
+    /// The command-class that is to select a piece (for its further moving)
+    /// </summary>
     internal class SelectPieceCommand : BaseCommands
     {
         public override void Execute(object parameter)

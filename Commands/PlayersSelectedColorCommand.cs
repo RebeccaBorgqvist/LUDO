@@ -12,6 +12,9 @@ using System.Reflection;
 
 namespace LUDO.Commands
 {
+    /// <summary>
+    /// The command-class that sets a color for every player 
+    /// </summary>
     internal class PlayersSelectedColorCommand : BaseCommands
     {
         public override void Execute(object parameter)

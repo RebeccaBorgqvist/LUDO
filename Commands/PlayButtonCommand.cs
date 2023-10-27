@@ -9,6 +9,9 @@ using Windows.UI.Xaml.Media.Animation;
 
 namespace LUDO.Commands
 {
+    /// <summary>
+    /// The command-class that navigates user to GameSettings Frame 
+    /// </summary>
     internal class PlayButtonCommand : BaseCommands
     {
         public override void Execute(object parameter)

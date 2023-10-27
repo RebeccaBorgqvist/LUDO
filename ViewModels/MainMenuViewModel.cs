@@ -10,6 +10,10 @@ using Windows.UI.Xaml.Controls;
 
 namespace LUDO.ViewModels
 {
+    /// <summary>
+    /// The class that handles manipulations with Main Menu Frame:
+    /// there are different buttons in it: PLAY, HIGH SCORE, GAME RULES
+    /// </summary>
     internal class MainMenuViewModel : ViewModelBase // ViewModelBase ärvs för att man ska kunna använda OnPropertyChange i denna klass och andra.
     {
         public static MainMenuViewModel Instance { get; set; } // Denna behövs för att köra ett command, se nedan
@@ -20,6 +24,8 @@ namespace LUDO.ViewModels
         public ICommand HighscoreButtonCommand { get; private set; }
         public ICommand RulesButtonCommand { get; private set; }
 
+        public ICommand GoToMainMenuCommand { get; private set; }
+
         public MainMenuViewModel()
         {
             // Assigning this instance to public static property for object access
@@ -29,6 +35,9 @@ namespace LUDO.ViewModels
             PlayButtonCommand = new PlayButtonCommand();
             HighscoreButtonCommand = new HighscoreButtonCommand();
             RulesButtonCommand = new RulesButtonCommand();
+
+            //navigation within the application
+            GoToMainMenuCommand = new GoToMainMenuCommand();
         }
     }
 }
